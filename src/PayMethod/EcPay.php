@@ -28,6 +28,11 @@ class EcPay extends Parameter implements PayInterface
         return $this->send->payMoney($this->url, $this->orderData);
     }
 
+    public function searchOrder()
+    {
+
+    }
+
     public function refund()
     {
 

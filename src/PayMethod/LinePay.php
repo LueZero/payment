@@ -41,4 +41,8 @@ class LinePay extends Parameter implements PayInterface
     public function refund()
     {
     }
+
+    public function searchOrder()
+    {
+    }
 }

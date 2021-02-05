@@ -8,4 +8,5 @@ interface PayInterface
     public function dataProcess();
     public function checkOut();
     public function refund();
+    public function searchOrder();
 }

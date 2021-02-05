@@ -48,6 +48,11 @@ class Payment
         return $this->method->createOrder($requestsData);
     }
 
+    public function searchOrder($requestsData)
+    {
+        return $this->method->searchOrder($requestsData);
+    }
+
     public function dataProcess()
     {
         return $this->method->dataProcess();

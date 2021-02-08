@@ -11,7 +11,8 @@ $Payment = new Payment("ecPay", [
   "MerchantID" => 2000132,
   "HashKey" => "5294y06JbISpM5x9",
   "HashIV" => "v77hoKGq4kWxNNIS",
-  "url" => "https://payment-stage.ecpay.com.tw/Cashier/AioCheckOut/V5"
+  "checkoutUrl" => "https://payment-stage.ecpay.com.tw/Cashier/AioCheckOut/V5",
+  "searchUrl" => "https://payment.ecpay.com.tw/Cashier/QueryTradeInfo/V5",
 ]);
 $requestsData = [
   "MerchantID" => 2000132,
@@ -28,14 +29,24 @@ $requestsData = [
 $Payment->createOrder($requestsData);
 $Payment->dataProcess();
 echo $Payment->checkOut();
-```
 
-```php
-// linePay 付款範例
+// 綠界搜尋範例
+$requestsData = [
+  "MerchantID" => 2000132,
+  "MerchantTradeNo" => "xxxxx",
+  "TimeStamp" => time(),
+  "PlatformID" => 2000132,
+];
+$Payment->searchOrder($requestsData);
+$Payment->dataProcess();
+echo $Payment->result();
+
+// linePay 付款範例 
 $Payment = new Payment("linePay", [
   "ChannelId" => "1654180534",
   "ChannelSecret" => "0b493ba53c7ee3ed1f228bf00dfc9639",
-  "url" => "https://sandbox-api-pay.line.me/v3/payments/request"
+  "checkoutUrl" => "https://sandbox-api-pay.line.me/v3/payments/request",
+  "searchUrl" => "https://sandbox-api-pay.line.me/v3/payments"
 ]);
 $requestsData = [
   'amount' => 100,
@@ -64,4 +75,23 @@ $requestsData = [
 $Payment->createOrder($requestsData);
 $Payment->dataProcess();
 echo $Payment->checkOut();
+
+// linePay 交易確認
+$transactionId = 2020121500644803510;
+$confirmUrl = "/v3/payments/$transactionId/confirm";
+$requestsData = [
+  "completeConfirmUrl" => "https://sandbox-api-pay.line.me". $confirmUrl,
+  "confirmUrl" => $confirmUrl,
+  "amount" => 100,
+  "currency" => "TWD",
+];
+echo $Payment->confirm($requestsData);
+
+// linePay 訂單查詢
+$requestsData = [
+  "orderId" => 20121414550564000006
+];
+$Payment->searchOrder($requestsData);
+$Payment->dataProcess();
+echo $Payment->result();
 ```

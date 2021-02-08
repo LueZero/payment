@@ -21,6 +21,13 @@ class Send
         return curl_exec($this->ch);
     }
 
+    public function get($url, $getFields = [], $headers = [])
+    {
+        curl_setopt($this->ch, CURLOPT_URL, $url . $getFields);
+        curl_setopt($this->ch, CURLOPT_HTTPHEADER, $headers);
+        return curl_exec($this->ch);
+    }
+
     public function form($url, $data)
     {
         $szHtml =  '<!DOCTYPE html>';

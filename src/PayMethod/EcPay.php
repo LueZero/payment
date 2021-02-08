@@ -20,29 +20,33 @@ class EcPay extends Parameter implements PayInterface
 
     public function createOrder($orderData)
     {
-        return $this->orderData = $orderData;
+        return $this->sendData = $orderData;
     }
 
     public function checkOut()
     {
-        return $this->send->payMoney($this->url, $this->orderData);
+        return $this->send->payMoney($this->checkoutUrl, $this->sendData, array("Content-type: application/x-www-form-urlencoded"));
     }
 
-    public function searchOrder()
+    public function searchOrder($searchData)
     {
-
+        return $this->sendData = $searchData;
     }
 
-    public function refund()
+    public function result()
     {
-
+        return $this->send->search($this->searchUrl, http_build_query($this->sendData), array("Content-Type: application/x-www-form-urlencoded",));
     }
     
     public function dataProcess()
     {
-        DataCheck::whetherEmpty($this->orderData, "order not defined");
-        $CheckMacValue = $this->generate($this->orderData,$this->HashKey, $this->HashIV);
-        $this->orderData["CheckMacValue"] = $CheckMacValue;
+        DataCheck::whetherEmpty($this->sendData, "send data not defined");
+        $CheckMacValue = $this->generate($this->sendData,$this->HashKey, $this->HashIV);
+        $this->sendData["CheckMacValue"] = $CheckMacValue;
+    }
+
+    public function refund()
+    {
     }
 
     public function generate($arParameters = array(), $HashKey = '', $HashIV = '', $encType = 0)

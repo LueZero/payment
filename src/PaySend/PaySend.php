@@ -20,7 +20,7 @@ class PaySend
             return new LinePaySend();
             break;
           default:
-            throw new Exception('no pay pay send class');
+            throw new Exception('no pay send class');
         }
     }
 

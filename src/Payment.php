@@ -53,6 +53,16 @@ class Payment
         return $this->method->searchOrder($requestsData);
     }
 
+    public function confirm($requestsData)
+    {
+        return $this->method->confirm($requestsData);
+    }
+
+    public function result()
+    {
+        return $this->method->result();
+    }
+
     public function dataProcess()
     {
         return $this->method->dataProcess();

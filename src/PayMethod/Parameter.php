@@ -5,7 +5,9 @@ namespace Zero\Pay\PayMethod;
 class Parameter
 {
     public $send;
-    public $url;
-    public $orderData = [];
-    public $refundData = [];
+    public $sendData = [];
+    public $checkoutUrl;
+    public $searchUrl;
+    public $refundUrl;
+    public $confirmUrl;
 }

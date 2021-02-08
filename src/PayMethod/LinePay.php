@@ -38,11 +38,6 @@ class LinePay extends Parameter implements PayInterface
         ]);
     }
 
-    public function dataProcess()
-    {
-        DataCheck::whetherEmpty($this->sendData, "send data not defined");
-    }
-
     public function confirm($confirmData)
     {
         $this->confirmUrl = $this->sendData["completeConfirmUrl"];
@@ -71,6 +66,10 @@ class LinePay extends Parameter implements PayInterface
 
     public function refund()
     {
+    }
 
+    public function dataProcess()
+    {
+        DataCheck::whetherEmpty($this->sendData, "send data not defined");
     }
 }

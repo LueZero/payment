@@ -18,14 +18,14 @@ class EcPay extends Parameter implements PayInterface
         $this->send = PaySend::setUp($sendPay);
     }
 
-    public function createOrder($orderData)
-    {
-        return $this->sendData = $orderData;
-    }
-
     public function setPar($searchData)
     {
         return $this->sendData = $searchData;
+    }
+
+    public function createOrder($orderData)
+    {
+        return $this->sendData = $orderData;
     }
 
     public function checkOut()
@@ -38,15 +38,15 @@ class EcPay extends Parameter implements PayInterface
         return $this->send->search($this->searchUrl, http_build_query($this->sendData), array("Content-Type: application/x-www-form-urlencoded"));
     }
 
+    public function refund()
+    {
+    }
+
     public function dataProcess()
     {
         DataCheck::whetherEmpty($this->sendData, "send data not defined");
         $CheckMacValue = $this->generate($this->sendData,$this->HashKey, $this->HashIV);
         $this->sendData["CheckMacValue"] = $CheckMacValue;
-    }
-
-    public function refund()
-    {
     }
 
     public function generate($arParameters = array(), $HashKey = '', $HashIV = '', $encType = 0)

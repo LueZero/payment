@@ -14,7 +14,7 @@ class EcPaySend extends Send
         parent::__construct();
     }
 
-    public function payMoney($sendUrl, $sendData, $headers)
+    public function payMoney($sendUrl, $sendData, $headers = array("Content-type: application/x-www-form-urlencoded"))
     {   
         return $this->form($sendUrl, $sendData, $headers);
     }

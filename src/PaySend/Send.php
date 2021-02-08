@@ -12,7 +12,7 @@ class Send
         curl_setopt($this->ch, CURLOPT_RETURNTRANSFER, true);
     }
 
-    public function post($url, $postFields = [], $headers = array("Content-type: application/x-www-form-urlencoded"))
+    public function post($url, $postFields = [], $headers = [])
     {
         curl_setopt($this->ch, CURLOPT_URL, $url);
         curl_setopt($this->ch, CURLOPT_HTTPHEADER, $headers);

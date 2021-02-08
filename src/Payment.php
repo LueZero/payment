@@ -48,19 +48,19 @@ class Payment
         return $this->method->createOrder($requestsData);
     }
 
-    public function searchOrder($requestsData)
+    public function setPar($requestsData)
     {
-        return $this->method->searchOrder($requestsData);
+        return $this->method->setPar($requestsData);
+    }
+
+    public function searchOrder()
+    {
+        return $this->method->searchOrder();
     }
 
     public function confirm($requestsData)
     {
         return $this->method->confirm($requestsData);
-    }
-
-    public function result()
-    {
-        return $this->method->result();
     }
 
     public function dataProcess()

@@ -37,9 +37,9 @@ $requestsData = [
   "TimeStamp" => time(),
   "PlatformID" => 2000132,
 ];
-$Payment->searchOrder($requestsData);
+$Payment->setPar($requestsData);
 $Payment->dataProcess();
-echo $Payment->result();
+echo $Payment->searchOrder();
 
 // linePay 付款範例 
 $Payment = new Payment("linePay", [
@@ -85,13 +85,15 @@ $requestsData = [
   "amount" => 100,
   "currency" => "TWD",
 ];
+$Payment->setPar($requestsData);
+$Payment->dataProcess();
 echo $Payment->confirm($requestsData);
 
 // linePay 訂單查詢
 $requestsData = [
   "orderId" => 20121414550564000006
 ];
-$Payment->searchOrder($requestsData);
+$Payment->setPar($requestsData);
 $Payment->dataProcess();
-echo $Payment->result();
+echo $Payment->searchOrder();
 ```

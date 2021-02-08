@@ -17,6 +17,11 @@ class LinePay extends Parameter implements PayInterface
         $this->send = PaySend::setUp($sendPay);
     }
 
+    public function setPar($searchData)
+    {
+        return $this->sendData = $searchData;
+    }
+
     public function createOrder($orderData)
     {
         return $this->sendData = $orderData;
@@ -40,8 +45,6 @@ class LinePay extends Parameter implements PayInterface
 
     public function confirm($confirmData)
     {
-        $this->sendData = $confirmData;
-        $this->dataProcess();
         $this->confirmUrl = $this->sendData["completeConfirmUrl"];
         $confirmUrl = $this->sendData["confirmUrl"];
         unset($this->sendData["completeConfirmUrl"]);
@@ -55,15 +58,10 @@ class LinePay extends Parameter implements PayInterface
         ]);
     }
 
-    public function searchOrder($searchData)
-    {
-        return $this->sendData = $searchData;
-    }
-
-    public function result()
+    public function searchOrder()
     {
         $body = $this->ChannelSecret . '/v3/payments' . http_build_query($this->sendData) . time();
-        return $this->send->setUp()->search($this->searchUrl."?", http_build_query($this->sendData), [
+        return $this->send->setUp()->search($this->searchUrl . "?", http_build_query($this->sendData), [
             "Content-Type: application/json",
             "X-LINE-ChannelId: " . $this->ChannelId,
             "X-LINE-Authorization-Nonce: " . time(),

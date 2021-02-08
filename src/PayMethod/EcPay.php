@@ -23,21 +23,21 @@ class EcPay extends Parameter implements PayInterface
         return $this->sendData = $orderData;
     }
 
+    public function setPar($searchData)
+    {
+        return $this->sendData = $searchData;
+    }
+
     public function checkOut()
     {
         return $this->send->payMoney($this->checkoutUrl, $this->sendData, array("Content-type: application/x-www-form-urlencoded"));
     }
 
-    public function searchOrder($searchData)
+    public function searchOrder()
     {
-        return $this->sendData = $searchData;
+        return $this->send->search($this->searchUrl, http_build_query($this->sendData), array("Content-Type: application/x-www-form-urlencoded"));
     }
 
-    public function result()
-    {
-        return $this->send->search($this->searchUrl, http_build_query($this->sendData), array("Content-Type: application/x-www-form-urlencoded",));
-    }
-    
     public function dataProcess()
     {
         DataCheck::whetherEmpty($this->sendData, "send data not defined");

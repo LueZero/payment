@@ -21,9 +21,4 @@ class Pay
                 throw new Exception('no pay method class');
         }
     }
-
-    public function callPay($className)
-    {
-       return static::setUp($className);
-    }
 }

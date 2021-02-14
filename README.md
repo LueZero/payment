@@ -14,7 +14,7 @@ require './vendor/autoload.php';
 use Zero\Pay\Pay as Pay;
 
 // 綠界 付款範例
-$Payment = Pay::setUp("ecPay");
+$payment = Pay::setUp("ecPay");
 
 $requestsData = [
   "MerchantID" => 2000132,
@@ -28,9 +28,9 @@ $requestsData = [
   "ChoosePayment" => "Credit",
   "EncryptType" => 1,
 ];
-$Payment->requestParameter($requestsData);
-$Payment->dataProcess();
-echo $Payment->checkouts();
+$payment->requestParameter($requestsData);
+$payment->dataProcess();
+echo $payment->checkouts();
 
 
 // 綠界 搜尋範例
@@ -40,13 +40,13 @@ $requestsData = [
   "TimeStamp" => time(),
   "PlatformID" => 2000132,
 ];
-$Payment->requestParameter($requestsData);
-$Payment->dataProcess();
-echo $Payment->search();
+$payment->requestParameter($requestsData);
+$payment->dataProcess();
+echo $payment->search();
 
 
 // LinePay 付款範例 
-$Payment = Pay::setUp("linePay");
+$payment = Pay::setUp("linePay");
 $requestsData = [
   'amount' => 100,
   'currency' => 'TWD',
@@ -71,9 +71,9 @@ $requestsData = [
     'cancelUrl' => "https://your.web.site/receive.php"
   ]
 ];
-$Payment->requestParameter($requestsData);
-$Payment->dataProcess();
-echo $Payment->checkouts();
+$payment->requestParameter($requestsData);
+$payment->dataProcess();
+echo $payment->checkouts();
 
 // linePay 交易確認
 $transactionId = 2020121500644803510;
@@ -83,15 +83,15 @@ $requestsData = [
   "amount" => 100,
   "currency" => "TWD",
 ];
-$Payment->requestParameter($requestsData);
-$Payment->dataProcess();
-echo $Payment->confirm($requestsData);
+$payment->requestParameter($requestsData);
+$payment->dataProcess();
+echo $payment->confirm($requestsData);
 
 // LinePay 訂單查詢
 $requestsData = [
   "orderId" => 20121414550564000006
 ];
-$Payment->requestParameter($requestsData);
-$Payment->dataProcess();
-echo $Payment->search();
+$payment->requestParameter($requestsData);
+$payment->dataProcess();
+echo $payment->search();
 ```

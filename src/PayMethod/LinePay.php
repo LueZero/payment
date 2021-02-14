@@ -69,6 +69,6 @@ class LinePay extends PayParameter implements PayInterface
      */
     public function dataProcess()
     {
-        DataCheck::whetherEmpty($this->sendData, "send data not defined");
+        DataCheck::whetherEmpty($this->sendData, "send data is empty");
     }
 }

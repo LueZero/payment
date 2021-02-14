@@ -2,50 +2,49 @@
 
 namespace Zero\Pay\PayMethod;
 
-use Zero\Pay\PayMethod\Parameter;
+use Zero\Pay\PayMethod\PayParameter;
 use Zero\Pay\PayMethod\PayInterface;
 use Zero\Pay\Helper\DataCheck;
 use Zero\Pay\PaySend\PaySend;
 
-class EcPay extends Parameter implements PayInterface
+class EcPay extends PayParameter implements PayInterface
 {
-    public $MerchantID;
-    public $HashKey;
-    public $HashIV;
-
-    public function __construct($sendPay)
+    public function __construct($pay)
     {
-        $this->send = PaySend::setUp($sendPay);
+        $this->sendMenthod = PaySend::setUp($pay);
+        $this->selectNecessaryParametersConfig($pay);
     }
 
-    public function setPar($searchData)
+    /**
+     * 結帳
+     */
+    public function checkouts()
     {
-        return $this->sendData = $searchData;
+        return $this->sendMenthod->checkoutsSend($this->necessaryParameters["checkoutUrl"], $this->sendData, array("Content-type: application/x-www-form-urlencoded"));
     }
 
-    public function createOrder($orderData)
+    /**
+     * 搜尋資料
+     */
+    public function search()
     {
-        return $this->sendData = $orderData;
+        return $this->sendMenthod->searchSend($this->necessaryParameters["searchUrl"], http_build_query($this->sendData), array("Content-Type: application/x-www-form-urlencoded"));
     }
 
-    public function checkOut()
-    {
-        return $this->send->payMoney($this->checkoutUrl, $this->sendData, array("Content-type: application/x-www-form-urlencoded"));
-    }
-
-    public function searchOrder()
-    {
-        return $this->send->search($this->searchUrl, http_build_query($this->sendData), array("Content-Type: application/x-www-form-urlencoded"));
-    }
-
+    /**
+     * 退款
+     */
     public function refund()
     {
     }
 
+    /**
+     * 資料處理
+     */
     public function dataProcess()
     {
         DataCheck::whetherEmpty($this->sendData, "send data not defined");
-        $CheckMacValue = $this->generate($this->sendData,$this->HashKey, $this->HashIV);
+        $CheckMacValue = $this->generate($this->sendData, $this->necessaryParameters["HashKey"], $this->necessaryParameters["HashIV"]);
         $this->sendData["CheckMacValue"] = $CheckMacValue;
     }
 

@@ -8,15 +8,13 @@ use Zero\Pay\PaySend\LinePaySend;
 
 class PaySend
 {
-    public static $set;
-
-    public static function setUp($methodName)
+    public static function setUp($className)
     {
-        switch ($methodName) {
-          case 'ecPay':
+        switch (strtolower($className)) {
+          case 'ecpay':
             return new EcPaySend();
             break;
-          case 'linePay':
+          case 'linepay':
             return new LinePaySend();
             break;
           default:

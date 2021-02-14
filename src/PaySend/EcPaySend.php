@@ -11,17 +11,17 @@ class EcPaySend extends Send
         parent::__construct();
     }
 
-    public function payMoney($sendUrl, $sendData, $headers = [])
+    public function checkoutsSend($sendUrl, $sendData, $headers = [])
     {   
         return $this->form($sendUrl, $sendData, $headers);
     }
 
-    public function search($sendUrl, $sendData, $headers = [])
+    public function searchSend($sendUrl, $sendData, $headers = [])
     {
         return $this->post($sendUrl, $sendData, $headers);
     }
 
-    public function refundMoney()
+    public function refundSend()
     {
         
     }

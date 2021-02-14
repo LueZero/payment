@@ -16,22 +16,22 @@ class LinePaySend extends Send
         return new LinePaySend();
     }
 
-    public function payMoney($sendUrl, $sendData, $headers=[])
+    public function checkoutsSend($sendUrl, $sendData, $headers=[])
     {
         return $this->post($sendUrl, $sendData, $headers);
     }
 
-    public function search($sendUrl, $sendData, $headers = [])
+    public function searchSend($sendUrl, $sendData, $headers = [])
     {
         return $this->get($sendUrl, $sendData, $headers);
     }
 
-    public function confirm($sendUrl, $sendData, $headers = [])
+    public function confirmSend($sendUrl, $sendData, $headers = [])
     {
         return $this->post($sendUrl, $sendData, $headers);
     }
 
-    public function refundMoney()
+    public function refundSend()
     {
       
     }

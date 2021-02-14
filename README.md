@@ -6,14 +6,16 @@
 ## 付款使用方式
 
 ```php
+ini_set('display_errors', '1');
+error_reporting(E_ALL);
+
+require './vendor/autoload.php';
+
+use Zero\Pay\Pay as Pay;
+
 // 綠界 付款範例
-$Payment = new Payment("ecPay", [
-  "MerchantID" => 2000132,
-  "HashKey" => "5294y06JbISpM5x9",
-  "HashIV" => "v77hoKGq4kWxNNIS",
-  "checkoutUrl" => "https://payment-stage.ecpay.com.tw/Cashier/AioCheckOut/V5",
-  "searchUrl" => "https://payment.ecpay.com.tw/Cashier/QueryTradeInfo/V5",
-]);
+$Payment = Pay::setUp("ecPay");
+
 $requestsData = [
   "MerchantID" => 2000132,
   "MerchantTradeNo" => "zero".date("YmdHis"),
@@ -26,28 +28,25 @@ $requestsData = [
   "ChoosePayment" => "Credit",
   "EncryptType" => 1,
 ];
-$Payment->createOrder($requestsData);
+$Payment->requestParameter($requestsData);
 $Payment->dataProcess();
-echo $Payment->checkOut();
+echo $Payment->checkouts();
 
-// 綠界搜尋範例
+
+// 綠界 搜尋範例
 $requestsData = [
   "MerchantID" => 2000132,
   "MerchantTradeNo" => "xxxxx",
   "TimeStamp" => time(),
   "PlatformID" => 2000132,
 ];
-$Payment->setPar($requestsData);
+$Payment->requestParameter($requestsData);
 $Payment->dataProcess();
-echo $Payment->searchOrder();
+echo $Payment->search();
 
-// linePay 付款範例 
-$Payment = new Payment("linePay", [
-  "ChannelId" => "1654180534",
-  "ChannelSecret" => "0b493ba53c7ee3ed1f228bf00dfc9639",
-  "checkoutUrl" => "https://sandbox-api-pay.line.me/v3/payments/request",
-  "searchUrl" => "https://sandbox-api-pay.line.me/v3/payments"
-]);
+
+// LinePay 付款範例 
+$Payment = Pay::setUp("linePay");
 $requestsData = [
   'amount' => 100,
   'currency' => 'TWD',
@@ -72,28 +71,27 @@ $requestsData = [
     'cancelUrl' => "https://your.web.site/receive.php"
   ]
 ];
-$Payment->createOrder($requestsData);
+$Payment->requestParameter($requestsData);
 $Payment->dataProcess();
-echo $Payment->checkOut();
+echo $Payment->checkouts();
 
 // linePay 交易確認
 $transactionId = 2020121500644803510;
 $confirmUrl = "/v3/payments/$transactionId/confirm";
 $requestsData = [
-  "completeConfirmUrl" => "https://sandbox-api-pay.line.me". $confirmUrl,
   "confirmUrl" => $confirmUrl,
   "amount" => 100,
   "currency" => "TWD",
 ];
-$Payment->setPar($requestsData);
+$Payment->requestParameter($requestsData);
 $Payment->dataProcess();
 echo $Payment->confirm($requestsData);
 
-// linePay 訂單查詢
+// LinePay 訂單查詢
 $requestsData = [
   "orderId" => 20121414550564000006
 ];
-$Payment->setPar($requestsData);
+$Payment->requestParameter($requestsData);
 $Payment->dataProcess();
-echo $Payment->searchOrder();
+echo $Payment->search();
 ```

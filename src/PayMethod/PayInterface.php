@@ -2,7 +2,7 @@
 
 namespace Zero\Pay\PayMethod;
 
-interface PayInterface 
+interface PayInterface
 {
     public function dataProcess();
     public function checkouts();

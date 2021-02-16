@@ -4,31 +4,32 @@ namespace Zero\Pay\PaySend;
 
 class Send
 {
-    public $ch;
+    public static $ch;
 
-    public function __construct()
+    public static function setUp()
     {
-        $this->ch = curl_init();
-        curl_setopt($this->ch, CURLOPT_RETURNTRANSFER, true);
+        static::$ch = curl_init();
+        curl_setopt(static::$ch, CURLOPT_RETURNTRANSFER, true);
+        return new static;
     }
 
     public function post($url, $postFields = [], $headers = [])
     {
-        curl_setopt($this->ch, CURLOPT_URL, $url);
-        curl_setopt($this->ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($this->ch, CURLOPT_POST, true);
-        curl_setopt($this->ch, CURLOPT_POSTFIELDS, $postFields);
-        return curl_exec($this->ch);
+        curl_setopt(static::$ch, CURLOPT_URL, $url);
+        curl_setopt(static::$ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt(static::$ch, CURLOPT_POST, true);
+        curl_setopt(static::$ch, CURLOPT_POSTFIELDS, $postFields);
+        return curl_exec(static::$ch);
     }
 
     public function get($url, $getFields = [], $headers = [])
     {
-        curl_setopt($this->ch, CURLOPT_URL, $url . $getFields);
-        curl_setopt($this->ch, CURLOPT_HTTPHEADER, $headers);
-        return curl_exec($this->ch);
+        curl_setopt(static::$ch, CURLOPT_URL, $url . $getFields);
+        curl_setopt(static::$ch, CURLOPT_HTTPHEADER, $headers);
+        return curl_exec(static::$ch);
     }
 
-    public function form($url, $data)
+    public static function form($url, $data)
     {
         $szHtml =  '<!DOCTYPE html>';
         $szHtml .= '<html>';
@@ -50,6 +51,6 @@ class Send
 
     public function __destruct()
     {
-        curl_close($this->ch);
+        curl_close(static::$ch);
     }
 }

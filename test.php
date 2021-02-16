@@ -11,7 +11,7 @@ $payment = Pay::setUp("ecPay");
 
 $requestsData = [
   "MerchantID" => 2000132,
-  "MerchantTradeNo" => "zero".date("YmdHis"),
+  "MerchantTradeNo" => "zero" . date("YmdHis"),
   "MerchantTradeDate" => date("Y/m/d H:i:s"),
   "PaymentType" => "aio",
   "TotalAmount" => 500,
@@ -60,7 +60,7 @@ $requestsData = [
     ]
   ],
   'redirectUrls' => [
-    'confirmUrl' => "https://your.web.site/receive.php", 
+    'confirmUrl' => "https://your.web.site/receive.php",
     'cancelUrl' => "https://your.web.site/receive.php"
   ]
 ];

@@ -60,8 +60,6 @@ class LinePay extends PayParameter implements PayInterface
 
     public function refund()
     {
-
-        
     }
 
     /**

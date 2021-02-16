@@ -2,21 +2,20 @@
 
 namespace Zero\Pay;
 
-use Exception;
 use Zero\Pay\PayMethod\EcPay;
 use Zero\Pay\PayMethod\LinePay;
 
 class Pay
 {
-    public $classPay;
-    
+    public $pay;
+
     public function __construct($className)
     {
         $this->setPay($className);
     }
 
     public static function setUp($className)
-    {   
+    {
         switch (strtolower($className)) {
             case 'ecpay':
                 return new EcPay($className);
@@ -25,43 +24,43 @@ class Pay
                 return new LinePay($className);
                 break;
             default:
-                throw new Exception('no pay method class');
+                throw new \Exception('no pay method class');
         }
     }
 
     public function setPay($className)
-    {   
+    {
         switch (strtolower($className)) {
             case 'ecpay':
-                $this->classPay = new EcPay($className);
+                $this->pay = new EcPay($className);
                 break;
             case 'linepay':
-                $this->classPay = new LinePay($className);
+                $this->pay = new LinePay($className);
                 break;
             default:
-                throw new Exception('no pay method class');
+                throw new \Exception('no pay method class');
         }
     }
-    
+
     public function requestParameter($data)
     {
-        $this->classPay->requestParameter($data);
+        $this->pay->requestParameter($data);
         return $this;
     }
 
     public function dataProcess()
     {
-        $this->classPay->dataProcess();
+        $this->pay->dataProcess();
         return $this;
     }
 
     public function checkouts()
     {
-        return $this->classPay->checkouts();
+        return $this->pay->checkouts();
     }
 
     public function search()
     {
-        return $this->classPay->search();
+        return $this->pay->search();
     }
 }

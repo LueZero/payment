@@ -9,13 +9,13 @@ class PayParameter
     public $sendMenthod;
     public $necessaryParameters;
     public $sendData;
-    
+
     /**
      * 選擇必要設定參數
      */
     public function selectNecessaryParametersConfig($pay)
-    {   
-        $this->necessaryParameters = require(dirname(dirname(__FILE__))."/config.php");
+    {
+        $this->necessaryParameters = require(dirname(dirname(__FILE__)) . "/config.php");
         switch (strtolower($pay)) {
             case 'ecpay':
                 $this->necessaryParameters = $this->necessaryParameters[strtolower($pay)];

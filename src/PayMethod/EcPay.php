@@ -2,16 +2,19 @@
 
 namespace Zero\Pay\PayMethod;
 
-use Zero\Pay\PayMethod\PayParameter;
+use Zero\Pay\PayMethod\PayParameterConfig;
 use Zero\Pay\PayMethod\PayInterface;
+use Zero\Pay\PaySend\SendInterface;
 use Zero\Pay\Helper\DataCheck;
-use Zero\Pay\PaySend\PaySend;
 
-class EcPay extends PayParameter implements PayInterface
+class EcPay extends PayParameterConfig implements PayInterface
 {
-    public function __construct($pay)
+    /**
+     * 建構子
+     */
+    public function __construct($pay, SendInterface $paySend)
     {
-        $this->sendMethod = PaySend::setUp($pay);
+        $this->sendMethod = $paySend;
         $this->selectNecessaryParametersConfig($pay);
     }
 
@@ -48,6 +51,9 @@ class EcPay extends PayParameter implements PayInterface
         $this->sendData["CheckMacValue"] = $CheckMacValue;
     }
 
+    /**
+     * 綠界加密
+     */
     public function generate($arParameters = array(), $HashKey = '', $HashIV = '', $encType = 0)
     {
         $sMacValue = '';
@@ -74,6 +80,9 @@ class EcPay extends PayParameter implements PayInterface
         return $sMacValue;
     }
 
+    /**
+     * 綠界加密排序
+     */
     private static function merchantSort($a, $b)
     {
         return strcasecmp($a, $b);

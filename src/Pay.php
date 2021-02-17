@@ -16,6 +16,9 @@ class Pay
         $this->setPay($className);
     }
 
+    /**
+     * 設定支付
+     */
     public static function setUp($className)
     {
         switch (strtolower($className)) {
@@ -32,6 +35,9 @@ class Pay
         }
     }
 
+    /**
+     * 設定實例支付
+     */
     public function setPay($className)
     {
         switch (strtolower($className)) {
@@ -48,6 +54,9 @@ class Pay
         }
     }
 
+    /**
+     * 請求參數
+     */
     public function requestParameter($data)
     {
         $this->pay->requestParameter($data);

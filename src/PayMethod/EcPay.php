@@ -23,7 +23,7 @@ class EcPay extends PayParameterConfig implements PayInterface
      */
     public function checkouts()
     {
-        return $this->sendMethod->checkoutsSend($this->necessaryParameters["checkoutUrl"], $this->sendData, array("Content-type: application/x-www-form-urlencoded"));
+        return $this->sendMethod->checkoutsSend($this->necessaryParameters["ecPayApiUrl"].$this->necessaryParameters["checkoutUrl"], $this->sendData, array("Content-type: application/x-www-form-urlencoded"));
     }
 
     /**
@@ -31,7 +31,15 @@ class EcPay extends PayParameterConfig implements PayInterface
      */
     public function search()
     {
-        return $this->sendMethod->searchSend($this->necessaryParameters["searchUrl"], http_build_query($this->sendData), array("Content-Type: application/x-www-form-urlencoded"));
+        return $this->sendMethod->searchSend($this->necessaryParameters["ecPayApiUrl"].$this->necessaryParameters["searchUrl"], http_build_query($this->sendData), array("Content-Type: application/x-www-form-urlencoded"));
+    }
+
+    /**
+     * 搜尋單筆明細資料記錄
+     */
+    public function searchDetails()
+    {
+        return $this->sendMethod->searchSend($this->necessaryParameters["ecPayApiUrl"].$this->necessaryParameters["searchDetailsUrl"], http_build_query($this->sendData), array("Content-Type: application/x-www-form-urlencoded"));
     }
 
     /**

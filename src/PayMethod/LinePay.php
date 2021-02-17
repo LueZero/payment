@@ -35,10 +35,10 @@ class LinePay extends PayParameterConfig implements PayInterface
     /**
      * 確認
      */
-    public function confirm($confirmData)
+    public function confirm($confirmData, $transactionId)
     {
-        $confirmUrl = $this->sendData["confirmUrl"];
-        unset($this->sendData["confirmUrl"]);
+        $explodeUrl = explode("{}", $this->necessaryParameters["confirmUrl"]);
+        $confirmUrl = $explodeUrl[0] . $transactionId . $explodeUrl[1];
         $body = $this->necessaryParameters["ChannelSecret"] . $confirmUrl . json_encode($this->sendData) . time();
         return $this->sendMethod->confirmSend($this->necessaryParameters["lineApiUrl"] . $confirmUrl, json_encode($this->sendData), [
             "Content-Type: application/json; charset=UTF-8",

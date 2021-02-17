@@ -70,15 +70,13 @@ echo $payment->checkouts();
 
 // linePay 交易確認
 $transactionId = 2020121500644803510;
-$confirmUrl = "/v3/payments/$transactionId/confirm";
 $requestsData = [
-  "confirmUrl" => $confirmUrl,
   "amount" => 100,
   "currency" => "TWD",
 ];
 $payment->requestParameter($requestsData);
 $payment->dataProcess();
-echo $payment->confirm($requestsData);
+echo $payment->confirm($requestsData, $transactionId);
 
 // LinePay 訂單查詢
 $requestsData = [

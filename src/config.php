@@ -5,8 +5,11 @@ return [
         "MerchantID" => 2000132,
         "HashKey" => "5294y06JbISpM5x9",
         "HashIV" => "v77hoKGq4kWxNNIS",
-        "checkoutUrl" => "https://payment-stage.ecpay.com.tw/Cashier/AioCheckOut/V5",
-        "searchUrl" => "https://payment.ecpay.com.tw/Cashier/QueryTradeInfo/V5",
+        "ecPayApiUrl" => "https://payment-stage.ecpay.com.tw",
+        "checkoutUrl" => "/Cashier/AioCheckOut/V5",
+        "searchUrl" => "/Cashier/QueryTradeInfo/V5",
+        "searchDetailsUrl" => "/CreditDetail/QueryTrade/V2",
+        "refundUrl" => "/CreditDetail/DoAction"
     ],
 
     "linepay" => [
@@ -14,6 +17,8 @@ return [
         "lineApiUrl" => "https://sandbox-api-pay.line.me",
         "ChannelSecret" => "0b493ba53c7ee3ed1f228bf00dfc9639",
         "checkoutUrl" => "/v3/payments/request",
-        "searchUrl" => "/v3/payments"
+        "confirmUrl" => "/v3/payments/{}/confirm",
+        "searchUrl" => "/v3/payments",
+        "refundUrl" => "/v3/payments/{}/refund"
     ]
 ];

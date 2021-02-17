@@ -9,49 +9,21 @@ use Zero\Pay\PaySend\LinePaySend;
 
 class Pay
 {
-    public $pay;
-
-    public function __construct($className)
-    {
-        $this->setPay($className);
-    }
+    public static $pay;
 
     /**
-     * 設定支付 靜態
+     * 設定支付
      */
-    public static function setUp($className)
+    public static function setPay($className)
     {
-        switch (strtolower($className)) {
-            case 'ecpay':
-                $paySend = new EcPaySend();
-                return new EcPay($className, $paySend);
-                break;
-            case 'linepay':
-                $paySend = new LinePaySend();
-                return new LinePay($className, $paySend);
-                break;
-            default:
-                throw new \Exception('no pay method class');
+        if(strtolower($className) == "ecpay"){
+             self::$pay = new EcPay($className, new EcPaySend());
+        } else if (strtolower($className) == "linepay") {
+             self::$pay = new LinePay($className, new LinePaySend());
+        }else{
+            throw new \Exception('no pay method class');
         }
-    }
-
-    /**
-     * 設定支付 實例
-     */
-    public function setPay($className)
-    {
-        switch (strtolower($className)) {
-            case 'ecpay':
-                $paySend = new EcPaySend();
-                $this->pay = new EcPay($className, $paySend);
-                break;
-            case 'linepay':
-                $paySend = new LinePaySend();
-                $this->pay = new LinePay($className, $paySend);
-                break;
-            default:
-                throw new \Exception('no pay method class');
-        }
+        return self::$pay;
     }
 
     /**
@@ -59,7 +31,7 @@ class Pay
      */
     public function requestParameter($data)
     {
-        $this->pay->requestParameter($data);
+        self::$pay->requestParameter($data);
         return $this;
     }
 
@@ -68,7 +40,7 @@ class Pay
      */
     public function dataProcess()
     {
-        $this->pay->dataProcess();
+        self::$pay->dataProcess();
         return $this;
     }
 
@@ -77,7 +49,7 @@ class Pay
      */
     public function checkouts()
     {
-        return $this->pay->checkouts();
+        return self::$pay->checkouts();
     }
 
     /**
@@ -85,7 +57,7 @@ class Pay
      */
     public function search()
     {
-        return $this->pay->search();
+        return self::$pay->search();
     }
 
     /**
@@ -93,7 +65,7 @@ class Pay
      */
     public function refund($orderId=null)
     {
-        return $this->pay->refund($orderId);
+        return self::$pay->refund($orderId);
     }
 
     // 保留

@@ -7,7 +7,7 @@ require './vendor/autoload.php';
 use Zero\Pay\Pay as Pay;
 
 // 綠界 付款範例
-$payment = Pay::setUp("ecPay");
+$payment = Pay::setPay("ecPay");
 
 $requestsData = [
   "MerchantID" => 2000132,
@@ -51,7 +51,7 @@ echo $payment->refund();
 /*--------分隔線-----------*/
 
 // LinePay 付款範例 
-$payment = Pay::setUp("linePay");
+$payment = Pay::setPay("linePay");
 $requestsData = [
   'amount' => 100,
   'currency' => 'TWD',

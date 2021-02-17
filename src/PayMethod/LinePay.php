@@ -2,20 +2,36 @@
 
 namespace Zero\Pay\PayMethod;
 
-use Zero\Pay\PayMethod\PayParameterConfig;
+use Zero\Pay\PayMethod\PayParameter;
 use Zero\Pay\PayMethod\PayInterface;
 use Zero\Pay\PaySend\SendInterface;
 use Zero\Pay\Helper\DataCheck;
 
-class LinePay extends PayParameterConfig implements PayInterface
+class LinePay extends PayParameter implements PayInterface
 {
     /**
      * 建構子
      */
     public function __construct($pay, SendInterface $paySend)
     {
-        $this->sendMethod = $paySend;
         $this->selectNecessaryParametersConfig($pay);
+        $this->sendMethod = $paySend;
+    }
+
+    /**
+     * 設定必要參數
+     */
+    public function selectNecessaryParametersConfig($pay)
+    {
+        $this->necessaryParameters = (require(dirname(dirname(__FILE__)) . "/config.php"))[strtolower($pay)];
+    }
+
+    /**
+     * 請求參數
+     */
+    public function requestParameter($data)
+    {
+        $this->sendData = $data;
     }
 
     /**

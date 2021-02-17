@@ -12,7 +12,7 @@ class LinePay extends PayParameter implements PayInterface
 
     public function __construct($pay)
     {
-        $this->sendMenthod = PaySend::setUp($pay);
+        $this->sendMethod = PaySend::setUp($pay);
         $this->selectNecessaryParametersConfig($pay);
     }
 
@@ -23,7 +23,7 @@ class LinePay extends PayParameter implements PayInterface
     public function checkouts()
     {
         $body = $this->necessaryParameters["ChannelSecret"] . $this->necessaryParameters["checkoutUrl"] . json_encode($this->sendData) . time();
-        return $this->sendMenthod->checkoutsSend($this->necessaryParameters["lineApiUrl"] . $this->necessaryParameters["checkoutUrl"], json_encode($this->sendData), [
+        return $this->sendMethod->checkoutsSend($this->necessaryParameters["lineApiUrl"] . $this->necessaryParameters["checkoutUrl"], json_encode($this->sendData), [
             "Content-Type: application/json",
             "X-LINE-ChannelId: " . $this->necessaryParameters["ChannelId"],
             "X-LINE-Authorization-Nonce: " . time(),
@@ -39,7 +39,7 @@ class LinePay extends PayParameter implements PayInterface
         $confirmUrl = $this->sendData["confirmUrl"];
         unset($this->sendData["confirmUrl"]);
         $body = $this->necessaryParameters["ChannelSecret"] . $confirmUrl . json_encode($this->sendData) . time();
-        return $this->sendMenthod->confirmSend($this->necessaryParameters["lineApiUrl"] . $confirmUrl, json_encode($this->sendData), [
+        return $this->sendMethod->confirmSend($this->necessaryParameters["lineApiUrl"] . $confirmUrl, json_encode($this->sendData), [
             "Content-Type: application/json; charset=UTF-8",
             "X-LINE-ChannelId: " . $this->necessaryParameters["ChannelId"],
             "X-LINE-Authorization-Nonce: " . time(),
@@ -50,7 +50,7 @@ class LinePay extends PayParameter implements PayInterface
     public function search()
     {
         $body = $this->necessaryParameters["ChannelSecret"] . $this->necessaryParameters["searchUrl"] . http_build_query($this->sendData) . time();
-        return $this->sendMenthod->searchSend($this->necessaryParameters["lineApiUrl"] . $this->necessaryParameters["searchUrl"] . "?", http_build_query($this->sendData), [
+        return $this->sendMethod->searchSend($this->necessaryParameters["lineApiUrl"] . $this->necessaryParameters["searchUrl"] . "?", http_build_query($this->sendData), [
             "Content-Type: application/json",
             "X-LINE-ChannelId: " . $this->necessaryParameters["ChannelId"],
             "X-LINE-Authorization-Nonce: " . time(),

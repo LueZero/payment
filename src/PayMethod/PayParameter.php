@@ -6,7 +6,7 @@ use Exception;
 
 class PayParameter
 {
-    public $sendMenthod;
+    public $sendMethod;
     public $necessaryParameters;
     public $sendData;
 

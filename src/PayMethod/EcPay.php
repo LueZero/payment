@@ -11,7 +11,7 @@ class EcPay extends PayParameter implements PayInterface
 {
     public function __construct($pay)
     {
-        $this->sendMenthod = PaySend::setUp($pay);
+        $this->sendMethod = PaySend::setUp($pay);
         $this->selectNecessaryParametersConfig($pay);
     }
 
@@ -20,7 +20,7 @@ class EcPay extends PayParameter implements PayInterface
      */
     public function checkouts()
     {
-        return $this->sendMenthod->checkoutsSend($this->necessaryParameters["checkoutUrl"], $this->sendData, array("Content-type: application/x-www-form-urlencoded"));
+        return $this->sendMethod->checkoutsSend($this->necessaryParameters["checkoutUrl"], $this->sendData, array("Content-type: application/x-www-form-urlencoded"));
     }
 
     /**
@@ -28,7 +28,7 @@ class EcPay extends PayParameter implements PayInterface
      */
     public function search()
     {
-        return $this->sendMenthod->searchSend($this->necessaryParameters["searchUrl"], http_build_query($this->sendData), array("Content-Type: application/x-www-form-urlencoded"));
+        return $this->sendMethod->searchSend($this->necessaryParameters["searchUrl"], http_build_query($this->sendData), array("Content-Type: application/x-www-form-urlencoded"));
     }
 
     /**

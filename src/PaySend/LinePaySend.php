@@ -22,7 +22,8 @@ class LinePaySend implements SendInterface
         return Send::setUp()->post($sendUrl, $sendData, $headers);
     }
 
-    public function refundSend()
+    public function refundSend($sendUrl, $sendData, $headers = [])
     {
+        return Send::setUp()->post($sendUrl, $sendData, $headers);
     }
 }

@@ -45,8 +45,9 @@ class EcPay extends PayParameterConfig implements PayInterface
     /**
      * 退款
      */
-    public function refund()
+    public function refund($orderId=null)
     {
+        return $this->sendMethod->searchSend($this->necessaryParameters["ecPayApiUrl"] . $this->necessaryParameters["refundUrl"], http_build_query($this->sendData), array("Content-Type: application/x-www-form-urlencoded"));
     }
 
     /**

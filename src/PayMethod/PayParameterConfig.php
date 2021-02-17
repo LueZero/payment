@@ -10,10 +10,12 @@ class PayParameterConfig
      * 發送方式
      */
     public $sendMethod;
+    
     /**
      * 必要參數
      */
     public $necessaryParameters;
+
     /**
      * 發送參數
      */

@@ -6,6 +6,6 @@ interface PayInterface
 {
     public function dataProcess();
     public function checkouts();
-    public function refund();
+    public function refund($orderId);
     public function search();
 }

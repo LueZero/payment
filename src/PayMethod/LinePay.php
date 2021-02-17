@@ -35,10 +35,10 @@ class LinePay extends PayParameterConfig implements PayInterface
     /**
      * 確認
      */
-    public function confirm($confirmData, $transactionId)
+    public function confirm($orderId=null)
     {
         $explodeUrl = explode("{}", $this->necessaryParameters["confirmUrl"]);
-        $confirmUrl = $explodeUrl[0] . $transactionId . $explodeUrl[1];
+        $confirmUrl = $explodeUrl[0] . $orderId . $explodeUrl[1];
         $body = $this->necessaryParameters["ChannelSecret"] . $confirmUrl . json_encode($this->sendData) . time();
         return $this->sendMethod->confirmSend($this->necessaryParameters["lineApiUrl"] . $confirmUrl, json_encode($this->sendData), [
             "Content-Type: application/json; charset=UTF-8",
@@ -59,8 +59,17 @@ class LinePay extends PayParameterConfig implements PayInterface
         ]);
     }
 
-    public function refund()
+    public function refund($orderId=null)
     {
+        $explodeUrl = explode("{}", $this->necessaryParameters["refundUrl"]);
+        $refundUrl = $explodeUrl[0] . $orderId . $explodeUrl[1];
+        $body = $this->necessaryParameters["ChannelSecret"] . $refundUrl. json_encode($this->sendData) . time();
+        return $this->sendMethod->refundSend($this->necessaryParameters["lineApiUrl"] . $refundUrl . "?", json_encode($this->sendData), [
+            "Content-Type: application/json",
+            "X-LINE-ChannelId: " . $this->necessaryParameters["ChannelId"],
+            "X-LINE-Authorization-Nonce: " . time(),
+            "X-LINE-Authorization: " . base64_encode(hash_hmac('sha256', $body, $this->necessaryParameters["ChannelSecret"], true)),
+        ]);
     }
 
     /**

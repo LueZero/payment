@@ -17,7 +17,7 @@ class Pay
     }
 
     /**
-     * 設定支付
+     * 設定支付 靜態
      */
     public static function setUp($className)
     {
@@ -36,7 +36,7 @@ class Pay
     }
 
     /**
-     * 設定實例支付
+     * 設定支付 實例
      */
     public function setPay($className)
     {
@@ -91,9 +91,9 @@ class Pay
     /**
      * 退款
      */
-    public function refund()
+    public function refund($orderId=null)
     {
-        return $this->pay->search();
+        return $this->pay->refund($orderId);
     }
 
     // 保留

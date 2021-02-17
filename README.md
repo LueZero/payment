@@ -6,9 +6,6 @@
 ## 付款使用方式
 
 ```php
-ini_set('display_errors', '1');
-error_reporting(E_ALL);
-
 require './vendor/autoload.php';
 
 use Zero\Pay\Pay as Pay;
@@ -32,7 +29,6 @@ $payment->requestParameter($requestsData);
 $payment->dataProcess();
 echo $payment->checkouts();
 
-
 // 綠界 搜尋範例
 $requestsData = [
   "MerchantID" => 2000132,
@@ -44,6 +40,23 @@ $payment->requestParameter($requestsData);
 $payment->dataProcess();
 echo $payment->search();
 
+// 綠界 退款範例
+$requestsData = [
+    "MerchantID" => 2000132,
+    "MerchantTradeNo" => "xxx",
+    "TradeNo" => "xxx",
+    "Action" => "R",
+    "TotalAmount" => 100,
+];
+$payment->requestParameter($requestsData);
+$payment->dataProcess();
+echo $payment->refund();
+```
+
+```php
+require './vendor/autoload.php';
+
+use Zero\Pay\Pay as Pay;
 
 // LinePay 付款範例 
 $payment = Pay::setUp("linePay");
@@ -75,21 +88,30 @@ $payment->requestParameter($requestsData);
 $payment->dataProcess();
 echo $payment->checkouts();
 
-// linePay 交易確認
-$transactionId = 2020121500644803510;
+// linePay 確認範例
+$orderId = 2020121500644803510;
 $requestsData = [
   "amount" => 100,
   "currency" => "TWD",
 ];
 $payment->requestParameter($requestsData);
 $payment->dataProcess();
-echo $payment->confirm($requestsData, $transactionId);
+echo $payment->confirm($orderId);
 
-// LinePay 訂單查詢
+// LinePay 查詢範例
 $requestsData = [
   "orderId" => 20121414550564000006
 ];
 $payment->requestParameter($requestsData);
 $payment->dataProcess();
 echo $payment->search();
+
+// LinePay 退款範例
+$orderId = 2020121500644803510;
+$requestsData = [
+  "refundAmount" => 100
+];
+$payment->requestParameter($requestsData);
+$payment->dataProcess();
+echo $payment->refund($orderId);
 ```

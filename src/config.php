@@ -9,7 +9,19 @@ return [
         "checkoutUrl" => "/Cashier/AioCheckOut/V5",
         "searchUrl" => "/Cashier/QueryTradeInfo/V5",
         "searchDetailsUrl" => "/CreditDetail/QueryTrade/V2",
-        "refundUrl" => "/CreditDetail/DoAction"
+        "refundUrl" => "/CreditDetail/DoAction",
+        "checkoutParameter" => [
+            "MerchantID",
+            "MerchantTradeNo",
+            "MerchantTradeDate",
+            "PaymentType",
+            "TotalAmount",
+            "TradeDesc",
+            "ItemName",
+            "ReturnURL",
+            "ChoosePayment",
+            "EncryptType",
+        ]
     ],
 
     "linepay" => [
@@ -19,6 +31,13 @@ return [
         "checkoutUrl" => "/v3/payments/request",
         "confirmUrl" => "/v3/payments/{}/confirm",
         "searchUrl" => "/v3/payments",
-        "refundUrl" => "/v3/payments/{}/refund"
+        "refundUrl" => "/v3/payments/{}/refund",
+        "checkoutParameter" => [
+            "amount",
+            "currency",
+            "orderId",
+            "packages",
+            'redirectUrls'
+        ]
     ]
 ];

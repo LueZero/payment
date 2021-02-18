@@ -39,6 +39,7 @@ class LinePay extends PayParameter implements PayInterface
      */
     public function checkouts()
     {
+        $this->exhaustiveCheckSendData($this->sendData, "checkoutParameter");
         $body = $this->necessaryParameters["ChannelSecret"] . $this->necessaryParameters["checkoutUrl"] . json_encode($this->sendData) . time();
         return $this->sendMethod->checkoutsSend($this->necessaryParameters["lineApiUrl"] . $this->necessaryParameters["checkoutUrl"], json_encode($this->sendData), [
             "Content-Type: application/json",
@@ -94,5 +95,17 @@ class LinePay extends PayParameter implements PayInterface
     public function dataProcess()
     {
         DataCheck::whetherEmpty($this->sendData, "send data is empty");
+    }
+
+    /**
+     * 發送參數詳盡檢查
+     */
+    public function exhaustiveCheckSendData($sendData,$key)
+    {
+        foreach ($this->necessaryParameters[$key] as $checkoutParameter) {
+            if (empty($sendData[$checkoutParameter])) {
+                throw new \Exception("{$checkoutParameter} parameter missing ");
+            }
+        }
     }
 }

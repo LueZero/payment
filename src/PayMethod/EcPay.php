@@ -32,7 +32,9 @@ class EcPay extends PayParameter implements PayInterface
      */
     public function checkouts()
     {
-        $this->exhaustiveCheckSendData($this->sendData, "checkoutParameter");
+        DataCheck::checkOrderNumber($this->sendData["MerchantTradeNo"], "MerchantTradeNo");
+        DataCheck::checkTotalAmount($this->sendData["TotalAmount"]);
+        DataCheck::exhaustiveCheckSendData($this->necessaryParameters, $this->sendData, "checkoutParameter");
         return $this->sendMethod->checkoutsSend($this->necessaryParameters["ecPayApiUrl"].$this->necessaryParameters["checkoutUrl"], $this->sendData, array("Content-type: application/x-www-form-urlencoded"));
     }
 
@@ -41,6 +43,7 @@ class EcPay extends PayParameter implements PayInterface
      */
     public function search()
     {
+        DataCheck::checkOrderNumber($this->sendData["MerchantTradeNo"], "MerchantTradeNo");
         return $this->sendMethod->searchSend($this->necessaryParameters["ecPayApiUrl"].$this->necessaryParameters["searchUrl"], http_build_query($this->sendData), array("Content-Type: application/x-www-form-urlencoded"));
     }
 
@@ -49,6 +52,7 @@ class EcPay extends PayParameter implements PayInterface
      */
     public function searchDetails()
     {
+        DataCheck::checkOrderNumber($this->sendData["MerchantTradeNo"], "MerchantTradeNo");
         return $this->sendMethod->searchSend($this->necessaryParameters["ecPayApiUrl"].$this->necessaryParameters["searchDetailsUrl"], http_build_query($this->sendData), array("Content-Type: application/x-www-form-urlencoded"));
     }
 
@@ -57,6 +61,7 @@ class EcPay extends PayParameter implements PayInterface
      */
     public function refund($orderId=null)
     {
+        DataCheck::checkOrderNumber($this->sendData["MerchantTradeNo"], "MerchantTradeNo");
         return $this->sendMethod->searchSend($this->necessaryParameters["ecPayApiUrl"] . $this->necessaryParameters["refundUrl"], http_build_query($this->sendData), array("Content-Type: application/x-www-form-urlencoded"));
     }
 
@@ -68,18 +73,6 @@ class EcPay extends PayParameter implements PayInterface
         DataCheck::whetherEmpty($this->sendData, "send data is empty");
         $CheckMacValue = $this->generate($this->sendData, $this->necessaryParameters["HashKey"], $this->necessaryParameters["HashIV"]);
         $this->sendData["CheckMacValue"] = $CheckMacValue;
-    }
-
-    /**
-     * 發送參數詳盡檢查
-     */
-    public function exhaustiveCheckSendData($sendData, $key)
-    {
-        foreach($this->necessaryParameters[$key] as $checkoutParameter){
-            if(empty($sendData[$checkoutParameter])){
-                throw new \Exception("{$checkoutParameter} parameter missing ");
-            }
-        }
     }
 
     /**

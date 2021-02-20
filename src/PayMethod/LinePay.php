@@ -32,7 +32,9 @@ class LinePay extends PayParameter implements PayInterface
      */
     public function checkouts()
     {
-        $this->exhaustiveCheckSendData($this->sendData, "checkoutParameter");
+        DataCheck::checkOrderNumber($this->sendData["orderId"], "orderId");
+        DataCheck::checkTotalAmount($this->sendData["amount"]);
+        DataCheck::exhaustiveCheckSendData($this->necessaryParameters, $this->sendData, "checkoutParameter");
         $body = $this->necessaryParameters["ChannelSecret"] . $this->necessaryParameters["checkoutUrl"] . json_encode($this->sendData) . time();
         return $this->sendMethod->checkoutsSend($this->necessaryParameters["lineApiUrl"] . $this->necessaryParameters["checkoutUrl"], json_encode($this->sendData), [
             "Content-Type: application/json",
@@ -47,6 +49,7 @@ class LinePay extends PayParameter implements PayInterface
      */
     public function confirm($orderId=null)
     {
+        DataCheck::checkOrderNumber($orderId, "orderId");
         $explodeUrl = explode("{}", $this->necessaryParameters["confirmUrl"]);
         $confirmUrl = $explodeUrl[0] . $orderId . $explodeUrl[1];
         $body = $this->necessaryParameters["ChannelSecret"] . $confirmUrl . json_encode($this->sendData) . time();
@@ -60,6 +63,7 @@ class LinePay extends PayParameter implements PayInterface
 
     public function search()
     {
+        DataCheck::checkOrderNumber($this->sendData["orderId"], "orderId");
         $body = $this->necessaryParameters["ChannelSecret"] . $this->necessaryParameters["searchUrl"] . http_build_query($this->sendData) . time();
         return $this->sendMethod->searchSend($this->necessaryParameters["lineApiUrl"] . $this->necessaryParameters["searchUrl"] . "?", http_build_query($this->sendData), [
             "Content-Type: application/json",
@@ -71,6 +75,7 @@ class LinePay extends PayParameter implements PayInterface
 
     public function refund($orderId=null)
     {
+        DataCheck::checkOrderNumber($orderId, "orderId");
         $explodeUrl = explode("{}", $this->necessaryParameters["refundUrl"]);
         $refundUrl = $explodeUrl[0] . $orderId . $explodeUrl[1];
         $body = $this->necessaryParameters["ChannelSecret"] . $refundUrl. json_encode($this->sendData) . time();
@@ -88,17 +93,5 @@ class LinePay extends PayParameter implements PayInterface
     public function dataProcess()
     {
         DataCheck::whetherEmpty($this->sendData, "send data is empty");
-    }
-
-    /**
-     * 發送參數詳盡檢查
-     */
-    public function exhaustiveCheckSendData($sendData,$key)
-    {
-        foreach ($this->necessaryParameters[$key] as $checkoutParameter) {
-            if (empty($sendData[$checkoutParameter])) {
-                throw new \Exception("{$checkoutParameter} parameter missing ");
-            }
-        }
     }
 }

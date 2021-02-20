@@ -14,16 +14,9 @@ class LinePay extends PayParameter implements PayInterface
      */
     public function __construct($pay, SendInterface $paySend)
     {
-        $this->selectNecessaryParametersConfig($pay);
+        parent::__construct();
+        $this->necessaryParameters = $this->necessaryParameters[$pay];
         $this->sendMethod = $paySend;
-    }
-
-    /**
-     * 設定必要參數
-     */
-    public function selectNecessaryParametersConfig($pay)
-    {
-        $this->necessaryParameters = (require(dirname(dirname(__FILE__)) . "/config.php"))[strtolower($pay)];
     }
 
     /**

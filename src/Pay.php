@@ -16,10 +16,11 @@ class Pay
      */
     public static function setPay($className)
     {
-        if(strtolower($className) == "ecpay"){
-             self::$pay = new EcPay($className, new EcPaySend());
-        } else if (strtolower($className) == "linepay") {
-             self::$pay = new LinePay($className, new LinePaySend());
+        $name = strtolower($className);
+        if($name == "ecpay"){
+             self::$pay = new EcPay($name, new EcPaySend());
+        } else if ($name == "linepay") {
+             self::$pay = new LinePay($name, new LinePaySend());
         }else{
             throw new \Exception('no pay method class');
         }

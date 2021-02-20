@@ -25,4 +25,12 @@ abstract class PayParameter
      * 發送參數
      */
     protected $sendData;
+
+    /**
+     * 建構子
+     */
+    public function __construct()
+    {
+        $this->necessaryParameters = require(dirname(dirname(__FILE__)) . "/config.php");
+    }
 }

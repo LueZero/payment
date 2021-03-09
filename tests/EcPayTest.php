@@ -7,7 +7,10 @@ use Zero\Pay\Pay as Pay;
 
 final class EcPayTest extends TestCase
 {
-    public function testSetPay(): void
+    /**
+     * @test
+     */
+    public function Given_EcPay_When_SetPay_Then_Retur_EcPay(): void
     {
         $pay = Pay::setPay("ecPay");
         $this->assertStringStartsWith('Zero\Pay\PayMethod\EcPay', get_class($pay));

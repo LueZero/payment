@@ -24,4 +24,13 @@ final class EcPayTest extends TestCase
         $pay = Pay::setPay("LinePay");
         $this->assertStringStartsWith('Zero\Pay\PayMethod\LinePay', get_class($pay));
     }
+
+    /**
+     * @test
+     */
+    public function Given_ZeroPay_When_SetPay_Then_Throw_Exception()
+    {
+        $this->expectException(Exception::class);
+        $pay = Pay::setPay("ZeroPay");
+    }
 }

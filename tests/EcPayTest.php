@@ -15,4 +15,13 @@ final class EcPayTest extends TestCase
         $pay = Pay::setPay("ecPay");
         $this->assertStringStartsWith('Zero\Pay\PayMethod\EcPay', get_class($pay));
     }
+
+    /**
+     * @test
+     */
+    public function Given_LinePay_When_SetPay_Then_Retur_LinePay(): void
+    {
+        $pay = Pay::setPay("LinePay");
+        $this->assertStringStartsWith('Zero\Pay\PayMethod\LinePay', get_class($pay));
+    }
 }

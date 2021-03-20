@@ -5,7 +5,7 @@ declare(strict_types=1);
 use PHPUnit\Framework\TestCase;
 use Zero\Pay\Pay as Pay;
 
-final class EcPayTest extends TestCase
+final class PayTest extends TestCase
 {
     public function testSetPay(): void
     {

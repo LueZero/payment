@@ -40,7 +40,7 @@ class LinePay extends PayParameter implements PayInterface
             "Content-Type: application/json",
             "X-LINE-ChannelId: " . $this->necessaryParameters["ChannelId"],
             "X-LINE-Authorization-Nonce: " . time(),
-            "X-LINE-Authorization: " . base64_encode(hash_hmac('sha256', $body, $this->necessaryParameters["ChannelSecret"], true)),
+            "X-LINE-Authorization: " . $this->encrypt($body),
         ]);
     }
 
@@ -57,10 +57,14 @@ class LinePay extends PayParameter implements PayInterface
             "Content-Type: application/json; charset=UTF-8",
             "X-LINE-ChannelId: " . $this->necessaryParameters["ChannelId"],
             "X-LINE-Authorization-Nonce: " . time(),
-            "X-LINE-Authorization: " . base64_encode(hash_hmac('sha256', $body, $this->necessaryParameters["ChannelSecret"], true)),
+            "X-LINE-Authorization: " . $this->encrypt($body),
         ]);
     }
 
+
+    /**
+     * 搜尋資料
+     */
     public function search()
     {
         DataCheck::checkOrderNumber($this->sendData["orderId"], "orderId");
@@ -69,10 +73,13 @@ class LinePay extends PayParameter implements PayInterface
             "Content-Type: application/json",
             "X-LINE-ChannelId: " . $this->necessaryParameters["ChannelId"],
             "X-LINE-Authorization-Nonce: " . time(),
-            "X-LINE-Authorization: " . base64_encode(hash_hmac('sha256', $body, $this->necessaryParameters["ChannelSecret"], true)),
+            "X-LINE-Authorization: " . $this->encrypt($body),
         ]);
     }
 
+    /**
+     * 退款
+     */
     public function refund($orderId=null)
     {
         DataCheck::checkOrderNumber($orderId, "orderId");
@@ -83,8 +90,16 @@ class LinePay extends PayParameter implements PayInterface
             "Content-Type: application/json",
             "X-LINE-ChannelId: " . $this->necessaryParameters["ChannelId"],
             "X-LINE-Authorization-Nonce: " . time(),
-            "X-LINE-Authorization: " . base64_encode(hash_hmac('sha256', $body, $this->necessaryParameters["ChannelSecret"], true)),
+            "X-LINE-Authorization: " . $this->encrypt($body),
         ]);
+    }
+
+    /**
+     * 加密
+     */
+    public function encrypt($data)
+    {
+        return base64_encode(hash_hmac('sha256', $data, $this->necessaryParameters["ChannelSecret"], true));
     }
 
     /**

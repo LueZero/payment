@@ -71,8 +71,16 @@ class EcPay extends PayParameter implements PayInterface
     public function dataProcess()
     {
         DataCheck::whetherEmpty($this->sendData, "send data is empty");
-        $CheckMacValue = $this->generate($this->sendData, $this->necessaryParameters["HashKey"], $this->necessaryParameters["HashIV"]);
+        $CheckMacValue = $this->encrypt($this->sendData);
         $this->sendData["CheckMacValue"] = $CheckMacValue;
+    }
+
+    /**
+     * 加密
+     */
+    public function encrypt($data)
+    {
+        return $this->generate($data,$this->necessaryParameters["HashKey"], $this->necessaryParameters["HashIV"]);
     }
 
     /**

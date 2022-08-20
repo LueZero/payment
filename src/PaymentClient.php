@@ -50,7 +50,7 @@ class PaymentClient
     /**
      * 改變支付
      */
-    public function changePay($paymentName)
+    public function changePayment($paymentName)
     {
         $this->paymentName = $paymentName;
         $this->setPayment();

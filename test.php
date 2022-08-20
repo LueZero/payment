@@ -1,17 +1,11 @@
-## 整合第三方金流服務
+<?php
+ini_set('display_errors', '1');
+error_reporting(E_ALL);
 
-- [綠界科技](https://www.ecpay.com.tw/)
-- [Line金流](https://pay.line.me/portal/tw/main)
-
-## 付款使用方式
-
-```php
 require './vendor/autoload.php';
 
-use Zero\Pay\PayClient as PayClient;
-```
+use Zero\Payment\PaymentClient as PaymentClient;
 
-```php
 // 綠界 付款範例
 $payment = new PaymentClient('ec');
 
@@ -47,9 +41,9 @@ $requests = [
     'TotalAmount' => 100,
 ];
 echo $payment->getPayment()->requestParameter($requests)->dataProcess()->refund();
-```
 
-```php
+/*--------分隔線-----------*/
+
 // Line 付款範例 
 $payment = new PaymentClient('line');
 
@@ -100,9 +94,3 @@ $requests = [
   'refundAmount' => 100
 ];
 echo $payment->getPayment()->requestParameter($requests)->dataProcess()->refund($orderId);
-```
-
-## 測試使用指令
-```zsh
-./vendor/bin/phpunit tests
-```

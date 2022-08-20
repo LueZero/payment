@@ -8,7 +8,7 @@
 ```php
 require './vendor/autoload.php';
 
-use Zero\Pay\PayClient as PayClient;
+use Zero\Payment\PayClient as PayClient;
 ```
 
 ```php

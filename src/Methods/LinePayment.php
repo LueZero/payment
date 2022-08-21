@@ -3,12 +3,25 @@
 namespace Zero\Payment\Methods;
 
 use Zero\Payment\Http;
-use Zero\Payment\Methods\AbstractPayment;
 use Zero\Payment\Helpers\DataCheck;
 
 class LinePayment extends Payment
 {
-    protected Http $http;
+    public string $amount;
+
+    public string $currency;
+
+    public string $transactionId;
+
+    public string $orderId;
+
+    public array $packages;
+
+    public array $options;
+
+    public array $redirectUrls;
+
+    public string $refundAmount;
 
     /**
      * 建構子
@@ -16,16 +29,6 @@ class LinePayment extends Payment
     public function __construct(Http $http)
     {
         $this->http = $http;
-    }
-
-    /**
-     * 請求參數
-     */
-    public function requestParameter($data): Payment
-    {
-        DataCheck::whetherEmpty($data, 'Send data is empty');
-        $this->sends = $data;
-        return $this;
     }
 
     /**
@@ -49,11 +52,11 @@ class LinePayment extends Payment
     /**
      * 確認
      */
-    public function confirm($orderId=null)
+    public function confirm($transactionId)
     {
-        DataCheck::checkOrderNumber($orderId, 'orderId');
+        DataCheck::checkOrderNumber($transactionId, 'transactionId');
         $explodeUrl = explode('{}', $this->necessaryParameters['paymentUrls']['confirmUrl']);
-        $confirmUrl = $explodeUrl[0] . $orderId . $explodeUrl[1];
+        $confirmUrl = $explodeUrl[0] . $transactionId . $explodeUrl[1];
         $body = $this->necessaryParameters['paymentParameters']['ChannelSecret'] . $confirmUrl . json_encode($this->sends) . time();
         return $this->http->setup([
                     'Content-Type: application/json',
@@ -87,11 +90,11 @@ class LinePayment extends Payment
     /**
      * 退款
      */
-    public function refund($orderId=null)
+    public function refund($transactionId)
     {
-        DataCheck::checkOrderNumber($orderId, 'orderId');
+        DataCheck::checkOrderNumber($transactionId, 'transactionId');
         $explodeUrl = explode('{}', $this->necessaryParameters['paymentUrls']['refundUrl']);
-        $refundUrl = $explodeUrl[0] . $orderId . $explodeUrl[1];
+        $refundUrl = $explodeUrl[0] . $transactionId . $explodeUrl[1];
         $body = $this->necessaryParameters['paymentParameters']['ChannelSecret'] . $refundUrl. json_encode($this->sends) . time();
         return $this->http->setup([
                     'Content-Type: application/json',

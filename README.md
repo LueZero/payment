@@ -26,38 +26,41 @@ $requests = [
   'ReturnURL' => 'https://your.web.site/receive.php',
   'ChoosePayment' => 'Credit',
   'EncryptType' => 1,
+  'awd' => 1,
 ];
-echo $payment->getPayment()->requestParameter($requests)->dataProcess()->checkouts();
+//echo $payment->getPayment()->requestParameter($requests)->dataProcess()->checkouts();
+//return;
 
 // 綠界 搜尋範例
 $requests = [
   'MerchantID' => 2000132,
-  'MerchantTradeNo' => 'xxxxx',
+  'MerchantTradeNo' => 'zero20220821101552',
   'TimeStamp' => time(),
   'PlatformID' => 2000132,
 ];
-echo $payment->getPayment()->requestParameter($requests)->dataProcess()->search();
+//echo $payment->getPayment()->requestParameter($requests)->dataProcess()->search();
+//return;
 
 // 綠界 退款範例
 $requests = [
     'MerchantID' => 2000132,
-    'MerchantTradeNo' => 'xxx',
-    'TradeNo' => 'xxx',
+    'MerchantTradeNo' => 'zero20220821101552',
+    'TradeNo' => '2208211615567910',
     'Action' => 'R',
     'TotalAmount' => 100,
 ];
-echo $payment->getPayment()->requestParameter($requests)->dataProcess()->refund();
+//echo $payment->getPayment()->requestParameter($requests)->dataProcess()->refund();
+//return;
 ```
 
 ```php
-// Line 付款範例 
 $payment = new PaymentClient('line');
 
-$orderId = 'zero' . date('YmdHis');
+$transactionId = date('YmdHis');
 $requests = [
   'amount' => 100,
   'currency' => 'TWD',
-  'orderId' =>  $orderId,
+  'orderId' =>  $transactionId,
   'packages' => [
     [
       'id' => 1,
@@ -78,28 +81,31 @@ $requests = [
     'cancelUrl' => 'https://your.web.site/receive.php'
   ]
 ];
-echo $payment->getPayment()->requestParameter($requests)->dataProcess()->checkouts();
+// echo $payment->getPayment()->requestParameter($requests)->dataProcess()->checkouts();
+// return;
 
 // line 確認範例
-$orderId = $orderId;
 $requests = [
   'amount' => 100,
   'currency' => 'TWD',
 ];
-echo $payment->getPayment()->requestParameter($requests)->dataProcess()->confirm($orderId);
+// echo $payment->getPayment()->requestParameter($requests)->dataProcess()->confirm($transactionId);
+// return;
 
 // Line 查詢範例
+$orderId = '20220821103746';
 $requests = [
-  'orderId' => $orderId
+  'orderId' => '20220821103746'
 ];
-echo $payment->getPayment()->requestParameter($requests)->dataProcess()->search();
+// echo $payment->getPayment()->requestParameter($requests)->dataProcess()->search();
+// return;
 
 // Line 退款範例 2020121500644803511
-$orderId = 2020121500644803511;
 $requests = [
   'refundAmount' => 100
 ];
-echo $payment->getPayment()->requestParameter($requests)->dataProcess()->refund($orderId);
+//echo $payment->getPayment()->requestParameter($requests)->dataProcess()->refund($transactionId);
+// return;
 ```
 
 ## 測試使用指令

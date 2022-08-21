@@ -3,12 +3,37 @@
 namespace Zero\Payment\Methods;
 
 use Zero\Payment\Http;
-use Zero\Payment\Methods\Payment;
 use Zero\Payment\Helpers\DataCheck;
 
 class EcPayment extends Payment
 {
-    protected Http $http;
+    public string $merchantId;
+
+    public string $merchantTradeNo;
+
+    public string $merchantTradeDate;
+
+    public string $totalAmount;
+
+    public string $tradeDesc;
+
+    public string $itemName;
+
+    public string $returnURL;
+
+    public string $paymentType;
+
+    public string $choosePayment;
+
+    public string $encryptType;
+
+    public string $timeStamp;
+
+    public string $platformId;
+
+    public string $tradeNo;
+
+    public string $action;
 
     /**
      * 建構子
@@ -19,31 +44,21 @@ class EcPayment extends Payment
     }
 
     /**
-     * 請求參數
-     */
-    public function requestParameter($data): Payment
-    {
-        DataCheck::whetherEmpty($data, 'Send data is empty');
-        $this->sends = $data;
-        return $this;
-    }
-
-    /**
      * 結帳
      */
     public function checkouts()
     {
         DataCheck::exhaustiveCheckSends($this->necessaryParameters, $this->sends, 'requestParameters');
         return $this->http->form(
-                    $this->necessaryParameters['paymentUrls']['ecApiUrl'].$this->necessaryParameters['paymentUrls']['checkoutUrl'], 
-                    $this->sends
-               );
+            $this->necessaryParameters['paymentUrls']['ecApiUrl'] . $this->necessaryParameters['paymentUrls']['checkoutUrl'],
+            $this->sends
+        );
     }
-    
+
     /**
      * 確認
      */
-    public function confirm($orderId=null)
+    public function confirm($merchantId = null)
     {
     }
 
@@ -54,11 +69,11 @@ class EcPayment extends Payment
     {
         DataCheck::checkOrderNumber($this->sends['MerchantTradeNo'], 'MerchantTradeNo');
         return $this->http->setup([
-                    'Content-Type: application/x-www-form-urlencoded'
-                ])->post(
-                    $this->necessaryParameters['paymentUrls']['ecApiUrl'].$this->necessaryParameters['paymentUrls']['searchUrl'], 
-                    http_build_query($this->sends)                    
-               );
+            'Content-Type: application/x-www-form-urlencoded'
+        ])->post(
+            $this->necessaryParameters['paymentUrls']['ecApiUrl'] . $this->necessaryParameters['paymentUrls']['searchUrl'],
+            http_build_query($this->sends)
+        );
     }
 
     /**
@@ -68,25 +83,25 @@ class EcPayment extends Payment
     {
         DataCheck::checkOrderNumber($this->sends['MerchantTradeNo'], 'MerchantTradeNo');
         return $this->http->setup([
-                    'Content-Type: application/x-www-form-urlencoded'
-                ])->post(
-                    $this->necessaryParameters['paymentUrls']['ecApiUrl'].$this->necessaryParameters['paymentUrls']['searchDetailsUrl'], 
-                    http_build_query($this->sends)                    
-               );
+            'Content-Type: application/x-www-form-urlencoded'
+        ])->post(
+            $this->necessaryParameters['paymentUrls']['ecApiUrl'] . $this->necessaryParameters['paymentUrls']['searchDetailsUrl'],
+            http_build_query($this->sends)
+        );
     }
 
     /**
      * 退款
      */
-    public function refund($orderId=null)
+    public function refund($merchantId = null)
     {
         DataCheck::checkOrderNumber($this->sends['MerchantTradeNo'], 'MerchantTradeNo');
         return $this->http->setup([
-                    'Content-Type: application/x-www-form-urlencoded'
-                ])->post(
-                    $this->necessaryParameters['paymentUrls']['ecApiUrl'] . $this->necessaryParameters['paymentUrls']['refundUrl'], 
-                    http_build_query($this->sends)                    
-               );
+            'Content-Type: application/x-www-form-urlencoded'
+        ])->post(
+            $this->necessaryParameters['paymentUrls']['ecApiUrl'] . $this->necessaryParameters['paymentUrls']['refundUrl'],
+            http_build_query($this->sends)
+        );
     }
 
     /**
@@ -104,7 +119,7 @@ class EcPayment extends Payment
      */
     public function encrypt($data)
     {
-        return $this->generate($data,$this->necessaryParameters['paymentParameters']['HashKey'], $this->necessaryParameters['paymentParameters']['HashIV']);
+        return $this->generate($data, $this->necessaryParameters['paymentParameters']['HashKey'], $this->necessaryParameters['paymentParameters']['HashIV']);
     }
 
     /**

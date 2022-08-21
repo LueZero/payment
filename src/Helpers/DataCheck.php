@@ -21,7 +21,7 @@ class DataCheck
    {
       foreach ($necessaryParameters[$key] as $checkoutParameter) {
          if (empty($sends[$checkoutParameter])) {
-            throw new \Exception("{$checkoutParameter} parameter missing ");
+            throw new \Exception("Zero\Payment\Helpers\DataCheck::[{$checkoutParameter} parameter missing]");
          }
       }
    }
@@ -32,7 +32,7 @@ class DataCheck
    public static function checkTotalAmount($amount)
    {
       if ($amount < 1) {
-         throw new \Exception('The total amount cannot be less than 0');
+         throw new \Exception('Zero\Payment::[The total amount cannot be less than 0]');
       }
    }
 
@@ -42,7 +42,7 @@ class DataCheck
    public static function checkOrderNumber($orderNumber, $key)
    {
       if (empty($orderNumber)) {
-         throw new \Exception("{$key} number is empty");
+         throw new \Exception("Zero\Payment::[{$key} number is empty]");
       }
    }
 }

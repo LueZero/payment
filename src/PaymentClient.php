@@ -34,7 +34,7 @@ class PaymentClient
     public function setPayment()
     {
         if (!array_key_exists($this->paymentName, $this->paymentList))
-            throw new \Exception('no payment method class');
+            throw new \Exception('Zero\Payment\PaymentClient::[no payment method class]');
 
         $this->payment = new $this->paymentList[$this->paymentName](new Http());
     }
@@ -64,7 +64,7 @@ class PaymentClient
         $configs = require('config.php');
 
         if(empty($configs[$this->paymentName]))
-            throw new \Exception('config is empty');
+            throw new \Exception('Zero\Payment\PaymentClient::[payment config is empty]');
 
         $this->configs = $configs[$this->paymentName];
     }

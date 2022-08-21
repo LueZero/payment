@@ -42,7 +42,7 @@ return [
         'requestParameters' => [
             'amount',
             'currency',
-            'transactionId',
+            'orderId',
             'packages',
             'redirectUrls'
         ]

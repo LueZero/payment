@@ -9,7 +9,7 @@ use Zero\Payment\Http;
 abstract class Payment
 {
     /**
-     * 請求功能參數
+     * 請求功能
      */
     protected Http $http;
 
@@ -37,6 +37,16 @@ abstract class Payment
     abstract public function encrypt($data);
 
     /**
+     * 取得請求參數
+     */
+    abstract public function getRequestParameter();
+
+    /**
+     * 設定請求參數
+     */
+    abstract function setRequestParameter($requests): Payment;
+
+    /**
      * 資料處理
      */
     abstract public function dataProcess(): Payment;
@@ -60,32 +70,4 @@ abstract class Payment
      * 確認
      */
     abstract public function confirm($data);
-
-    /**
-     * 請求參數
-     */
-    public function requestParameter($data): Payment
-    {
-        DataCheck::whetherEmpty($data, 'Send data is empty');
-
-        foreach ($data as $key => $item) {
-            if (!isset($this->$key))
-                $this->$key = $item;
-        }
-
-        $this->sends = $this->getPublicVars();
-        return $this;
-    }
-
-    public function getPublicVars()
-    {
-        $me = new class
-        {
-            function getPublicVars($object)
-            {
-                return get_object_vars($object);
-            }
-        };
-        return $me->getPublicVars($this);
-    }
 }

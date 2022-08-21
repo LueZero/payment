@@ -4,36 +4,11 @@ namespace Zero\Payment\Methods;
 
 use Zero\Payment\Http;
 use Zero\Payment\Helpers\DataCheck;
+use Zero\Payment\Parameters\EcPaymentRequestParameter;
 
 class EcPayment extends Payment
 {
-    public string $merchantId;
-
-    public string $merchantTradeNo;
-
-    public string $merchantTradeDate;
-
-    public string $totalAmount;
-
-    public string $tradeDesc;
-
-    public string $itemName;
-
-    public string $returnURL;
-
-    public string $paymentType;
-
-    public string $choosePayment;
-
-    public string $encryptType;
-
-    public string $timeStamp;
-
-    public string $platformId;
-
-    public string $tradeNo;
-
-    public string $action;
+    private EcPaymentRequestParameter $paymentRequestParameter;
 
     /**
      * 建構子
@@ -41,6 +16,41 @@ class EcPayment extends Payment
     public function __construct(Http $http)
     {
         $this->http = $http;
+        $this->paymentRequestParameter = new EcPaymentRequestParameter();
+    }
+
+    /**
+     * 取得請求參數
+     */
+    public function getRequestParameter()
+    {
+        return $this->paymentRequestParameter;
+    }
+
+    /**
+     * 設定請求參數
+     */
+    public function setRequestParameter($requests): Payment
+    {
+        DataCheck::whetherEmpty($requests, 'Zero\Payment\Helpers\DataCheck::[requests data is empty]');
+
+        foreach ($requests as $key => $item) {
+            if (!isset($this->paymentRequestParameter->$key))
+                $this->paymentRequestParameter->$key = $item;
+        }
+        
+        return $this;
+    }
+
+    /**
+     * 資料處理
+     */
+    public function dataProcess(): Payment
+    {
+        $this->sends = (array) $this->paymentRequestParameter;
+        $CheckMacValue = $this->encrypt($this->sends);
+        $this->sends['CheckMacValue'] = $CheckMacValue;
+        return $this;
     }
 
     /**
@@ -102,16 +112,6 @@ class EcPayment extends Payment
             $this->necessaryParameters['paymentUrls']['ecApiUrl'] . $this->necessaryParameters['paymentUrls']['refundUrl'],
             http_build_query($this->sends)
         );
-    }
-
-    /**
-     * 資料處理
-     */
-    public function dataProcess(): Payment
-    {
-        $CheckMacValue = $this->encrypt($this->sends);
-        $this->sends['CheckMacValue'] = $CheckMacValue;
-        return $this;
     }
 
     /**

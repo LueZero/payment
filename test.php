@@ -20,10 +20,9 @@ $requests = [
   'ReturnURL' => 'https://your.web.site/receive.php',
   'ChoosePayment' => 'Credit',
   'EncryptType' => 1,
-  'awd' => 1,
 ];
-//echo $payment->getPayment()->requestParameter($requests)->dataProcess()->checkouts();
-//return;
+// echo $payment->getPayment()->setRequestParameter($requests)->dataProcess()->checkouts();
+// return;
 
 // 綠界 搜尋範例
 $requests = [
@@ -32,7 +31,7 @@ $requests = [
   'TimeStamp' => time(),
   'PlatformID' => 2000132,
 ];
-//echo $payment->getPayment()->requestParameter($requests)->dataProcess()->search();
+//echo $payment->getPayment()->setRequestParameter($requests)->dataProcess()->search();
 //return;
 
 // 綠界 退款範例
@@ -43,7 +42,7 @@ $requests = [
     'Action' => 'R',
     'TotalAmount' => 100,
 ];
-//echo $payment->getPayment()->requestParameter($requests)->dataProcess()->refund();
+//echo $payment->getPayment()->setRequestParameter($requests)->dataProcess()->refund();
 //return;
 
 /*--------分隔線-----------*/
@@ -76,7 +75,7 @@ $requests = [
     'cancelUrl' => 'https://your.web.site/receive.php'
   ]
 ];
-// echo $payment->getPayment()->requestParameter($requests)->dataProcess()->checkouts();
+// echo $payment->getPayment()->setRequestParameter($requests)->dataProcess()->checkouts();
 // return;
 
 // line 確認範例
@@ -84,7 +83,7 @@ $requests = [
   'amount' => 100,
   'currency' => 'TWD',
 ];
-// echo $payment->getPayment()->requestParameter($requests)->dataProcess()->confirm($transactionId);
+// echo $payment->getPayment()->setRequestParameter($requests)->dataProcess()->confirm($transactionId);
 // return;
 
 // Line 查詢範例
@@ -92,12 +91,12 @@ $orderId = '20220821103746';
 $requests = [
   'orderId' => '20220821103746'
 ];
-// echo $payment->getPayment()->requestParameter($requests)->dataProcess()->search();
+// echo $payment->getPayment()->setRequestParameter($requests)->dataProcess()->search();
 // return;
 
-// Line 退款範例 2020121500644803511
+// Line 退款範例
 $requests = [
   'refundAmount' => 100
 ];
-//echo $payment->getPayment()->requestParameter($requests)->dataProcess()->refund($transactionId);
+// echo $payment->getPayment()->setRequestParameter($requests)->dataProcess()->refund($transactionId);
 // return;

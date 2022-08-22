@@ -15,6 +15,11 @@ class PaymentClient
 
     public string $paymentName;
 
+    public array $paymentNames = [
+        'ec' => '綠界科技ECPAY',
+        'line' => 'LINE Pay 行動支付'
+    ];
+
     private array $paymentList = [
         'ec' => EcPayment::class,
         'line' => LinePayment::class
@@ -33,7 +38,7 @@ class PaymentClient
      */
     public function setPayment()
     {
-        if (!array_key_exists($this->paymentName, $this->paymentList))
+        if (!array_key_exists($this->paymentName, $this->paymentNames))
             throw new \Exception('Zero\Payment\PaymentClient::[no payment method class]');
 
         $this->payment = new $this->paymentList[$this->paymentName](new Http());

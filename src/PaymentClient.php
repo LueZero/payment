@@ -16,8 +16,8 @@ class PaymentClient
     public string $paymentName;
 
     public array $paymentNames = [
-        'ec' => '綠界科技ECPAY',
-        'line' => 'LINE Pay 行動支付'
+        'ec' => 'EcPayment',
+        'line' => 'LinePayment'
     ];
 
     private array $paymentList = [

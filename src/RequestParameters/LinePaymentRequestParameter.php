@@ -5,37 +5,37 @@ namespace Zero\RequestParameters;
 class LinePaymentRequestParameter
 {
     /**
-     * string merchantID
+     * int amount
      */
     public $amount;
 
     /**
-     * string merchantID
+     * string currency
      */
     public $currency;
 
     /**
-     * string merchantID
+     * string orderId
      */
     public $orderId;
 
     /**
-     * array merchantID
+     * array packages
      */
     public $packages;
 
     /**
-     * array merchantID
+     * array redirectUrls
      */
     public $redirectUrls;
 
     /**
-     * string merchantID
+     * int refundAmount
      */
     public $refundAmount;
 
     /**
-     * array merchantID
+     * array options
      */
     public $options;
 }

@@ -7,170 +7,170 @@ class EcPaymentRequestParameter
     /**
      * string merchantID
      */
-    public $merchantID;
+    public $MerchantID;
 
     /**
      * string merchantTradeNo
      */
-    public $merchantTradeNo;
+    public $MerchantTradeNo;
 
     /**
      * string merchantTradeDate
      */
-    public $merchantTradeDate;
+    public $MerchantTradeDate;
 
     /**
      * int totalAmount
      */
-    public $totalAmount;
+    public $TotalAmount;
 
     /**
      * string tradeDesc
      */
-    public $tradeDesc;
+    public $TradeDesc;
 
     /**
      * string itemName
      */
-    public $itemName;
+    public $ItemName;
 
     /**
      * string returnURL
      */
-    public $returnURL;
+    public $ReturnURL;
 
     /**
      * string paymentType
      */
-    public $paymentType;
+    public $PaymentType;
 
     /**
      * string choosePayment
      */
-    public $choosePayment;
+    public $ChoosePayment;
 
     /**
      * int encryptType
      */
-    public $encryptType;
+    public $EncryptType;
 
     /**
      * string timeStamp
      */
-    public $timeStamp;
+    public $TimeStamp;
 
     /**
      * string tradeNo
      */
-    public $tradeNo;
+    public $TradeNo;
 
     /**
      * string action
      */
-    public $action;
+    public $Action;
 
     /**
      * string platformID
      */
-    public $platformID;
+    public $PlatformID;
 
     /**
      * string remark
      */
-    public $remark;
+    public $Remark;
 
     /**
      * string orderResultURL
      */
-    public $orderResultURL;
+    public $OrderResultURL;
 
     /**
      * string customField1
      */
-    public $customField1;
+    public $CustomField1;
 
     /**
      * string customField2
      */
-    public $customField2;
+    public $CustomField2;
 
     /**
      * string customField3
      */
-    public $customField3;
+    public $CustomField3;
 
     /**
      * string customField4
      */
-    public $customField4;
+    public $CustomField4;
 
     /**
      * string language
      */
-    public $language;
+    public $Language;
 
     /**
      * int expireDate
      */
-    public $expireDate;
+    public $ExpireDate;
 
     /**
      * int storeExpireDate
      */
-    public $storeExpireDate;
+    public $StoreExpireDate;
 
     /**
      * string desc_1
      */
-    public $desc_1;
+    public $Desc_1;
 
     /**
      * string desc_2
      */
-    public $desc_2;
+    public $Desc_2;
 
     /**
      * string desc_3
      */
-    public $desc_3;
+    public $Desc_3;
 
     /**
      * string desc_4
      */
-    public $desc_4;
+    public $Desc_4;
 
     /**
      * string paymentInfoURL
      */
-    public $paymentInfoURL;
+    public $PaymentInfoURL;
 
     /**
      * string clientRedirectURL
      */
-    public $clientRedirectURL;
+    public $ClientRedirectURL;
 
     /**
      * string redeem
      */
-    public $redeem;
+    public $Redeem;
 
     /**
      * string creditInstallment
      */
-    public $creditInstallment;
+    public $CreditInstallment;
 
     /**
      * int creditRefundId
      */
-    public $creditRefundId;
+    public $CreditRefundId;
 
     /**
      * int creditCheckCode
      */
-    public $creditCheckCode;
+    public $CreditCheckCode;
 
     /**
      * int creditAmount
      */
-    public $creditAmount;
+    public $CreditAmount;
 }

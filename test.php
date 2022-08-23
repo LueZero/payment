@@ -97,7 +97,6 @@ $requests = [
 // return;
 
 // Line 查詢範例
-$orderId = '20220821103746';
 $requests = [
   'orderId' => '20220821103746'
 ];

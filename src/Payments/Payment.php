@@ -14,7 +14,7 @@ abstract class Payment
     protected $http;
 
     /**
-     * array configs 設定檔
+     * array configs 配置
      */
     protected $configs;
 
@@ -29,9 +29,9 @@ abstract class Payment
     protected $paymentRequestParameter;
 
     /**
-     * void 設定參數
+     * void 設定配置參數
      */
-    public function setParameters($configs)
+    public function setConfigs($configs)
     {
         $this->configs = $configs;
     }

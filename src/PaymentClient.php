@@ -17,7 +17,7 @@ class PaymentClient
     /**
      * array configs
      */
-    private $configs;
+    public $configs;
 
     /**
      * string paymentName
@@ -44,6 +44,8 @@ class PaymentClient
     {
         $this->paymentName = $paymentName;      
         $this->setPayment();
+        $this->requireConfig();
+        $this->setPaymentConfigs();
     }
 
     /**
@@ -55,8 +57,14 @@ class PaymentClient
             throw new \Exception('Zero\Payment\PaymentClient::[no payment method class]');
 
         $this->payment = new $this->paymentList[$this->paymentName](new Http());
-        $configs = $this->requireConfig();
-        $this->payment->setParameters($configs);
+    }
+
+    /**
+     * void 
+     */
+    public function setPaymentConfigs()
+    {
+        $this->payment->setConfigs($this->configs);
     }
 
     /**
@@ -86,7 +94,7 @@ class PaymentClient
         if (empty($configs[$this->paymentName]))
             throw new \Exception('Zero\Payment\PaymentClient::[payment config is empty]');
 
-        return $configs[$this->paymentName];
+        $this->configs = $configs[$this->paymentName];
     }
 
     // 保留

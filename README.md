@@ -1,4 +1,4 @@
-## 整合第三方金流服務
+# 整合第三方金流服務
 
 - [綠界科技](https://www.ecpay.com.tw/)
 - [Line金流](https://pay.line.me/portal/tw/main)

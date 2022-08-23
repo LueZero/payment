@@ -158,4 +158,19 @@ class EcPaymentRequestParameter
      * string creditInstallment
      */
     public $creditInstallment;
+
+    /**
+     * int creditRefundId
+     */
+    public $creditRefundId;
+
+    /**
+     * int creditCheckCode
+     */
+    public $creditCheckCode;
+
+    /**
+     * int creditAmount
+     */
+    public $creditAmount;
 }

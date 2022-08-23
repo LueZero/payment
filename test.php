@@ -10,7 +10,7 @@ use Zero\PaymentClient as PaymentClient;
 $payment = new PaymentClient('ec');
 
 $requests = [
-  'MerchantID' => 2000132,
+  'MerchantID' => '2000132',
   'MerchantTradeNo' => 'zero' . date('YmdHis'),
   'MerchantTradeDate' => date('Y/m/d H:i:s'),
   'PaymentType' => 'aio',
@@ -21,29 +21,39 @@ $requests = [
   'ChoosePayment' => 'Credit',
   'EncryptType' => 1,
 ];
-// echo $payment->getPayment()->setRequestParameter($requests)->checkouts();
+// echo $payment->setRequestParameter($requests)->checkouts();
 // return;
 
 // 綠界 搜尋範例
 $requests = [
-  'MerchantID' => 2000132,
+  'MerchantID' => '2000132',
   'MerchantTradeNo' => 'zero20220821101552',
   'TimeStamp' => time(),
   'PlatformID' => 2000132,
 ];
-// echo $payment->getPayment()->setRequestParameter($requests)->search();
+// echo $payment->setRequestParameter($requests)->search();
+// return;
+
+// 綠界 搜尋明細範例
+$requests = [
+  'MerchantID' => '2000132',
+  'CreditRefundId' => 12095677,
+  'CreditCheckCode' => 25938511,
+  'CreditAmount' => 500,
+];
+// echo $payment->setRequestParameter($requests)->searchDetails();
 // return;
 
 // 綠界 退款範例
 $requests = [
-    'MerchantID' => 2000132,
+    'MerchantID' => '2000132',
     'MerchantTradeNo' => 'zero20220821101552',
     'TradeNo' => '2208211615567910',
     'Action' => 'R',
     'TotalAmount' => 100,
 ];
-//echo $payment->getPayment()->setRequestParameter($requests)->refund();
-//return;
+// echo $payment->setRequestParameter($requests)->refund();
+// return;
 
 /*--------分隔線-----------*/
 
@@ -75,7 +85,7 @@ $requests = [
     'cancelUrl' => 'https://your.web.site/receive.php'
   ]
 ];
-// echo $payment->getPayment()->setRequestParameter($requests)->checkouts();
+// echo $payment->setRequestParameter($requests)->checkouts();
 // return;
 
 // line 確認範例
@@ -83,7 +93,7 @@ $requests = [
   'amount' => 100,
   'currency' => 'TWD',
 ];
-// echo $payment->getPayment()->setRequestParameter($requests)->confirm($transactionId);
+// echo $payment->setRequestParameter($requests)->confirm(2022082400725100210);
 // return;
 
 // Line 查詢範例
@@ -91,12 +101,12 @@ $orderId = '20220821103746';
 $requests = [
   'orderId' => '20220821103746'
 ];
-// echo $payment->getPayment()->setRequestParameter($requests)->search();
+// echo $payment->setRequestParameter($requests)->search();
 // return;
 
 // Line 退款範例
 $requests = [
   'refundAmount' => 100
 ];
-// echo $payment->getPayment()->setRequestParameter($requests)->refund($transactionId);
+// echo $payment->setRequestParameter($requests)->refund(2022082400725100210);
 // return;

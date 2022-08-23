@@ -57,6 +57,10 @@ abstract class Payment
     public function dataProcess()
     {
         $this->sends = (array) $this->paymentRequestParameter;
+        foreach($this->sends as $key=>$item)
+            if (empty($item))
+                unset($this->sends[$key]);
+                
         return $this;
     }
 

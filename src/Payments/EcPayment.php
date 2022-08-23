@@ -47,6 +47,10 @@ class EcPayment extends Payment
     public function dataProcess()
     {
         $this->sends = (array) $this->paymentRequestParameter;
+        foreach($this->sends as $key=>$item)
+            if (empty($item))
+                unset($this->sends[$key]);
+
         $CheckMacValue = $this->encrypt($this->sends);
         $this->sends['CheckMacValue'] = $CheckMacValue;
         return $this;
@@ -90,7 +94,6 @@ class EcPayment extends Payment
      */
     public function searchDetails()
     {
-        DataCheck::checkOrderNumber($this->sends['MerchantTradeNo'], 'MerchantTradeNo');
         return $this->http->setup([
             'Content-Type: application/x-www-form-urlencoded'
         ])->post(

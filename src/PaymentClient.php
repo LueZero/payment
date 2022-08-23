@@ -97,6 +97,14 @@ class PaymentClient
         $this->configs = $configs[$this->paymentName];
     }
 
+    /**
+     * return class Payment
+     */
+    public function setRequestParameter(array $requests)
+    {
+        return $this->payment->setRequestParameter($requests);
+    }
+
     // 保留
     // public static function __callStatic($value, $args)
     // {

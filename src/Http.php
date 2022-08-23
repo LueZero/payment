@@ -1,6 +1,6 @@
 <?php
 
-namespace Zero\Payment;
+namespace Zero;
 
 class Http implements HttpInterface
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Zero\Payment\Helpers;
+namespace Zero\Helpers;
 
 class DataCheck
 {
@@ -17,9 +17,9 @@ class DataCheck
    /**
     * 詳細參數檢查
     */
-   public static function exhaustiveCheckSends($necessaryParameters, $sends, $key)
+   public static function exhaustiveCheckSends($configs, $sends, $key)
    {
-      foreach ($necessaryParameters[$key] as $checkoutParameter) {
+      foreach ($configs[$key] as $checkoutParameter) {
          if (empty($sends[$checkoutParameter])) {
             throw new \Exception("Zero\Payment\Helpers\DataCheck::[{$checkoutParameter} parameter missing]");
          }

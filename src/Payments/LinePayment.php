@@ -1,15 +1,13 @@
 <?php
 
-namespace Zero\Payment\Methods;
+namespace Zero\Payments;
 
-use Zero\Payment\Http;
-use Zero\Payment\Helpers\DataCheck;
-use Zero\Payment\Parameters\LinePaymentRequestParameter;
+use Zero\Http;
+use Zero\Helpers\DataCheck;
+use Zero\RequestParameters\LinePaymentRequestParameter;
 
 class LinePayment extends Payment
 {
-    private LinePaymentRequestParameter $paymentRequestParameter;
-
     /**
      * 建構子
      */
@@ -28,9 +26,9 @@ class LinePayment extends Payment
     }
 
     /**
-     * 設定請求參數
+     * return class Payment 設定請求參數
      */
-    public function setRequestParameter($requests): Payment
+    public function setRequestParameter($requests)
     {
         DataCheck::whetherEmpty($requests, 'Zero\Payment\Helpers\DataCheck::[requests data is empty]');
 
@@ -39,24 +37,15 @@ class LinePayment extends Payment
                 $this->paymentRequestParameter->$key = $item;
         }
 
-        return $this;
+        return $this->dataProcess();
     }
-
-    /**
-     * 資料處理
-     */
-    public function dataProcess(): Payment
-    {
-        $this->sends = (array) $this->paymentRequestParameter;
-        return $this;
-    }
-
+    
     /**
      * 加密
      */
     public function encrypt($data)
     {
-        return base64_encode(hash_hmac('sha256', $data, $this->necessaryParameters['paymentParameters']['ChannelSecret'], true));
+        return base64_encode(hash_hmac('sha256', $data, $this->configs['paymentParameters']['ChannelSecret'], true));
     }
 
     /**
@@ -64,15 +53,15 @@ class LinePayment extends Payment
      */
     public function checkouts()
     {
-        DataCheck::exhaustiveCheckSends($this->necessaryParameters, $this->sends, 'requestParameters');
-        $body = $this->necessaryParameters['paymentParameters']['ChannelSecret'] . $this->necessaryParameters['paymentUrls']['checkoutUrl'] . json_encode($this->sends) . time();
+        DataCheck::exhaustiveCheckSends($this->configs, $this->sends, 'requestParameters');
+        $body = $this->configs['paymentParameters']['ChannelSecret'] . $this->configs['paymentUrls']['checkoutUrl'] . json_encode($this->sends) . time();
         return $this->http->setup([
             'Content-Type: application/json',
-            'X-LINE-ChannelId: ' . $this->necessaryParameters['paymentParameters']['ChannelId'],
+            'X-LINE-ChannelId: ' . $this->configs['paymentParameters']['ChannelId'],
             'X-LINE-Authorization-Nonce: ' . time(),
             'X-LINE-Authorization: ' . $this->encrypt($body)
         ])->post(
-            $this->necessaryParameters['paymentUrls']['lineApiUrl'] . $this->necessaryParameters['paymentUrls']['checkoutUrl'],
+            $this->configs['paymentUrls']['lineApiUrl'] . $this->configs['paymentUrls']['checkoutUrl'],
             json_encode($this->sends)
         );
     }
@@ -83,16 +72,16 @@ class LinePayment extends Payment
     public function confirm($transactionId)
     {
         DataCheck::checkOrderNumber($transactionId, 'transactionId');
-        $explodeUrl = explode('{}', $this->necessaryParameters['paymentUrls']['confirmUrl']);
+        $explodeUrl = explode('{}', $this->configs['paymentUrls']['confirmUrl']);
         $confirmUrl = $explodeUrl[0] . $transactionId . $explodeUrl[1];
-        $body = $this->necessaryParameters['paymentParameters']['ChannelSecret'] . $confirmUrl . json_encode($this->sends) . time();
+        $body = $this->configs['paymentParameters']['ChannelSecret'] . $confirmUrl . json_encode($this->sends) . time();
         return $this->http->setup([
             'Content-Type: application/json',
-            'X-LINE-ChannelId: ' . $this->necessaryParameters['paymentParameters']['ChannelId'],
+            'X-LINE-ChannelId: ' . $this->configs['paymentParameters']['ChannelId'],
             'X-LINE-Authorization-Nonce: ' . time(),
             'X-LINE-Authorization: ' . $this->encrypt($body)
         ])->post(
-            $this->necessaryParameters['paymentUrls']['lineApiUrl'] . $confirmUrl,
+            $this->configs['paymentUrls']['lineApiUrl'] . $confirmUrl,
             json_encode($this->sends)
         );
     }
@@ -103,14 +92,14 @@ class LinePayment extends Payment
     public function search()
     {
         DataCheck::checkOrderNumber($this->sends['orderId'], 'orderId');
-        $body = $this->necessaryParameters['paymentParameters']['ChannelSecret'] . $this->necessaryParameters['paymentUrls']['searchUrl'] . http_build_query($this->sends) . time();
+        $body = $this->configs['paymentParameters']['ChannelSecret'] . $this->configs['paymentUrls']['searchUrl'] . http_build_query($this->sends) . time();
         return $this->http->setup([
             'Content-Type: application/json',
-            'X-LINE-ChannelId: ' . $this->necessaryParameters['paymentParameters']['ChannelId'],
+            'X-LINE-ChannelId: ' . $this->configs['paymentParameters']['ChannelId'],
             'X-LINE-Authorization-Nonce: ' . time(),
             'X-LINE-Authorization: ' . $this->encrypt($body)
         ])->get(
-            $this->necessaryParameters['paymentUrls']['lineApiUrl'] . $this->necessaryParameters['paymentUrls']['searchUrl'],
+            $this->configs['paymentUrls']['lineApiUrl'] . $this->configs['paymentUrls']['searchUrl'],
             $this->sends
         );
     }
@@ -121,16 +110,16 @@ class LinePayment extends Payment
     public function refund($transactionId)
     {
         DataCheck::checkOrderNumber($transactionId, 'transactionId');
-        $explodeUrl = explode('{}', $this->necessaryParameters['paymentUrls']['refundUrl']);
+        $explodeUrl = explode('{}', $this->configs['paymentUrls']['refundUrl']);
         $refundUrl = $explodeUrl[0] . $transactionId . $explodeUrl[1];
-        $body = $this->necessaryParameters['paymentParameters']['ChannelSecret'] . $refundUrl . json_encode($this->sends) . time();
+        $body = $this->configs['paymentParameters']['ChannelSecret'] . $refundUrl . json_encode($this->sends) . time();
         return $this->http->setup([
             'Content-Type: application/json',
-            'X-LINE-ChannelId: ' . $this->necessaryParameters['paymentParameters']['ChannelId'],
+            'X-LINE-ChannelId: ' . $this->configs['paymentParameters']['ChannelId'],
             'X-LINE-Authorization-Nonce: ' . time(),
             'X-LINE-Authorization: ' . $this->encrypt($body)
         ])->post(
-            $this->necessaryParameters['paymentUrls']['lineApiUrl'] . $refundUrl,
+            $this->configs['paymentUrls']['lineApiUrl'] . $refundUrl,
             json_encode($this->sends)
         );
     }

@@ -17,7 +17,7 @@ class ComposerStaticInit4d30bcf06f4288a31ca1c6f4dc3ba5dd
         ),
         'Z' => 
         array (
-            'Zero\\Payment\\' => 13,
+            'Zero\\' => 5,
         ),
         'W' => 
         array (
@@ -41,7 +41,7 @@ class ComposerStaticInit4d30bcf06f4288a31ca1c6f4dc3ba5dd
             1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
             2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
         ),
-        'Zero\\Payment\\' => 
+        'Zero\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),

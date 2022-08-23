@@ -1,15 +1,13 @@
 <?php
 
-namespace Zero\Payment\Methods;
+namespace Zero\Payments;
 
-use Zero\Payment\Http;
-use Zero\Payment\Helpers\DataCheck;
-use Zero\Payment\Parameters\EcPaymentRequestParameter;
+use Zero\Http;
+use Zero\Helpers\DataCheck;
+use Zero\RequestParameters\EcPaymentRequestParameter;
 
 class EcPayment extends Payment
 {
-    private EcPaymentRequestParameter $paymentRequestParameter;
-
     /**
      * 建構子
      */
@@ -28,9 +26,9 @@ class EcPayment extends Payment
     }
 
     /**
-     * 設定請求參數
+     * return class Payment 設定請求參數
      */
-    public function setRequestParameter($requests): Payment
+    public function setRequestParameter($requests)
     {
         DataCheck::whetherEmpty($requests, 'Zero\Payment\Helpers\DataCheck::[requests data is empty]');
 
@@ -39,13 +37,14 @@ class EcPayment extends Payment
                 $this->paymentRequestParameter->$key = $item;
         }
         
-        return $this;
+        return $this->dataProcess();
     }
 
     /**
-     * 資料處理
+     * @override 
+     * return class Payment 資料處理
      */
-    public function dataProcess(): Payment
+    public function dataProcess()
     {
         $this->sends = (array) $this->paymentRequestParameter;
         $CheckMacValue = $this->encrypt($this->sends);
@@ -58,9 +57,9 @@ class EcPayment extends Payment
      */
     public function checkouts()
     {
-        DataCheck::exhaustiveCheckSends($this->necessaryParameters, $this->sends, 'requestParameters');
+        DataCheck::exhaustiveCheckSends($this->configs, $this->sends, 'requestParameters');
         return $this->http->form(
-            $this->necessaryParameters['paymentUrls']['ecApiUrl'] . $this->necessaryParameters['paymentUrls']['checkoutUrl'],
+            $this->configs['paymentUrls']['ecApiUrl'] . $this->configs['paymentUrls']['checkoutUrl'],
             $this->sends
         );
     }
@@ -81,7 +80,7 @@ class EcPayment extends Payment
         return $this->http->setup([
             'Content-Type: application/x-www-form-urlencoded'
         ])->post(
-            $this->necessaryParameters['paymentUrls']['ecApiUrl'] . $this->necessaryParameters['paymentUrls']['searchUrl'],
+            $this->configs['paymentUrls']['ecApiUrl'] . $this->configs['paymentUrls']['searchUrl'],
             http_build_query($this->sends)
         );
     }
@@ -95,7 +94,7 @@ class EcPayment extends Payment
         return $this->http->setup([
             'Content-Type: application/x-www-form-urlencoded'
         ])->post(
-            $this->necessaryParameters['paymentUrls']['ecApiUrl'] . $this->necessaryParameters['paymentUrls']['searchDetailsUrl'],
+            $this->configs['paymentUrls']['ecApiUrl'] . $this->configs['paymentUrls']['searchDetailsUrl'],
             http_build_query($this->sends)
         );
     }
@@ -109,7 +108,7 @@ class EcPayment extends Payment
         return $this->http->setup([
             'Content-Type: application/x-www-form-urlencoded'
         ])->post(
-            $this->necessaryParameters['paymentUrls']['ecApiUrl'] . $this->necessaryParameters['paymentUrls']['refundUrl'],
+            $this->configs['paymentUrls']['ecApiUrl'] . $this->configs['paymentUrls']['refundUrl'],
             http_build_query($this->sends)
         );
     }
@@ -119,7 +118,7 @@ class EcPayment extends Payment
      */
     public function encrypt($data)
     {
-        return $this->generate($data, $this->necessaryParameters['paymentParameters']['HashKey'], $this->necessaryParameters['paymentParameters']['HashIV']);
+        return $this->generate($data, $this->configs['paymentParameters']['HashKey'], $this->configs['paymentParameters']['HashIV']);
     }
 
     /**
@@ -130,7 +129,7 @@ class EcPayment extends Payment
         $sMacValue = '';
         if (isset($arParameters)) {
             unset($arParameters['CheckMacValue']);
-            uksort($arParameters, array('Zero\Payment\Methods\EcPayment', 'merchantSort'));
+            uksort($arParameters, array('Zero\Payments\EcPayment', 'merchantSort'));
             $sMacValue = 'HashKey=' . $HashKey;
             foreach ($arParameters as $key => $value) {
                 $sMacValue .= '&' . $key . '=' . $value;

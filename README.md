@@ -8,7 +8,7 @@
 ```php
 require './vendor/autoload.php';
 
-use Zero\Payment\PayClient as PayClient;
+use Zero\PayClient as PayClient;
 ```
 
 ```php
@@ -27,7 +27,7 @@ $requests = [
   'ChoosePayment' => 'Credit',
   'EncryptType' => 1,
 ];
-// echo $payment->getPayment()->setRequestParameter($requests)->dataProcess()->checkouts();
+// echo $payment->getPayment()->setRequestParameter($requests)->checkouts();
 // return;
 
 // 綠界 搜尋範例
@@ -37,8 +37,8 @@ $requests = [
   'TimeStamp' => time(),
   'PlatformID' => 2000132,
 ];
-//echo $payment->getPayment()->setRequestParameter($requests)->dataProcess()->search();
-//return;
+// echo $payment->getPayment()->setRequestParameter($requests)->search();
+// return;
 
 // 綠界 退款範例
 $requests = [
@@ -48,7 +48,7 @@ $requests = [
     'Action' => 'R',
     'TotalAmount' => 100,
 ];
-//echo $payment->getPayment()->setRequestParameter($requests)->dataProcess()->refund();
+//echo $payment->getPayment()->setRequestParameter($requests)->refund();
 //return;
 
 /*--------分隔線-----------*/
@@ -81,40 +81,7 @@ $requests = [
     'cancelUrl' => 'https://your.web.site/receive.php'
   ]
 ];
-// echo $payment->getPayment()->setRequestParameter($requests)->dataProcess()->checkouts();
-// return;
-```
-
-```php
-// Line 付款範例 
-$payment = new PaymentClient('line');
-
-$transactionId = date('YmdHis');
-$requests = [
-  'amount' => 100,
-  'currency' => 'TWD',
-  'orderId' =>  $transactionId,
-  'packages' => [
-    [
-      'id' => 1,
-      'amount' => 100,
-      'name' => 'Test',
-      'products' => [
-        [
-          'name' => '測試商品',
-          'imageUrl' => 'https://img.ruten.com.tw/s1/8/5f/69/21309199705961_969_m.jpg',
-          'quantity' => 1,
-          'price' => 100,
-        ]
-      ],
-    ]
-  ],
-  'redirectUrls' => [
-    'confirmUrl' => 'https://your.web.site/receive.php',
-    'cancelUrl' => 'https://your.web.site/receive.php'
-  ]
-];
-// echo $payment->getPayment()->setRequestParameter($requests)->dataProcess()->checkouts();
+// echo $payment->getPayment()->setRequestParameter($requests)->checkouts();
 // return;
 
 // line 確認範例
@@ -122,7 +89,7 @@ $requests = [
   'amount' => 100,
   'currency' => 'TWD',
 ];
-// echo $payment->getPayment()->setRequestParameter($requests)->dataProcess()->confirm($transactionId);
+// echo $payment->getPayment()->setRequestParameter($requests)->confirm($transactionId);
 // return;
 
 // Line 查詢範例
@@ -130,14 +97,14 @@ $orderId = '20220821103746';
 $requests = [
   'orderId' => '20220821103746'
 ];
-// echo $payment->getPayment()->setRequestParameter($requests)->dataProcess()->search();
+// echo $payment->getPayment()->setRequestParameter($requests)->search();
 // return;
 
 // Line 退款範例
 $requests = [
   'refundAmount' => 100
 ];
-// echo $payment->getPayment()->setRequestParameter($requests)->dataProcess()->refund($transactionId);
+// echo $payment->getPayment()->setRequestParameter($requests)->refund($transactionId);
 // return;
 ```
 

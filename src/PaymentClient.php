@@ -1,40 +1,53 @@
 <?php
 
-namespace Zero\Payment;
+namespace Zero;
 
-use Zero\Payment\Methods\Payment;
-use Zero\Payment\Methods\EcPayment;
-use Zero\Payment\Methods\LinePayment;
-use Zero\Payment\Http;
+use Zero\Helpers\DataCheck;
+use Zero\Payments\Payment;
+use Zero\Payments\EcPayment;
+use Zero\Payments\LinePayment;
 
 class PaymentClient
 {
-    public array $configs;
+    /**
+     * class Payment
+     */
+    private $payment;
 
-    private Payment $payment;
+    /**
+     * array configs
+     */
+    private $configs;
 
-    public string $paymentName;
+    /**
+     * string paymentName
+     */
+    public $paymentName;
 
-    public array $paymentNames = [
+    /**
+     * array paymentNames
+     */
+    public $paymentNames = [
         'ec' => 'EcPayment',
         'line' => 'LinePayment'
     ];
 
-    private array $paymentList = [
+    /**
+     * array paymentList
+     */
+    private $paymentList = [
         'ec' => EcPayment::class,
         'line' => LinePayment::class
     ];
 
     public function __construct($paymentName)
     {
-        $this->paymentName = $paymentName;
-        $this->requireConfig();
+        $this->paymentName = $paymentName;      
         $this->setPayment();
-        $this->setConfig();
     }
-    
+
     /**
-     * 設定支付
+     * void 設定支付
      */
     public function setPayment()
     {
@@ -42,18 +55,20 @@ class PaymentClient
             throw new \Exception('Zero\Payment\PaymentClient::[no payment method class]');
 
         $this->payment = new $this->paymentList[$this->paymentName](new Http());
+        $configs = $this->requireConfig();
+        $this->payment->setParameters($configs);
     }
 
     /**
-     * 取得支付
+     * return class Payment 取得支付
      */
-    public function getPayment(): Payment
+    public function getPayment()
     {
         return $this->payment;
     }
 
     /**
-     * 改變支付
+     * void 改變支付
      */
     public function changePayment($paymentName)
     {
@@ -62,24 +77,16 @@ class PaymentClient
     }
 
     /**
-     * 呼叫配置檔
+     * return array 呼叫配置檔
      */
     private function requireConfig()
     {
         $configs = require('config.php');
 
-        if(empty($configs[$this->paymentName]))
+        if (empty($configs[$this->paymentName]))
             throw new \Exception('Zero\Payment\PaymentClient::[payment config is empty]');
 
-        $this->configs = $configs[$this->paymentName];
-    }
-
-    /**
-     * 設定配置檔
-     */
-    public function setConfig()
-    {
-        $this->payment->setParameters($this->configs);
+        return $configs[$this->paymentName];
     }
 
     // 保留

@@ -4,7 +4,7 @@ namespace Zero\Payments;
 
 use Zero\Http;
 use Zero\Helpers\DataCheck;
-use Zero\Bodies\EcBody;
+use Zero\Requests\EcRequestParameter;
 
 class EcPayment extends Payment
 {
@@ -14,18 +14,19 @@ class EcPayment extends Payment
     public function __construct(Http $http)
     {
         $this->http = $http;
-        $this->body = new Ecbody();
+        $this->requestParameter = new EcRequestParameter();
     }
 
     /**
-     * return class Payment 設定body
+     * return class Payment 設定請求參數
      */
-    public function setBody($requests)
+    public function setRequestParameters($requestParameters)
     {
-        DataCheck::whetherEmpty($requests, 'Zero\Payment\Helpers\DataCheck::[requests data is empty]');
-        foreach ($requests as $key => $item) {
+        DataCheck::whetherEmpty($requestParameters, 'Zero\Payment\Helpers\DataCheck::[request parameters data is empty]');
+
+        foreach ($requestParameters as $key => $requestParameter) {
             if (!isset($this->body->$key))
-                $this->body->$key = $item;
+                $this->requestParameter->$key = $requestParameter;
         }
 
         return $this->dataProcess();
@@ -37,13 +38,14 @@ class EcPayment extends Payment
      */
     public function dataProcess()
     {
-        $this->sends = (array) $this->body;
-        foreach($this->sends as $key=>$item)
-            if (empty($item))
-                unset($this->sends[$key]);
+        $this->sendDatas = (array) $this->requestParameter;
 
-        $CheckMacValue = $this->encrypt($this->sends);
-        $this->sends['CheckMacValue'] = $CheckMacValue;
+        foreach($this->sendDatas as $key=>$item)
+            if (empty($item))
+                unset($this->sendDatas[$key]);
+
+        $CheckMacValue = $this->encrypt($this->sendDatas);
+        $this->sendDatas['CheckMacValue'] = $CheckMacValue;
         return $this;
     }
 
@@ -54,7 +56,7 @@ class EcPayment extends Payment
     {
         return $this->http->form(
             $this->configs['paymentUrls']['ecApiUrl'] . $this->configs['paymentUrls']['checkoutUrl'],
-            $this->sends
+            $this->sendDatas
         );
     }
 
@@ -70,12 +72,12 @@ class EcPayment extends Payment
      */
     public function search()
     {
-        DataCheck::checkOrderNumber($this->sends['MerchantTradeNo'], 'MerchantTradeNo');
+        DataCheck::checkOrderNumber($this->sendDatas['MerchantTradeNo'], 'MerchantTradeNo');
         return $this->http->setup([
             'Content-Type: application/x-www-form-urlencoded'
         ])->post(
             $this->configs['paymentUrls']['ecApiUrl'] . $this->configs['paymentUrls']['searchUrl'],
-            http_build_query($this->sends)
+            http_build_query($this->sendDatas)
         );
     }
 
@@ -88,7 +90,7 @@ class EcPayment extends Payment
             'Content-Type: application/x-www-form-urlencoded'
         ])->post(
             $this->configs['paymentUrls']['ecApiUrl'] . $this->configs['paymentUrls']['searchDetailsUrl'],
-            http_build_query($this->sends)
+            http_build_query($this->sendDatas)
         );
     }
 
@@ -97,12 +99,12 @@ class EcPayment extends Payment
      */
     public function refund($merchantId = null)
     {
-        DataCheck::checkOrderNumber($this->sends['MerchantTradeNo'], 'MerchantTradeNo');
+        DataCheck::checkOrderNumber($this->sendDatas['MerchantTradeNo'], 'MerchantTradeNo');
         return $this->http->setup([
             'Content-Type: application/x-www-form-urlencoded'
         ])->post(
             $this->configs['paymentUrls']['ecApiUrl'] . $this->configs['paymentUrls']['refundUrl'],
-            http_build_query($this->sends)
+            http_build_query($this->sendDatas)
         );
     }
 

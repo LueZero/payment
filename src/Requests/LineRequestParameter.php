@@ -1,8 +1,8 @@
 <?php
 
-namespace Zero\Bodies;
+namespace Zero\Requests;
 
-class LineBody
+class LineRequestParameter
 {
     /**
      * int amount

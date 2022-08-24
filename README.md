@@ -27,7 +27,7 @@ $requests = [
   'ChoosePayment' => 'Credit',
   'EncryptType' => 1,
 ];
-// echo $payment->setBody($requests)->checkouts();
+// echo $payment->setRequestParameters($requests)->checkouts();
 // return;
 
 // 綠界 搜尋範例
@@ -37,7 +37,7 @@ $requests = [
   'TimeStamp' => time(),
   'PlatformID' => 2000132,
 ];
-// echo $payment->setBody($requests)->search();
+// echo $payment->setRequestParameters($requests)->search();
 // return;
 
 // 綠界 搜尋明細範例
@@ -47,7 +47,7 @@ $requests = [
   'CreditCheckCode' => 25938511,
   'CreditAmount' => 500,
 ];
-// echo $payment->setBody($requests)->searchDetails();
+// echo $payment->setRequestParameters($requests)->searchDetails();
 // return;
 
 // 綠界 退款範例
@@ -58,7 +58,7 @@ $requests = [
     'Action' => 'R',
     'TotalAmount' => 100,
 ];
-// echo $payment->setBody($requests)->refund();
+// echo $payment->setRequestParameters($requests)->refund();
 // return;
 
 /*--------分隔線-----------*/
@@ -91,7 +91,7 @@ $requests = [
     'cancelUrl' => 'https://your.web.site/receive.php'
   ]
 ];
-// echo $payment->setBody($requests)->checkouts();
+// echo $payment->setRequestParameters($requests)->checkouts();
 // return;
 
 // line 確認範例
@@ -99,21 +99,21 @@ $requests = [
   'amount' => 100,
   'currency' => 'TWD',
 ];
-// echo $payment->setBody($requests)->confirm(2022082400725100210);
+// echo $payment->setRequestParameters($requests)->confirm(2022082400725100210);
 // return;
 
 // Line 查詢範例
 $requests = [
   'orderId' => '20220821103746'
 ];
-// echo $payment->setBody($requests)->search();
+// echo $payment->setRequestParameters($requests)->search();
 // return;
 
 // Line 退款範例
 $requests = [
   'refundAmount' => 100
 ];
-// echo $payment->setBody($requests)->refund(2022082400725100210);
+// echo $payment->setRequestParameters($requests)->refund(2022082400725100210);
 // return;
 ```
 

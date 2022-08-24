@@ -98,16 +98,10 @@ class PaymentClient
     }
 
     /**
-     * return class Payment
+     * return class Payment 設定請求參數
      */
-    public function setBody(array $requests)
+    public function setRequestParameters(array $requestParameters)
     {
-        return $this->payment->setBody($requests);
+        return $this->payment->setRequestParameters($requestParameters);
     }
-
-    // 保留
-    // public static function __callStatic($value, $args)
-    // {
-    //     return static::$locale::$$value;
-    // }
 }

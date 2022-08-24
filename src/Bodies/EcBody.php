@@ -1,8 +1,8 @@
 <?php
 
-namespace Zero\RequestParameters;
+namespace Zero\Bodies;
 
-class EcPaymentRequestParameter
+class EcBody
 {
     /**
      * string merchantID

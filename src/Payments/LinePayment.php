@@ -4,7 +4,7 @@ namespace Zero\Payments;
 
 use Zero\Http;
 use Zero\Helpers\DataCheck;
-use Zero\RequestParameters\LinePaymentRequestParameter;
+use Zero\Bodies\LineBody;
 
 class LinePayment extends Payment
 {
@@ -14,27 +14,18 @@ class LinePayment extends Payment
     public function __construct(Http $http)
     {
         $this->http = $http;
-        $this->paymentRequestParameter = new LinePaymentRequestParameter();
+        $this->body = new LineBody();
     }
 
     /**
-     * 取得請求參數
+     * return class Payment 設定body
      */
-    public function getRequestParameter()
-    {
-        return $this->paymentRequestParameter;
-    }
-
-    /**
-     * return class Payment 設定請求參數
-     */
-    public function setRequestParameter($requests)
+    public function setBody($requests)
     {
         DataCheck::whetherEmpty($requests, 'Zero\Payment\Helpers\DataCheck::[requests data is empty]');
-
         foreach ($requests as $key => $item) {
-            if (!isset($this->paymentRequestParameter->$key))
-                $this->paymentRequestParameter->$key = $item;
+            if (!isset($this->body->$key))
+                $this->body->$key = $item;
         }
 
         return $this->dataProcess();
@@ -53,7 +44,6 @@ class LinePayment extends Payment
      */
     public function checkouts()
     {
-        DataCheck::exhaustiveCheckSends($this->configs, $this->sends, 'requestParameters');
         $body = $this->configs['paymentParameters']['ChannelSecret'] . $this->configs['paymentUrls']['checkoutUrl'] . json_encode($this->sends) . time();
         return $this->http->setup([
             'Content-Type: application/json',

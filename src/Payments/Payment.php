@@ -24,9 +24,9 @@ abstract class Payment
     protected $sends;
 
     /**
-     * class PaymentRequestParameter
+     * class body
      */
-    protected $paymentRequestParameter;
+    protected $body;
 
     /**
      * void 設定配置參數
@@ -42,21 +42,24 @@ abstract class Payment
     abstract public function encrypt($data);
 
     /**
-     * return array 取得請求參數
+     * 取得 class body
      */
-    abstract public function getRequestParameter();
+    public function getBody()
+    {
+        return $this->body;
+    }
 
     /**
-     * return class Payment 設定請求參數
+     * return class Payment set body
      */
-    abstract function setRequestParameter($requests);
+    abstract function setbody($requests);
 
     /**
      * return class Payment 資料處理
      */
     public function dataProcess()
     {
-        $this->sends = (array) $this->paymentRequestParameter;
+        $this->sends = (array) $this->body;
         foreach($this->sends as $key=>$item)
             if (empty($item))
                 unset($this->sends[$key]);

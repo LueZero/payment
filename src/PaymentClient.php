@@ -100,9 +100,9 @@ class PaymentClient
     /**
      * return class Payment
      */
-    public function setRequestParameter(array $requests)
+    public function setBody(array $requests)
     {
-        return $this->payment->setRequestParameter($requests);
+        return $this->payment->setBody($requests);
     }
 
     // 保留

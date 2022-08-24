@@ -4,7 +4,7 @@ namespace Zero\Payments;
 
 use Zero\Http;
 use Zero\Helpers\DataCheck;
-use Zero\RequestParameters\EcPaymentRequestParameter;
+use Zero\Bodies\EcBody;
 
 class EcPayment extends Payment
 {
@@ -14,29 +14,20 @@ class EcPayment extends Payment
     public function __construct(Http $http)
     {
         $this->http = $http;
-        $this->paymentRequestParameter = new EcPaymentRequestParameter();
+        $this->body = new Ecbody();
     }
 
     /**
-     * 取得請求參數
+     * return class Payment 設定body
      */
-    public function getRequestParameter()
-    {
-        return $this->paymentRequestParameter;
-    }
-
-    /**
-     * return class Payment 設定請求參數
-     */
-    public function setRequestParameter($requests)
+    public function setBody($requests)
     {
         DataCheck::whetherEmpty($requests, 'Zero\Payment\Helpers\DataCheck::[requests data is empty]');
-
         foreach ($requests as $key => $item) {
-            if (!isset($this->paymentRequestParameter->$key))
-                $this->paymentRequestParameter->$key = $item;
+            if (!isset($this->body->$key))
+                $this->body->$key = $item;
         }
-        
+
         return $this->dataProcess();
     }
 
@@ -46,7 +37,7 @@ class EcPayment extends Payment
      */
     public function dataProcess()
     {
-        $this->sends = (array) $this->paymentRequestParameter;
+        $this->sends = (array) $this->body;
         foreach($this->sends as $key=>$item)
             if (empty($item))
                 unset($this->sends[$key]);
@@ -61,7 +52,6 @@ class EcPayment extends Payment
      */
     public function checkouts()
     {
-        DataCheck::exhaustiveCheckSends($this->configs, $this->sends, 'requestParameters');
         return $this->http->form(
             $this->configs['paymentUrls']['ecApiUrl'] . $this->configs['paymentUrls']['checkoutUrl'],
             $this->sends

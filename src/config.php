@@ -14,18 +14,6 @@ return [
             'searchUrl' => '/Cashier/QueryTradeInfo/V5',
             'searchDetailsUrl' => '/CreditDetail/QueryTrade/V2',
             'refundUrl' => '/CreditDetail/DoAction'
-        ],
-        'requestParameters' => [
-            'MerchantID',
-            'MerchantTradeNo',
-            'MerchantTradeDate',
-            'PaymentType',
-            'TotalAmount',
-            'TradeDesc',
-            'ItemName',
-            'ReturnURL',
-            'ChoosePayment',
-            'EncryptType'
         ]
     ],
     'line' => [
@@ -39,13 +27,6 @@ return [
             'confirmUrl' => '/v3/payments/{}/confirm',
             'searchUrl' => '/v3/payments',
             'refundUrl' => '/v3/payments/{}/refund'
-        ],
-        'requestParameters' => [
-            'amount',
-            'currency',
-            'orderId',
-            'packages',
-            'redirectUrls'
         ]
     ]
 ];

@@ -15,18 +15,6 @@ class DataCheck
    }
 
    /**
-    * 詳細參數檢查
-    */
-   public static function exhaustiveCheckSends($configs, $sends, $key)
-   {
-      foreach ($configs[$key] as $checkoutParameter) {
-         if (empty($sends[$checkoutParameter])) {
-            throw new \Exception("Zero\Payment\Helpers\DataCheck::[{$checkoutParameter} parameter missing]");
-         }
-      }
-   }
-
-   /**
     * 檢查總金額
     */
    public static function checkTotalAmount($amount)

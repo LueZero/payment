@@ -1,8 +1,8 @@
 <?php
 
-namespace Zero\Requests;
+namespace Zero\Request\Models\LinePay;
 
-class LineRequestParameter
+class Checkouts
 {
     /**
      * int amount

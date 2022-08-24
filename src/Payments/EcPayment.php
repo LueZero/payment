@@ -4,7 +4,6 @@ namespace Zero\Payments;
 
 use Zero\Http;
 use Zero\Helpers\DataCheck;
-use Zero\Requests\EcRequestParameter;
 
 class EcPayment extends Payment
 {
@@ -14,22 +13,6 @@ class EcPayment extends Payment
     public function __construct(Http $http)
     {
         $this->http = $http;
-        $this->requestParameter = new EcRequestParameter();
-    }
-
-    /**
-     * return class Payment 設定請求參數
-     */
-    public function setRequestParameters($requestParameters)
-    {
-        DataCheck::whetherEmpty($requestParameters, 'Zero\Payment\Helpers\DataCheck::[request parameters data is empty]');
-
-        foreach ($requestParameters as $key => $requestParameter) {
-            if (!isset($this->body->$key))
-                $this->requestParameter->$key = $requestParameter;
-        }
-
-        return $this->dataProcess();
     }
 
     /**
@@ -38,12 +21,6 @@ class EcPayment extends Payment
      */
     public function dataProcess()
     {
-        $this->sendDatas = (array) $this->requestParameter;
-
-        foreach($this->sendDatas as $key=>$item)
-            if (empty($item))
-                unset($this->sendDatas[$key]);
-
         $CheckMacValue = $this->encrypt($this->sendDatas);
         $this->sendDatas['CheckMacValue'] = $CheckMacValue;
         return $this;
@@ -58,13 +35,6 @@ class EcPayment extends Payment
             $this->configs['paymentUrls']['ecApiUrl'] . $this->configs['paymentUrls']['checkoutUrl'],
             $this->sendDatas
         );
-    }
-
-    /**
-     * 確認
-     */
-    public function confirm($merchantId = null)
-    {
     }
 
     /**
@@ -84,7 +54,7 @@ class EcPayment extends Payment
     /**
      * 搜尋單筆明細資料記錄
      */
-    public function searchDetails()
+    public function searchDetail()
     {
         return $this->http->setup([
             'Content-Type: application/x-www-form-urlencoded'

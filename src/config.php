@@ -24,9 +24,11 @@ return [
         'paymentUrls' => [
             'lineApiUrl' => 'https://sandbox-api-pay.line.me',
             'checkoutUrl' => '/v3/payments/request',
+            'captureUrl' => '/v3/payments/{}/capture',
             'confirmUrl' => '/v3/payments/{}/confirm',
+            'voidUrl' => '/v3/payments/{}/void',
             'searchUrl' => '/v3/payments',
-            'refundUrl' => '/v3/payments/{}/refund'
+            'refundUrl' => '/v3/payments/{}/refund',
         ]
     ]
 ];

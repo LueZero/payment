@@ -41,7 +41,7 @@ $requests = [
   'CreditCheckCode' => 25938511,
   'CreditAmount' => 500,
 ];
-// echo $payment->setRequestParameters($requests)->searchDetails();
+// echo $payment->setRequestParameters($requests)->searchDetail();
 // return;
 
 // 綠界 退款範例

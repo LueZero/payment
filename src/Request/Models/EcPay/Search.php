@@ -2,7 +2,7 @@
 
 namespace Zero\Request\Models\EcPay;
 
-class Checkouts
+class Search
 {
     /**
      * string merchantID

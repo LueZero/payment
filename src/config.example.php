@@ -10,10 +10,10 @@ return [
         ],
         'paymentURLs' => [
             'baseURL' => 'https://payment-stage.ecpay.com.tw',
-            'checkoutURL' => '/Cashier/AioCheckOut/V5',
-            'searchURL' => '/Cashier/QueryTradeInfo/V5',
-            'searchDetailsURL' => '/CreditDetail/QueryTrade/V2',
-            'refundURL' => '/CreditDetail/DoAction'
+            'checkout' => '/Cashier/AioCheckOut/V5',
+            'search' => '/Cashier/QueryTradeInfo/V5',
+            'searchDetail' => '/CreditDetail/QueryTrade/V2',
+            'refund' => '/CreditDetail/DoAction'
         ]
     ],
     'line' => [
@@ -23,12 +23,12 @@ return [
         ],
         'paymentURLs' => [
             'baseURL' => 'https://sandbox-api-pay.line.me',
-            'checkoutURL' => '/v3/payments/request',
-            'captureURL' => '/v3/payments/{}/capture',
-            'confirmURL' => '/v3/payments/{}/confirm',
-            'voidURL' => '/v3/payments/{}/void',
-            'searchURL' => '/v3/payments',
-            'refundURL' => '/v3/payments/{}/refund',
+            'checkout' => '/v3/payments/request',
+            'capture' => '/v3/payments/{}/capture',
+            'confirm' => '/v3/payments/{}/confirm',
+            'void' => '/v3/payments/{}/void',
+            'search' => '/v3/payments',
+            'refund' => '/v3/payments/{}/refund',
         ]
     ]
 ];

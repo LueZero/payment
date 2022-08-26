@@ -34,7 +34,7 @@ class EcPayment extends Payment
     {
         DataCheck::checkOrderNumber($this->sendDatas['MerchantTradeNo'], 'MerchantTradeNo');
         return $this->http->form(
-            $this->configs['paymentURLs']['baseURL'] . $this->configs['paymentURLs']['checkoutURL'],
+            $this->configs['paymentURLs']['baseURL'] . $this->configs['paymentURLs']['checkout'],
             $this->sendDatas
         );
     }
@@ -48,7 +48,7 @@ class EcPayment extends Payment
         return $this->http->setup([
             'Content-Type: application/x-www-form-urlencoded'
         ])->post(
-            $this->configs['paymentURLs']['baseURL'] . $this->configs['paymentURLs']['searchURL'],
+            $this->configs['paymentURLs']['baseURL'] . $this->configs['paymentURLs']['search'],
             http_build_query($this->sendDatas)
         );
     }
@@ -61,7 +61,7 @@ class EcPayment extends Payment
         return $this->http->setup([
             'Content-Type: application/x-www-form-urlencoded'
         ])->post(
-            $this->configs['paymentURLs']['baseURL'] . $this->configs['paymentURLs']['searchDetailsURL'],
+            $this->configs['paymentURLs']['baseURL'] . $this->configs['paymentURLs']['searchDetail'],
             http_build_query($this->sendDatas)
         );
     }
@@ -77,7 +77,7 @@ class EcPayment extends Payment
         return $this->http->setup([
             'Content-Type: application/x-www-form-urlencoded'
         ])->post(
-            $this->configs['paymentURLs']['baseURL'] . $this->configs['paymentURLs']['refundURL'],
+            $this->configs['paymentURLs']['baseURL'] . $this->configs['paymentURLs']['refund'],
             http_build_query($this->sendDatas)
         );
     }

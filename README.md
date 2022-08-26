@@ -3,6 +3,10 @@
 - [綠界科技](https://www.ecpay.com.tw/)
 - [Line金流](https://pay.line.me/portal/tw/main)
 
+# 金鑰設定
+
+請複製/src/config.example.php更改為config.php即可使用(`預設內容為測試環境`)。
+
 ## 付款使用方式
 
 ```php

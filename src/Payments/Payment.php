@@ -23,7 +23,7 @@ abstract class Payment
     /**
      * @var array
      */
-    protected $sendDatas;
+    protected $sendData;
 
     /**
      * 設定配置
@@ -37,15 +37,15 @@ abstract class Payment
      * 加密
      * @return string 
      */
-    abstract public function encrypt($data);
+    abstract public function encryption($data);
 
     /**
      * 取得發送參數
      * @return array
      */
-    public function getSendDatas()
+    public function getSendData()
     {
-        return $this->sendDatas;
+        return $this->sendData;
     }
 
     /**
@@ -57,7 +57,7 @@ abstract class Payment
         DataCheck::whetherEmpty($requestParameters, 'Zero\Payment\Helpers\DataCheck::[request parameters is empty]');
 
         foreach ($requestParameters as $key => $requestParameter)
-            $this->sendDatas[$key] = $requestParameter;
+            $this->sendData[$key] = $requestParameter;
 
         return $this->dataProcess();
     }

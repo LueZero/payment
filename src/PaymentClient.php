@@ -10,22 +10,22 @@ use Zero\Payments\LinePayment;
 class PaymentClient
 {
     /**
-     * class Payment
+     * @var Payment
      */
     private $payment;
 
     /**
-     * array configs
+     * @var array
      */
     public $configs;
 
     /**
-     * string paymentName
+     * @var string
      */
     public $paymentName;
 
     /**
-     * array paymentNames
+     * @var array
      */
     public $paymentNames = [
         'ec' => 'EcPayment',
@@ -33,7 +33,7 @@ class PaymentClient
     ];
 
     /**
-     * array paymentList
+     * @var array
      */
     private $paymentList = [
         'ec' => EcPayment::class,
@@ -49,7 +49,7 @@ class PaymentClient
     }
 
     /**
-     * void 設定支付
+     * 設定支付
      */
     public function setPayment()
     {
@@ -60,7 +60,7 @@ class PaymentClient
     }
 
     /**
-     * void 
+     * 設定支付配置 
      */
     public function setPaymentConfigs()
     {
@@ -68,7 +68,7 @@ class PaymentClient
     }
 
     /**
-     * return class Payment 取得支付
+     * @return Payment 支付
      */
     public function getPayment()
     {
@@ -76,7 +76,7 @@ class PaymentClient
     }
 
     /**
-     * void 改變支付
+     * 改變支付
      */
     public function changePayment($paymentName)
     {
@@ -85,7 +85,7 @@ class PaymentClient
     }
 
     /**
-     * return array 呼叫配置檔
+     * 呼叫配置檔案
      */
     private function requireConfig()
     {
@@ -98,7 +98,8 @@ class PaymentClient
     }
 
     /**
-     * return class Payment 設定請求參數
+     * 設定請求參數
+     * @return Payment 
      */
     public function setRequestParameters(array $requestParameters)
     {

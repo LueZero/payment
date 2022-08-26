@@ -1,6 +1,6 @@
 <?php
 
-namespace Zero\Request\Models\LinePay;
+namespace Zero\Request\Parameters\LinePay;
 
 class Search
 {
@@ -18,4 +18,12 @@ class Search
      * array string fields
      */
     public $fields;
+
+    /**
+     * 搜尋資料
+     */
+    public static function CreateSearch()
+    {
+        return new Search();
+    }
 }

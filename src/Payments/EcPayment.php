@@ -16,8 +16,9 @@ class EcPayment extends Payment
     }
 
     /**
+     * 資料處理
      * @override 
-     * return class Payment 資料處理
+     * @return Payment
      */
     public function dataProcess()
     {
@@ -31,6 +32,7 @@ class EcPayment extends Payment
      */
     public function checkouts()
     {
+        DataCheck::checkOrderNumber($this->sendDatas['MerchantTradeNo'], 'MerchantTradeNo');
         return $this->http->form(
             $this->configs['paymentUrls']['ecApiUrl'] . $this->configs['paymentUrls']['checkoutUrl'],
             $this->sendDatas
@@ -70,6 +72,8 @@ class EcPayment extends Payment
     public function refund($merchantId = null)
     {
         DataCheck::checkOrderNumber($this->sendDatas['MerchantTradeNo'], 'MerchantTradeNo');
+
+
         return $this->http->setup([
             'Content-Type: application/x-www-form-urlencoded'
         ])->post(

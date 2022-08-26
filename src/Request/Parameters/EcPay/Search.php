@@ -1,6 +1,6 @@
 <?php
 
-namespace Zero\Request\Models\EcPay;
+namespace Zero\Request\Parameters\EcPay;
 
 class Search
 {
@@ -28,4 +28,12 @@ class Search
      * string platformID
      */
     public $PlatformID;
+
+    /**
+     * 搜尋資料
+     */
+    public static function CreateSearch()
+    {
+        return new Search();
+    }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Zero\Request\Models\EcPay;
+namespace Zero\Request\Parameters\EcPay;
 
 class SearchDetail
 {
@@ -28,4 +28,12 @@ class SearchDetail
      * string checkMacValue
      */
     public $CheckMacValue;
+
+    /**
+     * 搜尋單筆明細資料記錄
+     */
+    public static function CreateDetail()
+    {
+        return new SearchDetail();
+    }
 }

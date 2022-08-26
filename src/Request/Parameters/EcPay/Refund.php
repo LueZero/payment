@@ -1,6 +1,6 @@
 <?php
 
-namespace Zero\Request\Models\EcPay;
+namespace Zero\Request\Parameters\EcPay;
 
 class Refund
 {
@@ -38,4 +38,12 @@ class Refund
      * string platformID
      */
     public $PlatformID;
+    
+    /**
+     * 退款
+     */
+    public static function CreateRefund()
+    {
+        return new Refund();
+    }
 }

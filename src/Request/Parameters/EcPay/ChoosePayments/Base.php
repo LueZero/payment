@@ -1,8 +1,8 @@
 <?php
 
-namespace Zero\Request\Models\EcPay;
+namespace Zero\Request\Parameters\EcPay\ChoosePayments;
 
-class Checkouts
+class Base
 {
     /**
      * string merchantID
@@ -46,6 +46,14 @@ class Checkouts
 
     /**
      * string choosePayment
+     * --------------------
+     * Credit：信用卡及銀聯卡(需申請開通)
+     * WebATM：網路ATM
+     * ATM：自動櫃員機
+     * CVS：超商代碼
+     * BARCODE：超商條碼
+     * ApplePay: Apple Pay(僅支援手機支付)
+     * ALL：不指定付款方式，由綠界顯示付款方式選擇頁面。
      */
     public $ChoosePayment;
 
@@ -70,14 +78,29 @@ class Checkouts
     public $ClientBackURL;
 
     /**
+     * string itemURL
+     */
+    public $ItemURL;
+
+    /**
      * string remark
      */
     public $Remark;
 
     /**
+     * string chooseSubPayment
+     */
+    public $ChooseSubPayment;
+
+    /**
      * string orderResultURL
      */
     public $OrderResultURL;
+
+    /**
+     * string needExtraPaidInfo 
+     */
+    public $NeedExtraPaidInfo;
 
     /**
      * string ignorePayment

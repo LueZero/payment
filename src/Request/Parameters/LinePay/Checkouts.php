@@ -1,6 +1,6 @@
 <?php
 
-namespace Zero\Request\Models\LinePay;
+namespace Zero\Request\Parameters\LinePay;
 
 class Checkouts
 {
@@ -38,4 +38,12 @@ class Checkouts
      * array options
      */
     public $options;
+
+    /**
+     * 結帳
+     */
+    public static function CreateCheckouts()
+    {
+        return new Checkouts();
+    }
 }

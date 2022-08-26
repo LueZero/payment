@@ -1,6 +1,6 @@
 <?php
 
-namespace Zero\Request\Models\LinePay;
+namespace Zero\Request\Parameters\LinePay;
 
 class Capture
 {
@@ -18,4 +18,12 @@ class Capture
      * object options
      */
     public $options;
+
+    /**
+     * 捕獲
+     */
+    public static function CreateCapture()
+    {
+        return new Capture();
+    }
 }

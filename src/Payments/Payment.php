@@ -9,22 +9,24 @@ use Zero\Payment\Http;
 abstract class Payment
 {
     /**
-     * class Http 請求功能
+     * 請求功能
+     * @var Http 
      */
     protected $http;
 
     /**
-     * array configs 配置
+     * 配置
+     * @var array
      */
     protected $configs;
 
     /**
-     * array send datas
+     * @var array
      */
     protected $sendDatas;
 
     /**
-     * void 設定配置參數
+     * 設定配置
      */
     public function setConfigs($configs)
     {
@@ -32,12 +34,14 @@ abstract class Payment
     }
 
     /**
-     * return string 加密
+     * 加密
+     * @return string 
      */
     abstract public function encrypt($data);
 
     /**
-     * return array
+     * 取得發送參數
+     * @return array
      */
     public function getSendDatas()
     {
@@ -45,11 +49,12 @@ abstract class Payment
     }
 
     /**
-     * return class Payment 設定請求參數
+     * 設定請求參數
+     * @return Payment 
      */
     public function setRequestParameters($requestParameters)
     {
-        DataCheck::whetherEmpty($requestParameters, 'Zero\Payment\Helpers\DataCheck::[request parameters data is empty]');
+        DataCheck::whetherEmpty($requestParameters, 'Zero\Payment\Helpers\DataCheck::[request parameters is empty]');
 
         foreach ($requestParameters as $key => $requestParameter)
             $this->sendDatas[$key] = $requestParameter;
@@ -58,7 +63,8 @@ abstract class Payment
     }
 
     /**
-     * return class Payment 資料處理
+     * 資料處理
+     * @return Payment 
      */
     public function dataProcess()
     {
@@ -66,17 +72,20 @@ abstract class Payment
     }
 
     /**
-     * return string 結帳
+     * 結帳
+     * @return string 
      */
     abstract public function checkouts();
 
     /**
-     * return string 搜尋
+     * 搜尋
+     * @return string 
      */
     abstract public function search();
 
-     /**
-     * return string 退款
+    /**
+     * 退款
+     * @return string 
      */
     abstract public function refund($data);
 }

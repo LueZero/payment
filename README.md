@@ -21,7 +21,7 @@ $payment = new PaymentClient('ec');
 
 $requests = [
   'MerchantID' => '2000132',
-  'MerchantTradeNo' => 'zero' . date('YmdHis'),
+  'MerchantTradeNo' => date('YmdHis'),
   'MerchantTradeDate' => date('Y/m/d H:i:s'),
   'PaymentType' => 'aio',
   'TotalAmount' => 500,
@@ -37,7 +37,7 @@ $requests = [
 // 綠界 搜尋範例
 $requests = [
   'MerchantID' => '2000132',
-  'MerchantTradeNo' => 'zero20220821101552',
+  'MerchantTradeNo' => '220220811214215',
   'TimeStamp' => time(),
   'PlatformID' => 2000132,
 ];

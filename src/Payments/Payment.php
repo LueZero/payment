@@ -87,5 +87,5 @@ abstract class Payment
      * 退款
      * @return string 
      */
-    abstract public function refund($data);
+    abstract public function refund($data = null);
 }

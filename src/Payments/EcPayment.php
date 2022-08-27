@@ -8,11 +8,37 @@ use Zero\Helpers\DataCheck;
 class EcPayment extends Payment
 {
     /**
+     * @var string MerchantID 特店編號
+     */
+    protected $merchantID;
+
+    /**
+     * @var string HashKey Key
+     */
+    protected $hashKey;
+
+    /**
+     * @var string HashIv Iv
+     */
+    protected $hashIv;
+
+    /**
      * 建構子
      */
     public function __construct(Http $http)
     {
         $this->http = $http;
+    }
+
+    /**
+     * 設定配置
+     */
+    public function setConfigs($configs)
+    {
+        $this->configs = $configs;
+        $this->merchantID = empty($this->configs['paymentParameters']['MerchantID']) == true ? null : $this->configs['paymentParameters']['MerchantID'];
+        $this->hashKey = empty($this->configs['paymentParameters']['HashKey']) == true ? null : $this->configs['paymentParameters']['HashKey'];
+        $this->hashIv = empty($this->configs['paymentParameters']['HashIV']) == true ? null : $this->configs['paymentParameters']['HashIV'];
     }
 
     /**
@@ -69,7 +95,7 @@ class EcPayment extends Payment
     /**
      * 退款
      */
-    public function refund($merchantId = null)
+    public function refund($merchantTradeNo = null)
     {
         DataCheck::checkOrderNumber($this->sendData['MerchantTradeNo'], 'MerchantTradeNo');
         return $this->http->setup([
@@ -85,7 +111,7 @@ class EcPayment extends Payment
      */
     public function encryption($data)
     {
-        return $this->generate($data, $this->configs['paymentParameters']['HashKey'], $this->configs['paymentParameters']['HashIV']);
+        return $this->generate($data, $this->hashKey, $this->hashIv);
     }
 
     /**

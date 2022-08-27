@@ -8,17 +8,17 @@ use Zero\Helpers\DataCheck;
 class EcPayment extends Payment
 {
     /**
-     * @var string merchant id 特店編號
+     * @var string merchantId 特店編號
      */
     protected $merchantID;
 
     /**
-     * @var string hash Key
+     * @var string hashKey
      */
     protected $hashKey;
 
     /**
-     * @var string hash Iv
+     * @var string hashIv
      */
     protected $hashIv;
 

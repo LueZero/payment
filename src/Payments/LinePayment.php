@@ -3,7 +3,7 @@
 namespace Zero\Payments;
 
 use Zero\Http;
-use Zero\Helpers\DataCheck;
+use Zero\Helpers\DataCheckerer;
 
 class LinePayment extends Payment
 {
@@ -66,7 +66,7 @@ class LinePayment extends Payment
      */
     public function confirm($transactionId)
     {
-        DataCheck::checkOrderNumber($transactionId, 'transactionId');
+        DataChecker::checkOrderNumber($transactionId, 'transactionId');
         $explode = explode('{}', $this->configs['paymentURLs']['confirm']);
         $confirm = $explode[0] . $transactionId . $explode[1];
         $body = $this->channelSecret . $confirm . json_encode($this->sendData) . time();
@@ -86,7 +86,7 @@ class LinePayment extends Payment
      */
     public function capture($transactionId)
     {
-        DataCheck::checkOrderNumber($transactionId, 'transactionId');
+        DataChecker::checkOrderNumber($transactionId, 'transactionId');
         $explode = explode('{}', $this->configs['paymentURLs']['capture']);
         $capture = $explode[0] . $transactionId . $explode[1];
         $body = $this->channelSecret . $capture . json_encode($this->sendData) . time();
@@ -106,7 +106,7 @@ class LinePayment extends Payment
      */
     public function void($transactionId)
     {
-        DataCheck::checkOrderNumber($transactionId, 'transactionId');
+        DataChecker::checkOrderNumber($transactionId, 'transactionId');
         $explode = explode('{}', $this->configs['paymentURLs']['void']);
         $confirm = $explode[0] . $transactionId . $explode[1];
         $body = $this->channelSecret . $confirm . json_encode($this->sendData) . time();
@@ -126,7 +126,7 @@ class LinePayment extends Payment
      */
     public function search()
     {
-        DataCheck::checkOrderNumber($this->sendData['orderId'], 'orderId');
+        DataChecker::checkOrderNumber($this->sendData['orderId'], 'orderId');
         $body = $this->channelSecret . $this->configs['paymentURLs']['search'] . http_build_query($this->sendData) . time();
         return $this->http->setup([
             'Content-Type: application/json',
@@ -144,7 +144,7 @@ class LinePayment extends Payment
      */
     public function refund($transactionId = null)
     {
-        DataCheck::checkOrderNumber($transactionId, 'transactionId');
+        DataChecker::checkOrderNumber($transactionId, 'transactionId');
         $explode = explode('{}', $this->configs['paymentURLs']['refund']);
         $refund = $explode[0] . $transactionId . $explode[1];
         $body = $this->channelSecret . $refund . json_encode($this->sendData) . time();

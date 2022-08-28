@@ -2,7 +2,7 @@
 
 namespace Zero\Helpers;
 
-class DataCheck
+class DataChecker
 {
    /**
     * 參數判斷

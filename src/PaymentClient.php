@@ -2,7 +2,7 @@
 
 namespace Zero;
 
-use Zero\Helpers\DataCheck;
+use Zero\Helpers\DataChecker;
 use Zero\Payments\Payment;
 use Zero\Payments\EcPayment;
 use Zero\Payments\LinePayment;

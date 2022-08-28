@@ -3,7 +3,7 @@
 namespace Zero\Payments;
 
 use Exception;
-use Zero\Helpers\DataCheck;
+use Zero\Helpers\DataChecker;
 use Zero\Payment\Http;
 
 abstract class Payment
@@ -54,7 +54,7 @@ abstract class Payment
      */
     public function setRequestParameters($requestParameters)
     {
-        DataCheck::whetherEmpty($requestParameters, 'Zero\Payment\Helpers\DataCheck::[request parameters is empty]');
+        DataChecker::whetherEmpty($requestParameters, 'Zero\Payment\Helpers\DataChecker::[request parameters is empty]');
 
         foreach ($requestParameters as $key => $requestParameter)
             $this->sendData[$key] = $requestParameter;

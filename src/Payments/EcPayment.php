@@ -3,7 +3,7 @@
 namespace Zero\Payments;
 
 use Zero\Http;
-use Zero\Helpers\DataCheck;
+use Zero\Helpers\DataChecker;
 
 class EcPayment extends Payment
 {
@@ -58,7 +58,7 @@ class EcPayment extends Payment
      */
     public function checkouts()
     {
-        DataCheck::checkOrderNumber($this->sendData['MerchantTradeNo'], 'MerchantTradeNo');
+        DataChecker::checkOrderNumber($this->sendData['MerchantTradeNo'], 'MerchantTradeNo');
         return $this->http->form(
             $this->configs['paymentURLs']['baseURL'] . $this->configs['paymentURLs']['checkout'],
             $this->sendData
@@ -70,7 +70,7 @@ class EcPayment extends Payment
      */
     public function search()
     {
-        DataCheck::checkOrderNumber($this->sendData['MerchantTradeNo'], 'MerchantTradeNo');
+        DataChecker::checkOrderNumber($this->sendData['MerchantTradeNo'], 'MerchantTradeNo');
         return $this->http->setup([
             'Content-Type: application/x-www-form-urlencoded'
         ])->post(
@@ -97,7 +97,7 @@ class EcPayment extends Payment
      */
     public function refund($merchantTradeNo = null)
     {
-        DataCheck::checkOrderNumber($this->sendData['MerchantTradeNo'], 'MerchantTradeNo');
+        DataChecker::checkOrderNumber($this->sendData['MerchantTradeNo'], 'MerchantTradeNo');
         return $this->http->setup([
             'Content-Type: application/x-www-form-urlencoded'
         ])->post(

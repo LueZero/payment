@@ -1,6 +1,6 @@
 <?php
 
-namespace Zero\Request\Parameters\EcPay\ChoosePayments;
+namespace Zero\Request\Parameters\EcPay\ChoicePayments;
 
 class Base
 {

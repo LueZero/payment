@@ -1,8 +1,8 @@
 <?php
 
-namespace Zero\Request\Parameters\EcPay\ChoosePayments;
+namespace Zero\Request\Parameters\EcPay\ChoicePayments;
 
-use Zero\Request\Parameters\EcPay\ChoosePayments\Base;
+use Zero\Request\Parameters\EcPay\ChoicePayments\Base;
 
 class CVS extends Base
 {

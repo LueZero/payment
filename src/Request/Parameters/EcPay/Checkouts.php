@@ -2,13 +2,13 @@
 
 namespace Zero\Request\Parameters\EcPay;
 
-use Zero\Request\Parameters\EcPay\ChoosePayments\Base;
-use Zero\Request\Parameters\EcPay\ChoosePayments\Credit;
-use Zero\Request\Parameters\EcPay\ChoosePayments\AppelPay;
-use Zero\Request\Parameters\EcPay\ChoosePayments\ATM;
-use Zero\Request\Parameters\EcPay\ChoosePayments\CVS;
-use Zero\Request\Parameters\EcPay\ChoosePayments\BarCode;
-use Zero\Request\Parameters\EcPay\ChoosePayments\WebATM;
+use Zero\Request\Parameters\EcPay\ChoicePayments\Base;
+use Zero\Request\Parameters\EcPay\ChoicePayments\Credit;
+use Zero\Request\Parameters\EcPay\ChoicePayments\AppelPay;
+use Zero\Request\Parameters\EcPay\ChoicePayments\ATM;
+use Zero\Request\Parameters\EcPay\ChoicePayments\CVS;
+use Zero\Request\Parameters\EcPay\ChoicePayments\BarCode;
+use Zero\Request\Parameters\EcPay\ChoicePayments\WebATM;
 
 class Checkouts
 {

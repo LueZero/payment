@@ -3,7 +3,7 @@
 namespace Zero\Payments;
 
 use Zero\Http;
-use Zero\Helpers\DataCheckerer;
+use Zero\Helpers\DataChecker;
 
 class LinePayment extends Payment
 {

@@ -23,7 +23,7 @@ abstract class Payment
     /**
      * @var array
      */
-    protected $sendingData;
+    protected $sendData;
 
     /**
      * 設定配置
@@ -45,7 +45,7 @@ abstract class Payment
      */
     public function getSendingData()
     {
-        return $this->sendingData;
+        return $this->sendData;
     }
 
     /**
@@ -57,7 +57,7 @@ abstract class Payment
         DataChecker::whetherEmpty($requestParameters, 'Zero\Payment\Helpers\DataChecker::[request parameters is empty]');
 
         foreach ($requestParameters as $key => $requestParameter)
-            $this->sendingData[$key] = $requestParameter;
+            $this->sendData[$key] = $requestParameter;
 
         return $this->dataProcessing();
     }

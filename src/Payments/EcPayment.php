@@ -48,8 +48,8 @@ class EcPayment extends Payment
      */
     public function dataProcessing()
     {
-        $CheckMacValue = $this->encryption($this->sendingData);
-        $this->sendingData['CheckMacValue'] = $CheckMacValue;
+        $CheckMacValue = $this->encryption($this->sendData);
+        $this->sendData['CheckMacValue'] = $CheckMacValue;
         return $this;
     }
 
@@ -58,10 +58,10 @@ class EcPayment extends Payment
      */
     public function checkouts()
     {
-        DataChecker::checkOrderNumber($this->sendingData['MerchantTradeNo'], 'MerchantTradeNo');
+        DataChecker::checkOrderNumber($this->sendData['MerchantTradeNo'], 'MerchantTradeNo');
         return $this->http->form(
             $this->configs['paymentURLs']['baseURL'] . $this->configs['paymentURLs']['checkout'],
-            $this->sendingData
+            $this->sendData
         );
     }
 
@@ -70,12 +70,12 @@ class EcPayment extends Payment
      */
     public function search()
     {
-        DataChecker::checkOrderNumber($this->sendingData['MerchantTradeNo'], 'MerchantTradeNo');
+        DataChecker::checkOrderNumber($this->sendData['MerchantTradeNo'], 'MerchantTradeNo');
         return $this->http->setup([
             'Content-Type: application/x-www-form-urlencoded'
         ])->post(
             $this->configs['paymentURLs']['baseURL'] . $this->configs['paymentURLs']['search'],
-            http_build_query($this->sendingData)
+            http_build_query($this->sendData)
         );
     }
 
@@ -88,7 +88,7 @@ class EcPayment extends Payment
             'Content-Type: application/x-www-form-urlencoded'
         ])->post(
             $this->configs['paymentURLs']['baseURL'] . $this->configs['paymentURLs']['searchDetail'],
-            http_build_query($this->sendingData)
+            http_build_query($this->sendData)
         );
     }
 
@@ -97,12 +97,12 @@ class EcPayment extends Payment
      */
     public function refund($merchantTradeNo = null)
     {
-        DataChecker::checkOrderNumber($this->sendingData['MerchantTradeNo'], 'MerchantTradeNo');
+        DataChecker::checkOrderNumber($this->sendData['MerchantTradeNo'], 'MerchantTradeNo');
         return $this->http->setup([
             'Content-Type: application/x-www-form-urlencoded'
         ])->post(
             $this->configs['paymentURLs']['baseURL'] . $this->configs['paymentURLs']['refund'],
-            http_build_query($this->sendingData)
+            http_build_query($this->sendData)
         );
     }
 

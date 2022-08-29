@@ -46,7 +46,7 @@ class EcPayment extends Payment
      * @override 
      * @return Payment
      */
-    public function dataProcess()
+    public function dataProcessing()
     {
         $CheckMacValue = $this->encryption($this->sendData);
         $this->sendData['CheckMacValue'] = $CheckMacValue;

@@ -59,14 +59,14 @@ abstract class Payment
         foreach ($requestParameters as $key => $requestParameter)
             $this->sendData[$key] = $requestParameter;
 
-        return $this->dataProcess();
+        return $this->dataProcessing();
     }
 
     /**
      * 資料處理
      * @return Payment 
      */
-    public function dataProcess()
+    public function dataProcessing()
     {
         return $this;
     }

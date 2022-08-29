@@ -42,7 +42,7 @@ class Checkouts
     /**
      * 結帳
      */
-    public static function CreateCheckouts()
+    public static function createCheckouts()
     {
         return new Checkouts();
     }

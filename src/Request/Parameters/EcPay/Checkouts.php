@@ -16,7 +16,7 @@ class Checkouts
     {
     }
 
-    public static function CreateAll()
+    public static function createAll()
     {
         return new Base();
     }
@@ -24,7 +24,7 @@ class Checkouts
     /**
      * 信用卡
      */
-    public static function CreateCredit()
+    public static function createCredit()
     {
         $credit = new Credit();
         $credit->ChoosePayment = 'Credit';
@@ -34,7 +34,7 @@ class Checkouts
     /**
      * Appel Pay
      */
-    public static function CreateAppelPay()
+    public static function createAppelPay()
     {
         $credit = new AppelPay();
         $credit->ChoosePayment = 'AppelPay';
@@ -44,7 +44,7 @@ class Checkouts
     /**
      * ATM
      */
-    public static function CreateATM()
+    public static function createATM()
     {
         $credit = new ATM();
         $credit->ChoosePayment = 'ATM';
@@ -54,7 +54,7 @@ class Checkouts
     /**
      * CVS
      */
-    public static function CreateCVS()
+    public static function createCVS()
     {
         $credit = new CVS();
         $credit->ChoosePayment = 'CVS';
@@ -64,7 +64,7 @@ class Checkouts
     /**
      * Barcode
      */
-    public static function CreateBarcode()
+    public static function createBarcode()
     {
         $credit = new CVS();
         $credit->ChoosePayment = 'BARCODE';
@@ -74,7 +74,7 @@ class Checkouts
     /**
      * WebATM
      */
-    public static function CreateWebATM()
+    public static function createWebATM()
     {
         $credit = new WebATM();
         $credit->ChoosePayment = 'WebATM';

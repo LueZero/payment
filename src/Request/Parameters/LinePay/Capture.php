@@ -22,7 +22,7 @@ class Capture
     /**
      * 捕獲
      */
-    public static function CreateCapture()
+    public static function createCapture()
     {
         return new Capture();
     }

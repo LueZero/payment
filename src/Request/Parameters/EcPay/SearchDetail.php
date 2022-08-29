@@ -32,7 +32,7 @@ class SearchDetail
     /**
      * 搜尋單筆明細資料記錄
      */
-    public static function CreateDetail()
+    public static function createDetail()
     {
         return new SearchDetail();
     }

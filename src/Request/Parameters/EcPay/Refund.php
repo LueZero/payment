@@ -42,7 +42,7 @@ class Refund
     /**
      * 退款
      */
-    public static function CreateRefund()
+    public static function createRefund()
     {
         return new Refund();
     }

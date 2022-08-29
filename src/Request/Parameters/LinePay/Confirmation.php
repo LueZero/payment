@@ -17,7 +17,7 @@ class Confirmation
     /**
      * 確認
      */
-    public static function CreateConfirmation()
+    public static function createConfirmation()
     {
         return new Confirmation();
     }

@@ -32,7 +32,7 @@ class Search
     /**
      * 搜尋資料
      */
-    public static function CreateSearch()
+    public static function createSearch()
     {
         return new Search();
     }

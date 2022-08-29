@@ -2,7 +2,7 @@
 
 namespace Zero\Request\Parameters\LinePay;
 
-class Confirm
+class Confirmation 
 {
     /**
      * int amount
@@ -17,8 +17,8 @@ class Confirm
     /**
      * 確認
      */
-    public static function CreateConfirm()
+    public static function CreateConfirmation()
     {
-        return new Confirm();
+        return new Confirmation();
     }
 }

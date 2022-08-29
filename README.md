@@ -5,14 +5,14 @@
 
 # 金鑰設定
 
-請複製/src/config.example.php更改為config.php即可使用(`預設內容為測試環境`)。
+請複製/src/config.example.php更改為config.php即可使用(`內容為測試環境`)。
 
 ## 付款使用方式
 
 ```php
 require './vendor/autoload.php';
 
-use Zero\PayClient as PayClient;
+use Zero\PaymentClient as PaymentClient;
 ```
 
 ```php

@@ -39,7 +39,7 @@ class LinePayment extends Payment
     /**
      * 加密
      */
-    public function encryption($data)
+    public function encryp($data)
     {
         return base64_encode(hash_hmac('sha256', $data, $this->channelSecret, true));
     }
@@ -54,7 +54,7 @@ class LinePayment extends Payment
             'Content-Type: application/json',
             'X-LINE-ChannelId: ' . $this->channelId,
             'X-LINE-Authorization-Nonce: ' . time(),
-            'X-LINE-Authorization: ' . $this->encryption($body)
+            'X-LINE-Authorization: ' . $this->encryp($body)
         ])->post(
             $this->configs['paymentURLs']['baseURL'] . $this->configs['paymentURLs']['checkout'],
             json_encode($this->sendData)
@@ -74,7 +74,7 @@ class LinePayment extends Payment
             'Content-Type: application/json',
             'X-LINE-ChannelId: ' . $this->channelId,
             'X-LINE-Authorization-Nonce: ' . time(),
-            'X-LINE-Authorization: ' . $this->encryption($body)
+            'X-LINE-Authorization: ' . $this->encryp($body)
         ])->post(
             $this->configs['paymentURLs']['baseURL'] . $confirm,
             json_encode($this->sendData)
@@ -94,7 +94,7 @@ class LinePayment extends Payment
             'Content-Type: application/json',
             'X-LINE-ChannelId: ' . $this->channelId,
             'X-LINE-Authorization-Nonce: ' . time(),
-            'X-LINE-Authorization: ' . $this->encryption($body)
+            'X-LINE-Authorization: ' . $this->encryp($body)
         ])->post(
             $this->configs['paymentURLs']['baseURL'] . $capture,
             json_encode($this->sendData)
@@ -114,7 +114,7 @@ class LinePayment extends Payment
             'Content-Type: application/json',
             'X-LINE-ChannelId: ' . $this->channelId,
             'X-LINE-Authorization-Nonce: ' . time(),
-            'X-LINE-Authorization: ' . $this->encryption($body)
+            'X-LINE-Authorization: ' . $this->encryp($body)
         ])->post(
             $this->configs['paymentURLs']['baseURL'] . $confirm,
             json_encode($this->sendData)
@@ -132,7 +132,7 @@ class LinePayment extends Payment
             'Content-Type: application/json',
             'X-LINE-ChannelId: ' . $this->channelId,
             'X-LINE-Authorization-Nonce: ' . time(),
-            'X-LINE-Authorization: ' . $this->encryption($body)
+            'X-LINE-Authorization: ' . $this->encryp($body)
         ])->get(
             $this->configs['paymentURLs']['baseURL'] . $this->configs['paymentURLs']['search'],
             $this->sendData
@@ -152,7 +152,7 @@ class LinePayment extends Payment
             'Content-Type: application/json',
             'X-LINE-ChannelId: ' . $this->channelId,
             'X-LINE-Authorization-Nonce: ' . time(),
-            'X-LINE-Authorization: ' . $this->encryption($body)
+            'X-LINE-Authorization: ' . $this->encryp($body)
         ])->post(
             $this->configs['paymentURLs']['baseURL'] . $refund,
             json_encode($this->sendData)

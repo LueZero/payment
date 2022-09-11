@@ -46,9 +46,9 @@ class EcPayment extends Payment
      * @override 
      * @return Payment
      */
-    public function dataProcessing()
+    public function processData()
     {
-        $CheckMacValue = $this->encryption($this->sendData);
+        $CheckMacValue = $this->encryp($this->sendData);
         $this->sendData['CheckMacValue'] = $CheckMacValue;
         return $this;
     }
@@ -109,7 +109,7 @@ class EcPayment extends Payment
     /**
      * 加密
      */
-    public function encryption($data)
+    public function encryp($data)
     {
         return $this->generate($data, $this->hashKey, $this->hashIv);
     }
@@ -122,7 +122,7 @@ class EcPayment extends Payment
         $sMacValue = '';
         if (isset($arParameters)) {
             unset($arParameters['CheckMacValue']);
-            uksort($arParameters, array('Zero\Payments\EcPayment', 'merchantSort'));
+            uksort($arParameters, array('Zero\Payments\EcPayment', 'sortMerchant'));
             $sMacValue = 'HashKey=' . $HashKey;
             foreach ($arParameters as $key => $value) {
                 $sMacValue .= '&' . $key . '=' . $value;
@@ -146,7 +146,7 @@ class EcPayment extends Payment
     /**
      * 綠界加密排序
      */
-    private static function merchantSort($a, $b)
+    private static function sortMerchant($a, $b)
     {
         return strcasecmp($a, $b);
     }

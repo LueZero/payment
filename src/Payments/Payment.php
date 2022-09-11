@@ -37,7 +37,7 @@ abstract class Payment
      * 加密
      * @return string 
      */
-    abstract public function encryption($data);
+    abstract public function encryp($data);
 
     /**
      * 取得發送參數
@@ -59,14 +59,14 @@ abstract class Payment
         foreach ($requestParameters as $key => $requestParameter)
             $this->sendData[$key] = $requestParameter;
 
-        return $this->dataProcessing();
+        return $this->processData();
     }
 
     /**
      * 資料處理
      * @return Payment 
      */
-    public function dataProcessing()
+    public function processData()
     {
         return $this;
     }

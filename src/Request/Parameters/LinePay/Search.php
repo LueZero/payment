@@ -5,22 +5,23 @@ namespace Zero\Request\Parameters\LinePay;
 class Search
 {
     /**
-     * array int transactionId
+     * @var array int
      */
     public $transactionId;
 
     /**
-     * array string orderId
+     * @var array string
      */
     public $orderId;
 
     /**
-     * array string fields
+     * @var array string
      */
     public $fields;
 
     /**
      * 搜尋資料
+     * @return Search
      */
     public static function createSearch()
     {

@@ -5,17 +5,18 @@ namespace Zero\Request\Parameters\LinePay;
 class Refund
 {
     /**
-     * int refundAmount
+     * @var int
      */
     public $refundAmount;
 
     /**
-     * object options
+     * @var object
      */
     public $options;
 
     /**
      * 退款
+     * @return Refund
      */
     public static function createRefund()
     {

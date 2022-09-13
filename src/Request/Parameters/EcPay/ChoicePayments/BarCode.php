@@ -7,17 +7,17 @@ use Zero\Request\Parameters\EcPay\ChoicePayments\Base;
 class BarCode extends Base
 {
    /**
-     * int storeExpireDate 
+     * @var int 
      */
     public $StoreExpireDate;
 
     /**
-     * string paymentInfoURL
+     * @var string
      */
     public $PaymentInfoURL;
 
     /**
-     * string clientRedirectURL
+     * @var string
      */
     public $ClientRedirectURL;
 }

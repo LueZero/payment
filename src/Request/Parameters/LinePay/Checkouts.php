@@ -5,42 +5,43 @@ namespace Zero\Request\Parameters\LinePay;
 class Checkouts
 {
     /**
-     * int amount
+     * @var int
      */
     public $amount;
 
     /**
-     * string currency
+     * @var string
      */
     public $currency;
 
     /**
-     * string orderId
+     * @var string
      */
     public $orderId;
 
     /**
-     * array packages
+     * @var array
      */
     public $packages;
 
     /**
-     * array redirectUrls
+     * @var array
      */
     public $redirectUrls;
 
     /**
-     * int refundAmount
+     * @var int
      */
     public $refundAmount;
 
     /**
-     * array options
+     * @var array
      */
     public $options;
 
     /**
      * 結帳
+     * @return Checkouts
      */
     public static function createCheckouts()
     {

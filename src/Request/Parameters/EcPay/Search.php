@@ -5,32 +5,33 @@ namespace Zero\Request\Parameters\EcPay;
 class Search
 {
     /**
-     * string merchantID
+     * @var string
      */
     public $MerchantID;
 
     /**
-     * string merchantTradeNo
+     * @var string
      */
     public $MerchantTradeNo;
 
     /**
-     * int timeStamp
+     * @var int
      */
     public $TimeStamp;
 
     /**
-     * string checkMacValue
+     * @var string
      */
     public $CheckMacValue;
 
     /**
-     * string platformID
+     * @var string
      */
     public $PlatformID;
 
     /**
      * 搜尋資料
+     * @return Search
      */
     public static function createSearch()
     {

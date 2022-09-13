@@ -5,17 +5,18 @@ namespace Zero\Request\Parameters\LinePay;
 class Confirmation 
 {
     /**
-     * int amount
+     * @var int
      */
     public $amount;
 
     /**
-     * string currency
+     * @var string
      */
     public $currency;
 
     /**
      * 確認
+     * @return Confirmation
      */
     public static function createConfirmation()
     {

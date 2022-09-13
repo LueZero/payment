@@ -7,37 +7,37 @@ use Zero\Request\Parameters\EcPay\ChoicePayments\Base;
 class CVS extends Base
 {
     /**
-     * int storeExpireDate 
+     * @var int storeExpireDate 
      */
     public $StoreExpireDate;
 
     /**
-     * string paymentInfoURL
+     * @var string
      */
     public $PaymentInfoURL;
 
     /**
-     * string clientRedirectURL
+     * @var string
      */
     public $ClientRedirectURL;
 
     /**
-     * string desc 1 
+     * @var string
      */
     public $Desc_1;
 
     /**
-     * string desc 2 
+     * @var string 
      */
     public $Desc_2;
 
     /**
-     * string desc 3
+     * @var string
      */
     public $Desc_3;
 
     /**
-     * string desc 4
+     * @var string
      */
     public $Desc_4;
 }

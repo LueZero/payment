@@ -16,6 +16,9 @@ class Checkouts
     {
     }
 
+    /**
+     * @return Base
+     */
     public static function createAll()
     {
         return new Base();
@@ -23,6 +26,7 @@ class Checkouts
 
     /**
      * 信用卡
+     * @return Credit
      */
     public static function createCredit()
     {
@@ -33,6 +37,7 @@ class Checkouts
 
     /**
      * Appel Pay
+     * @return AppelPay
      */
     public static function createAppelPay()
     {
@@ -43,6 +48,7 @@ class Checkouts
 
     /**
      * ATM
+     * @return ATM
      */
     public static function createATM()
     {
@@ -53,6 +59,7 @@ class Checkouts
 
     /**
      * CVS
+     * @return CVS
      */
     public static function createCVS()
     {
@@ -63,16 +70,18 @@ class Checkouts
 
     /**
      * Barcode
+     * @return BarCode
      */
     public static function createBarcode()
     {
-        $credit = new CVS();
+        $credit = new BarCode();
         $credit->ChoosePayment = 'BARCODE';
         return $credit;
     }
 
     /**
      * WebATM
+     * @return WebATM
      */
     public static function createWebATM()
     {

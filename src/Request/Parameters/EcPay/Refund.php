@@ -5,42 +5,42 @@ namespace Zero\Request\Parameters\EcPay;
 class Refund
 {
     /**
-     * string merchantID
+     * @var string
      */
     public $MerchantID;
 
     /**
-     * string merchantTradeNo
+     * @var string
      */
     public $MerchantTradeNo;
 
     /**
-     * string tradeNo
+     * @var string
      */
     public $TradeNo;
 
     /**
-     * string action
+     * @var string
      */
     public $Action;
 
     /**
-     * int totalAmount
+     * @var int
      */
     public $TotalAmount;
 
     /**
-     * string checkMacValue
+     * @var string
      */
     public $CheckMacValue;
 
     /**
-     * string platformID
+     * @var string
      */
     public $PlatformID;
     
     /**
-     * 退款
+     * @return Refund
      */
     public static function createRefund()
     {

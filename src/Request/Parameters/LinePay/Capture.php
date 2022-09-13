@@ -5,22 +5,23 @@ namespace Zero\Request\Parameters\LinePay;
 class Capture
 {
     /**
-     * int amount
+     * @var int
      */
     public $amount;
 
     /**
-     * string currency
+     * @var string
      */
     public $currency;
 
     /**
-     * object options
+     * @var object
      */
     public $options;
 
     /**
      * 捕獲
+     * @return Capture
      */
     public static function createCapture()
     {

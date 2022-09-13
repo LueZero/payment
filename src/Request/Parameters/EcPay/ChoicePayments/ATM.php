@@ -7,17 +7,17 @@ use Zero\Request\Parameters\EcPay\ChoicePayments\Base;
 class ATM extends Base
 {
     /**
-     * int expireDate
+     * @var int
      */
     public $ExpireDate;
 
     /**
-     * string paymentInfoURL
+     * @var string
      */
     public $PaymentInfoURL;
 
     /**
-     * strung clientRedirectURL 
+     * @var strung 
      */
     public $ClientRedirectURL;
 }

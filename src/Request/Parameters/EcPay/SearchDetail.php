@@ -5,32 +5,33 @@ namespace Zero\Request\Parameters\EcPay;
 class SearchDetail
 {
     /**
-     * string merchantID
+     * @var string
      */
     public $MerchantID;
 
     /**
-     * int creditRefundId
+     * @var int
      */
     public $CreditRefundId;
 
     /**
-     * int creditAmount
+     * @var int
      */
     public $CreditAmount;
 
     /**
-     * int creditCheckCode
+     * @var int
      */
     public $CreditCheckCode;
 
     /**
-     * string checkMacValue
+     * @var string
      */
     public $CheckMacValue;
 
     /**
      * 搜尋單筆明細資料記錄
+     * @return SearchDetail
      */
     public static function createSearchDetail()
     {

@@ -68,7 +68,7 @@ class PaymentClient
     }
 
     /**
-     * @return Payment 支付
+     * @return Payment
      */
     public function getPayment()
     {

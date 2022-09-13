@@ -8,12 +8,12 @@ use Zero\Helpers\DataChecker;
 class LinePayment extends Payment
 {
     /**
-     * @var string channelId
+     * @var string
      */
     protected $channelId;
 
     /**
-     * @var string channelSecret
+     * @var string
      */
     protected $channelSecret;
 

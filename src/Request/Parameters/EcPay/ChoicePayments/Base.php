@@ -5,47 +5,47 @@ namespace Zero\Request\Parameters\EcPay\ChoicePayments;
 class Base
 {
     /**
-     * string merchantID
+     * @var string
      */
     public $MerchantID;
 
     /**
-     * string merchantTradeNo
+     * @var string
      */
     public $MerchantTradeNo;
 
     /**
-     * string merchantTradeDate
+     * @var string
      */
     public $MerchantTradeDate;
 
     /**
-     * string paymentType
+     * @var string
      */
     public $PaymentType;
 
     /**
-     * int totalAmount
+     * @var int
      */
     public $TotalAmount;
 
     /**
-     * string tradeDesc
+     * @var string
      */
     public $TradeDesc;
 
     /**
-     * string itemName
+     * @var string
      */
     public $ItemName;
 
     /**
-     * string returnURL
+     * @var string
      */
     public $ReturnURL;
 
     /**
-     * string choosePayment
+     * @var string
      * --------------------
      * Credit：信用卡及銀聯卡(需申請開通)
      * WebATM：網路ATM
@@ -58,82 +58,82 @@ class Base
     public $ChoosePayment;
 
     /**
-     * string checkMacValue
+     * @var string
      */
     public $CheckMacValue;
 
     /**
-     * int encryptType
+     * @var int
      */
     public $EncryptType;
 
     /**
-     * string storeID
+     * @var string
      */
     public $StoreID;
 
     /**
-     * string clientBackURL
+     * @var string
      */
     public $ClientBackURL;
 
     /**
-     * string itemURL
+     * @var string
      */
     public $ItemURL;
 
     /**
-     * string remark
+     * @var string
      */
     public $Remark;
 
     /**
-     * string chooseSubPayment
+     * @var string
      */
     public $ChooseSubPayment;
 
     /**
-     * string orderResultURL
+     * @var string
      */
     public $OrderResultURL;
 
     /**
-     * string needExtraPaidInfo 
+     * @var string 
      */
     public $NeedExtraPaidInfo;
 
     /**
-     * string ignorePayment
+     * @var string
      */
     public $IgnorePayment;
 
     /**
-     * string platformID
+     * @var string
      */
     public $PlatformID;
 
     /**
-     * string customField1
+     * @var string
      */
     public $CustomField1;
 
     /**
-     * string customField2
+     * @var string
      */
     public $CustomField2;
 
     /**
-     * string customField3
+     * @var string
      */
     public $CustomField3;
 
     /**
-     * string customField4
+     * @var string
      */
     public $CustomField4;
 
     /**
-     * string language
+     * @var string
      */
     public $Language;
 }

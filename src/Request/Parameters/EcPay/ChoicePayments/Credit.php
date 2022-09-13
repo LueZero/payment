@@ -7,56 +7,56 @@ use Zero\Request\Parameters\EcPay\ChoicePayments\Base;
 class Credit extends Base
 {
   /**
-   * string redeem
+   * @var string
    */
   public $Redeem;
 
   /**
-   * int unionPay
+   * @var int
    */
   public $UnionPay;
 
   /**
-   * int bindingCard
+   * @var int
    */
   public $BindingCard;
 
   /**
-   * string merchantMemberID
+   * @var string
    */
   public $MerchantMemberID;
 
   /////////////////////////
 
   /**
-   * int periodAmount
+   * @var int
    */
   public $PeriodAmount;
 
   /**
-   * string periodType
+   * @var string
    */
   public $PeriodType;
 
   /**
-   * int frequency
+   * @var int
    */
   public $Frequency;
 
   /**
-   * int execTimes
+   * @var int
    */
   public $ExecTimes;
 
   /**
-   * string periodReturnURL 
+   * @var string 
    */
   public $PeriodReturnURL;
 
   /////////////////////////
   
   /**
-   * string creditInstallment 
+   * @var string 
    */
   public $CreditInstallment;
 }

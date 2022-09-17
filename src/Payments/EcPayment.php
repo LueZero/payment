@@ -49,7 +49,7 @@ class EcPayment extends Payment
      */
     public function processData()
     {
-        $CheckMacValue = $this->encryp($this->sendData);
+        $CheckMacValue = $this->encrypt($this->sendData);
         $this->sendData['CheckMacValue'] = $CheckMacValue;
         return $this;
     }
@@ -110,7 +110,7 @@ class EcPayment extends Payment
     /**
      * 加密
      */
-    public function encryp($data)
+    public function encrypt($data)
     {
         return $this->generate($data, $this->hashKey, $this->hashIv);
     }

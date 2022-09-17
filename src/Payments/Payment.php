@@ -35,9 +35,9 @@ abstract class Payment
 
     /**
      * 加密
-     * @return string 
+     * @param string 
      */
-    abstract public function encryp($data);
+    abstract public function encrypt($data);
 
     /**
      * 取得發送參數

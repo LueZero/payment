@@ -4,7 +4,7 @@ namespace Zero\Payments;
 
 use Exception;
 use Zero\Helpers\DataChecker;
-use Zero\Payment\Http;
+use Zero\Http;
 
 abstract class Payment
 {

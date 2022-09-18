@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
-use Zero\Payment\PaymentClient as PaymentClient;
+use Zero\PaymentClient as PaymentClient;
 
 final class PaymentTest extends TestCase
 {

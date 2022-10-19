@@ -17,8 +17,8 @@ use Zero\PaymentClient as PaymentClient;
 
 ```php
 // 綠界 付款範例
-$payment = new PaymentClient('ec');
-
+$paymentClient = new PaymentClient('ec');
+$payment = $paymentClient->createPayment();
 $requests = [
   'MerchantID' => '2000132',
   'MerchantTradeNo' => date('YmdHis'),
@@ -68,8 +68,8 @@ $requests = [
 /*--------分隔線-----------*/
 
 // Line 付款範例 
-$payment = new PaymentClient('line');
-
+$paymentClient = new PaymentClient('line');
+$payment = $paymentClient->createPayment();
 $transactionId = date('YmdHis');
 $requests = [
   'amount' => 100,

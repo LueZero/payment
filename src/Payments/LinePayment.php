@@ -19,15 +19,18 @@ class LinePayment extends Payment
 
     /**
      * 建構子
+     * @param Http http
      */
     public function __construct(Http $http)
     {
+        parent::__construct();
         $this->http = $http;
+        $this->requireConfig('line');
      
     }
 
     /**
-     * 設定配置
+     * @param array configs
      */
     public function setConfigs($configs)
     {
@@ -38,6 +41,8 @@ class LinePayment extends Payment
 
     /**
      * 加密
+     * @param array data
+     * @return string
      */
     public function encrypt($data)
     {
@@ -46,6 +51,7 @@ class LinePayment extends Payment
 
     /**
      * 結帳
+     * @return string 
      */
     public function checkouts()
     {
@@ -63,6 +69,8 @@ class LinePayment extends Payment
 
     /**
      * 確認
+     * @param string transactionId
+     * @return string
      */
     public function confirm($transactionId)
     {
@@ -83,6 +91,8 @@ class LinePayment extends Payment
 
     /**
      * 捕獲
+     * @param string transactionId
+     * @return string
      */
     public function capture($transactionId)
     {
@@ -103,6 +113,8 @@ class LinePayment extends Payment
 
     /**
      * 無效處理
+     * @param string transactionId
+     * @return string
      */
     public function void($transactionId)
     {
@@ -123,6 +135,7 @@ class LinePayment extends Payment
 
     /**
      * 搜尋資料
+     * @return string  
      */
     public function search()
     {
@@ -141,6 +154,8 @@ class LinePayment extends Payment
 
     /**
      * 退款
+     * @param string transactionId
+     * @return string 
      */
     public function refund($transactionId = null)
     {

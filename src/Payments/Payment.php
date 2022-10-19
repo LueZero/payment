@@ -2,40 +2,66 @@
 
 namespace Zero\Payments;
 
-use Exception;
 use Zero\Helpers\DataChecker;
 use Zero\Http;
 
 abstract class Payment
 {
-    /**
-     * 請求功能
+    /**     
      * @var Http 
+     * 請求功能
      */
     protected $http;
 
-    /**
-     * 配置
+    /**     
      * @var array
+     * 配置
      */
     protected $configs;
 
     /**
      * @var array
+     * 發送資料
      */
     protected $sendData;
 
+    public function __construct()
+    {
+    }
+
+    /**
+     * 呼叫配置檔案
+     * @param string paymentName
+     */
+    public function requireConfig($paymentName)
+    {
+        $configs = require('./src/config.php');
+
+        if (empty($configs[$paymentName]))
+            throw new \Exception('Zero\Payment\Payment::[payment config is empty]');
+
+        $this->setConfigs($configs[$paymentName]);
+    }
+
+    /**
+     * 設定配置檔案
+     * @param array configs
+     */
+    abstract function setConfigs($configs);
+
     /**
      * 設定配置
+     * @return array
      */
-    public function setConfigs($configs)
+    public function getConfigs()
     {
-        $this->configs = $configs;
+        return $this->configs;
     }
 
     /**
      * 加密
-     * @param string 
+     * @param string data
+     * @return string
      */
     abstract public function encrypt($data);
 
@@ -50,6 +76,7 @@ abstract class Payment
 
     /**
      * 設定請求參數
+     * @param array requestParameters
      * @return Payment 
      */
     public function setRequestParameters($requestParameters)
@@ -85,6 +112,7 @@ abstract class Payment
 
     /**
      * 退款
+     * @return mixed data 
      * @return string 
      */
     abstract public function refund($data = null);

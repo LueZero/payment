@@ -25,14 +25,17 @@ class EcPayment extends Payment
 
     /**
      * 建構子
+     * @param Http http
      */
     public function __construct(Http $http)
     {
+        parent::__construct();
         $this->http = $http;
+        $this->requireConfig('ec');
     }
 
     /**
-     * 設定配置
+     * @param array configs
      */
     public function setConfigs($configs)
     {
@@ -56,6 +59,7 @@ class EcPayment extends Payment
 
     /**
      * 結帳
+     * @return string 
      */
     public function checkouts()
     {
@@ -68,6 +72,7 @@ class EcPayment extends Payment
 
     /**
      * 搜尋資料
+     * @return string 
      */
     public function search()
     {
@@ -82,6 +87,7 @@ class EcPayment extends Payment
 
     /**
      * 搜尋單筆明細資料記錄
+     * @return string 
      */
     public function searchDetail()
     {
@@ -95,6 +101,7 @@ class EcPayment extends Payment
 
     /**
      * 退款
+     * @param string merchantTradeNo
      */
     public function refund($merchantTradeNo = null)
     {
@@ -109,6 +116,8 @@ class EcPayment extends Payment
 
     /**
      * 加密
+     * @param array data
+     * @return string
      */
     public function encrypt($data)
     {
@@ -117,6 +126,11 @@ class EcPayment extends Payment
 
     /**
      * 綠界加密
+     * @param array arParameters
+     * @param string HashKey
+     * @param string HashIV
+     * @param int encType
+     * @return string
      */
     public function generate($arParameters = array(), $HashKey = '', $HashIV = '', $encType = 0)
     {
@@ -146,9 +160,11 @@ class EcPayment extends Payment
 
     /**
      * 綠界加密排序
+     * @param string string1
+     * @param string string2
      */
-    private static function sortMerchant($a, $b)
+    private static function sortMerchant($string1, $string2)
     {
-        return strcasecmp($a, $b);
+        return strcasecmp($string1, $string2);
     }
 }

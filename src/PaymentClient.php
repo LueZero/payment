@@ -45,12 +45,4 @@ class PaymentClient
 
         return new $this->paymentList[$this->paymentName](new Http());
     }
-
-    /**
-     * @return Payment 
-     */
-    public function setRequestParameters(array $requestParameters)
-    {
-        return $this->payment->setRequestParameters($requestParameters);
-    }
 }

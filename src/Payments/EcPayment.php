@@ -61,7 +61,7 @@ class EcPayment extends Payment
      * 結帳
      * @return string 
      */
-    public function checkouts()
+    public function checkout()
     {
         DataChecker::checkOrderNumber($this->sendData['MerchantTradeNo'], 'MerchantTradeNo');
         return $this->http->form(

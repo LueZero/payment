@@ -2,7 +2,7 @@
 
 namespace Zero\Request\Parameters\LinePay;
 
-class Checkouts
+class Checkout
 {
     /**
      * @var int
@@ -41,10 +41,10 @@ class Checkouts
 
     /**
      * 結帳
-     * @return Checkouts
+     * @return Checkout
      */
-    public static function createCheckouts()
+    public static function createCheckout()
     {
-        return new Checkouts();
+        return new Checkout();
     }
 }

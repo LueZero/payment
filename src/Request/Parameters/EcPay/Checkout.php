@@ -10,7 +10,7 @@ use Zero\Request\Parameters\EcPay\ChoicePayments\CVS;
 use Zero\Request\Parameters\EcPay\ChoicePayments\BarCode;
 use Zero\Request\Parameters\EcPay\ChoicePayments\WebATM;
 
-class Checkouts
+class Checkout
 {
     public function __construct()
     {

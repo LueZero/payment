@@ -53,7 +53,7 @@ class LinePayment extends Payment
      * 結帳
      * @return string 
      */
-    public function checkouts()
+    public function checkout()
     {
         $body = $this->channelSecret . $this->configs['paymentURLs']['checkout'] . json_encode($this->sendData) . time();
         return $this->http->setup([

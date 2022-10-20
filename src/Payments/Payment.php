@@ -106,7 +106,7 @@ abstract class Payment
      * 結帳
      * @return string 
      */
-    abstract public function checkouts();
+    abstract public function checkout();
 
     /**
      * 搜尋

@@ -21,7 +21,7 @@ $requests = [
   'ChoosePayment' => 'Credit',
   'EncryptType' => 1,
 ];
-// echo $payment->setRequestParameters($requests)->checkouts();
+// echo $payment->setRequestParameters($requests)->checkout();
 // return;
 
 // 綠界 搜尋範例
@@ -85,7 +85,7 @@ $requests = [
     'cancelUrl' => 'https://your.web.site/receive.php'
   ]
 ];
-// echo $payment->setRequestParameters($requests)->checkouts();
+// echo $payment->setRequestParameters($requests)->checkout();
 // return;
 
 // line 確認範例

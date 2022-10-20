@@ -37,6 +37,7 @@ class PaymentClient
 
     /**
      * @return Payment
+     * @throws \Exception
      */
     public function createPayment()
     {

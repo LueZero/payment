@@ -32,6 +32,7 @@ abstract class Payment
     /**
      * 呼叫配置檔案
      * @param string paymentName
+     * @throws \Exception
      */
     public function requireConfig($paymentName)
     {
@@ -47,7 +48,10 @@ abstract class Payment
      * 設定配置檔案
      * @param array configs
      */
-    abstract function setConfigs($configs);
+    function setConfigs($configs) 
+    {
+        $this->$configs = $configs;
+    }
 
     /**
      * 設定配置

@@ -87,8 +87,9 @@ abstract class Payment
     {
         DataChecker::whetherEmpty($requestParameters, 'Zero\Payment\Helpers\DataChecker::[request parameters is empty]');
 
-        foreach ($requestParameters as $key => $requestParameter)
+        foreach ($requestParameters as $key => $requestParameter) {
             $this->sendData[$key] = $requestParameter;
+        }
 
         return $this->processData();
     }

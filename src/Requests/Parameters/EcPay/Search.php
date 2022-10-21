@@ -1,8 +1,8 @@
 <?php
 
-namespace Zero\Request\Parameters\EcPay;
+namespace Zero\Requests\Parameters\EcPay;
 
-class Refund
+class Search
 {
     /**
      * @var string
@@ -15,19 +15,9 @@ class Refund
     public $MerchantTradeNo;
 
     /**
-     * @var string
-     */
-    public $TradeNo;
-
-    /**
-     * @var string
-     */
-    public $Action;
-
-    /**
      * @var int
      */
-    public $TotalAmount;
+    public $TimeStamp;
 
     /**
      * @var string
@@ -38,12 +28,13 @@ class Refund
      * @var string
      */
     public $PlatformID;
-    
+
     /**
-     * @return Refund
+     * 搜尋資料
+     * @return Search
      */
-    public static function createRefund()
+    public static function createSearch()
     {
-        return new Refund();
+        return new Search();
     }
 }

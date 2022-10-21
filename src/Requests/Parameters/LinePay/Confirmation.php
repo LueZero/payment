@@ -1,6 +1,6 @@
 <?php
 
-namespace Zero\Request\Parameters\LinePay;
+namespace Zero\Requests\Parameters\LinePay;
 
 class Confirmation 
 {

@@ -7,7 +7,7 @@
 
 請複製/src/config.example.php更改為config.php即可使用(`內容為測試環境`)。
 
-## 付款使用方式
+## 使用付款方式
 
 ```php
 require './vendor/autoload.php';

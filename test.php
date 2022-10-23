@@ -31,8 +31,8 @@ $requests = [
   'TimeStamp' => time(),
   'PlatformID' => 2000132,
 ];
-echo $payment->setRequestParameters($requests)->search();
-return;
+// echo $payment->setRequestParameters($requests)->search();
+// return;
 
 // 綠界 搜尋明細範例
 $requests = [

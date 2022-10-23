@@ -10,12 +10,12 @@ class LinePayment extends Payment
     /**
      * @var string
      */
-    protected $channelId;
+    public $channelId;
 
     /**
      * @var string
      */
-    protected $channelSecret;
+    public $channelSecret;
 
     /**
      * 建構子

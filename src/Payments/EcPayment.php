@@ -11,17 +11,17 @@ class EcPayment extends Payment
      * @var string 
      * 特店編號
      */
-    protected $merchantID;
+    public $merchantID;
 
     /**
      * @var string
      */
-    protected $hashKey;
+    public $hashKey;
 
     /**
      * @var string
      */
-    protected $hashIv;
+    public $hashIv;
 
     /**
      * 建構子

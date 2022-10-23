@@ -24,6 +24,11 @@ class EcPayment extends Payment
     public $hashIv;
 
     /**
+     * @var string
+     */
+    public $creditCheckCode;
+
+    /**
      * 建構子
      * @param Http http
      */
@@ -43,6 +48,7 @@ class EcPayment extends Payment
         $this->merchantID = empty($this->configs['paymentParameters']['MerchantID']) == true ? null : $this->configs['paymentParameters']['MerchantID'];
         $this->hashKey = empty($this->configs['paymentParameters']['HashKey']) == true ? null : $this->configs['paymentParameters']['HashKey'];
         $this->hashIv = empty($this->configs['paymentParameters']['HashIV']) == true ? null : $this->configs['paymentParameters']['HashIV'];
+        $this->creditCheckCode = empty($this->configs['paymentParameters']['CreditCheckCode']) == true ? null : $this->configs['paymentParameters']['CreditCheckCode'];
     }
 
     /**

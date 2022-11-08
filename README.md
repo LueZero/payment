@@ -5,7 +5,7 @@
 
 # 金鑰設定
 
-請複製/src/config.example.php更改為config.php即可使用(`內容為測試環境`)。
+請複製 /src/config.example.php 更改為 config.php 即可使用(`內容為測試環境`)。
 
 ## 使用付款方式
 

@@ -105,7 +105,7 @@ $requests = [
 
 // Line 退款範例
 $requests = [
-  'refundAmount' => 1000
+  'refundAmount' => 100
 ];
 // echo $payment->setRequestParameters($requests)->refund(2022082400725100210);
 // return;

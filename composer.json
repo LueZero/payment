@@ -1,4 +1,6 @@
 {
+    "name": "zero/payment",
+    "version": "1.0",
     "require": {
         "php": ">=7.0.0"
     },

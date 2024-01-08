@@ -42,7 +42,7 @@ class EcPayment extends Payment
     /**
      * @param array configs
      */
-    public function setConfigs($configs)
+    public function setConfig($configs)
     {
         $this->configs = $configs;
         $this->merchantID = empty($this->configs['paymentParameters']['MerchantID']) == true ? null : $this->configs['paymentParameters']['MerchantID'];

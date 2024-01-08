@@ -41,14 +41,14 @@ abstract class Payment
         if (empty($configs[$paymentName]))
             throw new \Exception('Zero\Payment\Payment::[payment config is empty]');
 
-        $this->setConfigs($configs[$paymentName]);
+        $this->setConfig($configs[$paymentName]);
     }
 
     /**
      * 設定配置檔案
      * @param array configs
      */
-    function setConfigs($configs) 
+    function setConfig($configs) 
     {
         $this->$configs = $configs;
     }
@@ -83,7 +83,7 @@ abstract class Payment
      * @param array requestParameters
      * @return Payment 
      */
-    public function setRequestParameters($requestParameters)
+    public function setRequestParameter($requestParameters)
     {
         DataChecker::whetherEmpty($requestParameters, 'Zero\Payment\Helpers\DataChecker::[request parameters is empty]');
 

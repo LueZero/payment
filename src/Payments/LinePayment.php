@@ -32,7 +32,7 @@ class LinePayment extends Payment
     /**
      * @param array configs
      */
-    public function setConfigs($configs)
+    public function setConfig($configs)
     {
         $this->configs = $configs;
         $this->channelId = empty($this->configs['paymentParameters']['ChannelId']) == true ? null : $this->configs['paymentParameters']['ChannelId'];

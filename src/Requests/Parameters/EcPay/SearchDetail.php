@@ -1,6 +1,6 @@
 <?php
 
-namespace Zero\Requests\Parameters\EcPay;
+namespace Zero\Requests\Parameters\ECPay;
 
 class SearchDetail
 {

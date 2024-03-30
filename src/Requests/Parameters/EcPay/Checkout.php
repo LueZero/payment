@@ -1,14 +1,14 @@
 <?php
 
-namespace Zero\Requests\Parameters\EcPay;
+namespace Zero\Requests\Parameters\ECPay;
 
-use Zero\Requests\Parameters\EcPay\ChoicePayments\Base;
-use Zero\Requests\Parameters\EcPay\ChoicePayments\Credit;
-use Zero\Requests\Parameters\EcPay\ChoicePayments\AppelPay;
-use Zero\Requests\Parameters\EcPay\ChoicePayments\ATM;
-use Zero\Requests\Parameters\EcPay\ChoicePayments\CVS;
-use Zero\Requests\Parameters\EcPay\ChoicePayments\BarCode;
-use Zero\Requests\Parameters\EcPay\ChoicePayments\WebATM;
+use Zero\Requests\Parameters\ECPay\ChoicePayments\Base;
+use Zero\Requests\Parameters\ECPay\ChoicePayments\Credit;
+use Zero\Requests\Parameters\ECPay\ChoicePayments\AppelPay;
+use Zero\Requests\Parameters\ECPay\ChoicePayments\ATM;
+use Zero\Requests\Parameters\ECPay\ChoicePayments\CVS;
+use Zero\Requests\Parameters\ECPay\ChoicePayments\BarCode;
+use Zero\Requests\Parameters\ECPay\ChoicePayments\WebATM;
 
 class Checkout
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Zero\Requests\Parameters\LinePay;
+namespace Zero\Requests\Parameters\LINEPay;
 
 class Checkout
 {

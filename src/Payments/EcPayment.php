@@ -5,7 +5,7 @@ namespace Zero\Payments;
 use Zero\Http;
 use Zero\Helpers\DataChecker;
 
-class EcPayment extends Payment
+class ECPayment extends Payment
 {
     /**
      * @var string 
@@ -143,7 +143,7 @@ class EcPayment extends Payment
         $sMacValue = '';
         if (isset($arParameters)) {
             unset($arParameters['CheckMacValue']);
-            uksort($arParameters, array('Zero\Payments\EcPayment', 'sortMerchant'));
+            uksort($arParameters, array('Zero\Payments\ECPayment', 'sortMerchant'));
             $sMacValue = 'HashKey=' . $HashKey;
             foreach ($arParameters as $key => $value) {
                 $sMacValue .= '&' . $key . '=' . $value;

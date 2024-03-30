@@ -4,8 +4,8 @@ namespace Zero;
 
 use Zero\Helpers\DataChecker;
 use Zero\Payments\Payment;
-use Zero\Payments\EcPayment;
-use Zero\Payments\LinePayment;
+use Zero\Payments\ECPayment;
+use Zero\Payments\LINEPayment;
 
 class PaymentClient
 {
@@ -18,16 +18,16 @@ class PaymentClient
      * @var array
      */
     public $paymentNames = [
-        'ec' => 'EcPayment',
-        'line' => 'LinePayment'
+        'ec' => 'ECPayment',
+        'line' => 'LINEPayment'
     ];
 
     /**
      * @var array
      */
     private $paymentList = [
-        'ec' => EcPayment::class,
-        'line' => LinePayment::class
+        'ec' => ECPayment::class,
+        'line' => LINEPayment::class
     ];
 
     public function __construct($paymentName)

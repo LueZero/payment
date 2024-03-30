@@ -57,7 +57,7 @@ $requests = [
 
 /*--------分隔線-----------*/
 
-// Line 付款範例 
+// LINE 付款範例 
 $paymentClient = new PaymentClient('line');
 $payment = $paymentClient->createPayment();
 $transactionId = date('YmdHis');
@@ -88,7 +88,7 @@ $requests = [
 // echo $payment->setRequestParameter($requests)->checkout();
 // return;
 
-// line 確認範例
+// LINE 確認範例
 $requests = [
   'amount' => 100,
   'currency' => 'TWD',
@@ -96,14 +96,14 @@ $requests = [
 // echo $payment->setRequestParameter($requests)->confirm(2022082400725100210);
 // return;
 
-// Line 查詢範例
+// LINE 查詢範例
 $requests = [
   'orderId' => '20220821103746'
 ];
 // echo $payment->setRequestParameter($requests)->search();
 // return;
 
-// Line 退款範例
+// LINE 退款範例
 $requests = [
   'refundAmount' => 100
 ];

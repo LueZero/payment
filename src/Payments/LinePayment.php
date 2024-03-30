@@ -5,7 +5,7 @@ namespace Zero\Payments;
 use Zero\Http;
 use Zero\Helpers\DataChecker;
 
-class LinePayment extends Payment
+class LINEPayment extends Payment
 {
     /**
      * @var string

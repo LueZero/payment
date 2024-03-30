@@ -1,8 +1,8 @@
 <?php
 
-namespace Zero\Requests\Parameters\EcPay\ChoicePayments;
+namespace Zero\Requests\Parameters\ECPay\ChoicePayments;
 
-use Zero\Requests\Parameters\EcPay\ChoicePayments\Base;
+use Zero\Requests\Parameters\ECPay\ChoicePayments\Base;
 
 class WebATM extends Base
 {

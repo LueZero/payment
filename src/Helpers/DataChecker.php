@@ -20,7 +20,7 @@ class DataChecker
    public static function checkTotalAmount($amount)
    {
       if ($amount < 1) {
-         throw new \Exception('Zero\Payment::[The total amount cannot be less than 0]');
+         throw new \Exception('Zero\Payment::[The total amount cannot be less than 0].');
       }
    }
 
@@ -30,7 +30,7 @@ class DataChecker
    public static function checkOrderNumber($orderNumber, $key)
    {
       if (empty($orderNumber)) {
-         throw new \Exception("Zero\Payment::[{$key} number is empty]");
+         throw new \Exception("Zero\Payment::[{$key} number is empty].");
       }
    }
 }

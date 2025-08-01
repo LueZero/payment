@@ -42,7 +42,7 @@ class PaymentClient
     public function createPayment()
     {
         if (!array_key_exists($this->paymentName, $this->paymentNames))
-            throw new \Exception('Zero\Payment\PaymentClient::[no payment method class]');
+            throw new \Exception('Zero\Payment\PaymentClient::[No payment method class]');
 
         return new $this->paymentList[$this->paymentName](new Http());
     }

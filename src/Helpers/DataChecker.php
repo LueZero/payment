@@ -30,7 +30,7 @@ class DataChecker
    public static function checkOrderNumber($orderNumber, $key)
    {
       if (empty($orderNumber)) {
-         throw new \Exception("Zero\Payment::[{$key} number is empty].");
+         throw new \Exception("Zero\Payment::[The following {$key} number is empty].");
       }
    }
 }

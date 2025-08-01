@@ -39,7 +39,7 @@ abstract class Payment
         $configs = require(dirname(__DIR__).'/config.php');
 
         if (empty($configs[$paymentName]))
-            throw new \Exception('Zero\Payment\Payment::[payment config is empty]');
+            throw new \Exception('Zero\Payment\Payment::[Payment config is empty]');
 
         $this->setConfig($configs[$paymentName]);
     }

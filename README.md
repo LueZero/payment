@@ -210,8 +210,12 @@ The test suite creates a temporary `src/config.php` from `src/config.example.php
 
 Recommended project policy before publishing:
 
-- Add a `LICENSE` file and set the matching `license` field in `composer.json`.
+- This project is released under the MIT License. See [LICENSE](LICENSE).
 - Keep public APIs backward compatible where possible, especially `PaymentClient` and `setRequestParameter()`.
 - Add or update examples and tests when adding provider operations.
 - Use issue labels such as `bug`, `provider-change`, `feature`, `docs`, and `security`.
 - Pull requests that change provider behavior should include the relevant official documentation link or sandbox verification notes.
+
+## License
+
+MIT License. See [LICENSE](LICENSE).

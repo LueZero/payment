@@ -1,6 +1,7 @@
 {
     "name": "zero/payment",
     "description": "A lightweight PHP payment integration package that supports multiple payment providers.",
+    "license": "MIT",
     "require": {
         "php": ">=7.0.0",
         "ext-curl": "*"

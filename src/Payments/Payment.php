@@ -36,7 +36,13 @@ abstract class Payment
      */
     public function requireConfig($paymentName)
     {
-        $configs = require(dirname(__DIR__).'/config.php');
+        $configPath = dirname(__DIR__) . '/config.php';
+
+        if (!file_exists($configPath)) {
+            throw new \Exception('Zero\Payment\Payment::[Payment config file not found. Copy src/config.example.php to src/config.php]');
+        }
+
+        $configs = require($configPath);
 
         if (empty($configs[$paymentName]))
             throw new \Exception('Zero\Payment\Payment::[Payment config is empty]');
@@ -48,9 +54,9 @@ abstract class Payment
      * 設定配置檔案
      * @param array configs
      */
-    function setConfig($configs) 
+    public function setConfig($configs)
     {
-        $this->$configs = $configs;
+        $this->configs = $configs;
     }
 
     /**
@@ -87,9 +93,7 @@ abstract class Payment
     {
         DataChecker::whetherEmpty($requestParameters, 'Zero\Payment\Helpers\DataChecker::[request parameters is empty]');
 
-        foreach ($requestParameters as $key => $requestParameter) {
-            $this->sendData[$key] = $requestParameter;
-        }
+        $this->sendData = $requestParameters;
 
         return $this->processData();
     }

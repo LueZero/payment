@@ -1,4 +1,5 @@
 <?php
+
 ini_set('display_errors', '1');
 error_reporting(E_ALL);
 
@@ -6,7 +7,7 @@ require './vendor/autoload.php';
 
 use Zero\PaymentClient as PaymentClient;
 
-// 綠界 付款範例
+// ECPay checkout example
 $paymentClient = new PaymentClient('ec');
 $payment = $paymentClient->createPayment();
 $requests = [
@@ -15,16 +16,16 @@ $requests = [
   'MerchantTradeDate' => date('Y/m/d H:i:s'),
   'PaymentType' => 'aio',
   'TotalAmount' => 500,
-  'TradeDesc' => urlencode('測試交易'),
-  'ItemName' => '手機20元',
-  'ReturnURL' => 'https://your.web.site/receive.php',
+  'TradeDesc' => urlencode('Test transaction'),
+  'ItemName' => 'Demo product 500 TWD',
+  'ReturnURL' => 'https://your.web.site/ecpay/return.php',
   'ChoosePayment' => 'Credit',
   'EncryptType' => 1,
 ];
 // echo $payment->setRequestParameter($requests)->checkout();
 // return;
 
-// 綠界 搜尋範例
+// ECPay order search example
 $requests = [
   'MerchantID' => '2000132',
   'MerchantTradeNo' => '220220811214215',
@@ -34,7 +35,7 @@ $requests = [
 // echo $payment->setRequestParameter($requests)->search();
 // return;
 
-// 綠界 搜尋明細範例
+// ECPay credit detail search example
 $requests = [
   'MerchantID' => '2000132',
   'CreditRefundId' => 12095677,
@@ -44,20 +45,18 @@ $requests = [
 // echo $payment->setRequestParameter($requests)->searchDetail();
 // return;
 
-// 綠界 退款範例
+// ECPay refund example
 $requests = [
-    'MerchantID' => '2000132',
-    'MerchantTradeNo' => 'zero20220821101552',
-    'TradeNo' => '2208211615567910',
-    'Action' => 'R',
-    'TotalAmount' => 100,
+  'MerchantID' => '2000132',
+  'MerchantTradeNo' => 'zero20220821101552',
+  'TradeNo' => '2208211615567910',
+  'Action' => 'R',
+  'TotalAmount' => 100,
 ];
 // echo $payment->setRequestParameter($requests)->refund();
 // return;
 
-/*--------分隔線-----------*/
-
-// LINE 付款範例 
+// LINE Pay checkout example
 $paymentClient = new PaymentClient('line');
 $payment = $paymentClient->createPayment();
 $transactionId = date('YmdHis');
@@ -72,23 +71,23 @@ $requests = [
       'name' => 'Test',
       'products' => [
         [
-          'name' => '測試商品',
-          'imageUrl' => 'https://img.ruten.com.tw/s1/8/5f/69/21309199705961_969_m.jpg',
+          'name' => 'Demo product',
+          'imageUrl' => 'https://example.com/product.jpg',
           'quantity' => 1,
           'price' => 100,
-        ]
+        ],
       ],
-    ]
+    ],
   ],
   'redirectUrls' => [
-    'confirmUrl' => 'https://your.web.site/receive.php',
-    'cancelUrl' => 'https://your.web.site/receive.php'
-  ]
+    'confirmUrl' => 'https://your.web.site/line-pay/confirm.php',
+    'cancelUrl' => 'https://your.web.site/line-pay/cancel.php',
+  ],
 ];
 // echo $payment->setRequestParameter($requests)->checkout();
 // return;
 
-// LINE 確認範例
+// LINE Pay confirm example
 $requests = [
   'amount' => 100,
   'currency' => 'TWD',
@@ -96,16 +95,16 @@ $requests = [
 // echo $payment->setRequestParameter($requests)->confirm(2022082400725100210);
 // return;
 
-// LINE 查詢範例
+// LINE Pay order search example
 $requests = [
-  'orderId' => '20220821103746'
+  'orderId' => '20220821103746',
 ];
 // echo $payment->setRequestParameter($requests)->search();
 // return;
 
-// LINE 退款範例
+// LINE Pay refund example
 $requests = [
-  'refundAmount' => 100
+  'refundAmount' => 100,
 ];
 // echo $payment->setRequestParameter($requests)->refund(2022082400725100210);
 // return;

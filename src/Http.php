@@ -9,6 +9,11 @@ class Http implements HttpInterface
     public function __construct()
     {
         $this->ch = curl_init();
+
+        if ($this->ch === false) {
+            throw new \RuntimeException('Zero\Payment\Http::[Failed to initialize cURL]');
+        }
+
         curl_setopt($this->ch, CURLOPT_RETURNTRANSFER, true);
     }
 
@@ -23,7 +28,7 @@ class Http implements HttpInterface
         curl_setopt($this->ch, CURLOPT_URL, $url);
         curl_setopt($this->ch, CURLOPT_POST, true);
         curl_setopt($this->ch, CURLOPT_POSTFIELDS, $postFields);
-        return curl_exec($this->ch);
+        return $this->execute();
     }
 
     public function get($url, $getFields = [])
@@ -33,7 +38,7 @@ class Http implements HttpInterface
         
         curl_setopt($this->ch, CURLOPT_URL, $url);
         curl_setopt($this->ch, CURLOPT_POST, false);
-        return curl_exec($this->ch);
+        return $this->execute();
     }
 
     public function form($url, $inputs)
@@ -44,9 +49,12 @@ class Http implements HttpInterface
         $szHtml .= '<meta charset="utf-8">';
         $szHtml .= '</head>';
         $szHtml .= '<body>';
-        $szHtml .= "<form id=\"__Form\" method=\"post\" action=\"{$url}\">";
+        $escapedUrl = htmlspecialchars($url, ENT_QUOTES, 'UTF-8');
+        $szHtml .= "<form id=\"__Form\" method=\"post\" action=\"{$escapedUrl}\">";
         foreach ($inputs as $keys => $input) {
-            $szHtml .= "<input type=\"hidden\" name=\"{$keys}\" value=\"" . htmlentities($input) . "\" />";
+            $escapedKey = htmlspecialchars((string) $keys, ENT_QUOTES, 'UTF-8');
+            $escapedValue = htmlspecialchars((string) $input, ENT_QUOTES, 'UTF-8');
+            $szHtml .= "<input type=\"hidden\" name=\"{$escapedKey}\" value=\"{$escapedValue}\" />";
         }
         $szHtml .= "<input type=\"submit\" id=\"__paymentButton\" />";
         $szHtml .= '</form>';
@@ -56,8 +64,21 @@ class Http implements HttpInterface
         return $szHtml;
     }
 
+    private function execute()
+    {
+        $response = curl_exec($this->ch);
+
+        if ($response === false) {
+            throw new \RuntimeException('Zero\Payment\Http::[' . curl_error($this->ch) . ']');
+        }
+
+        return $response;
+    }
+
     public function __destruct()
     {
-        curl_close($this->ch);
+        if ($this->ch) {
+            curl_close($this->ch);
+        }
     }
 }
